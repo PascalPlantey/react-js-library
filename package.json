@@ -1,10 +1,26 @@
 {
-  "name": "scratch",
-  "version": "0.0.0",
-  "description": "",
+  "name": "@pascalplantey/react-js-library",
+  "version": "0.0.1",
+  "description": "My personal React & JS Library",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "types/",
+  "homepage": "https://github.com/PascalPlantey/react-js-library.git",
+  "repositery": {
+    "type": "git",
+    "url": "git+https://github.com/PascalPlantey/react-js-library.git"
+  },
+  "publishConfig": {
+    "tag": "latest"
+  },
+  "keywords": [
+    "react",
+    "react-hooks",
+    "hooks",
+    "utilities"
+  ],
+  "author": "Pascal Plantey <pascal.plantey@gmail.com>",
+  "license": "ISC",
   "scripts": {
     "build-lib": "rollup -c",
     "build-lib:watch": "rollup -c --watch",
@@ -14,8 +30,6 @@
     "build-docs": "jsdoc -c jsdoc.json --readme ./README.md",
     "storybook:start": "storybook dev -p 6006"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.22.7",
     "@babel/preset-env": "^7.22.7",
