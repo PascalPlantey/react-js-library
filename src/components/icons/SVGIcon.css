@@ -1,0 +1,16 @@
+.svg-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color .5s ease-out;
+  transition: transform .5s ease-out;
+}
+
+.svg-icon-wrapper:active {
+  transform: scale(.9);
+}
+
+.svg-icon-wrapper:hover {
+  background-color: #b4aeae;
+  transform: scale(1.1)
+}

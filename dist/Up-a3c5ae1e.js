@@ -1,0 +1,1 @@
+"use strict";function e(e){return e&&"object"==typeof e&&"default"in e?e:{default:e}}var t=e(require("react"));exports.Up=()=>t.default.createElement("svg",{viewBox:"0 0 1024 1024",version:"1.1",xmlns:"http://www.w3.org/2000/svg"},t.default.createElement("path",{d:"M903.232 768l56.768-50.432L512 256l-448 461.568 56.768 50.432L512 364.928z"}));
