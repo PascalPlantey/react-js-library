@@ -24,10 +24,10 @@ declare class ExtMap extends Map<any, any> {
      * }
      * @example
      * const addIndustry = (newIndustry, extmap) => {   // ExtMap
-     *   extmap.hasOrSet('Industries', new Set()).add(newIndustry);
+     *   extmap.getOrSet('Industries', new Set()).add(newIndustry);
      * }
      */
-    hasOrSet(key: any, value: any): any;
+    getOrSet(key: any, value: any): any;
     /**
      * Map entries as an array [[key, value], ...]
      * @type {Array<Array>}

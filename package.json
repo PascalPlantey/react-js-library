@@ -1,6 +1,6 @@
 {
   "name": "@pascalplantey/react-js-library",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "My personal React & JS Library",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -28,6 +28,7 @@
     "build-types:watch": "tsc --watch",
     "build-storybook": "storybook build",
     "build-docs": "jsdoc -c jsdoc.json --readme ./README.md",
+    "build-all": "npm build-lib && npm build-types && npm build-docs && npm build-storybook",
     "storybook:start": "storybook dev -p 6006"
   },
   "devDependencies": {

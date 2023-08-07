@@ -61,7 +61,7 @@ class PropertyValues extends Set {
     const map = new ExtMap();
 
     for(const [k, v] of this)
-      map.hasOrSet(k, new Set()).add(v);
+      map.getOrSet(k, new Set()).add(v);
 
     return map;
   }

@@ -1,6 +1,6 @@
 export default Compound;
 /**
- * Building/Destructuring compound keys. Useful when building a Set or Map to get unique keys
+ * Building/Destructuring compound keys. Useful when building a Set or Map with unique keys
  * @example
  * const compound = Compound.structure('Service cloud', 'Field Service Consultant'); // 'Service Cloud|Field Service Consultant'
  * let cloud, certification;
@@ -20,22 +20,26 @@ declare class Compound {
     static is: (value: any) => boolean;
     /**
      * @static
-     * @description Build a compound string from a radical and a key
+     * @description Build a compound string individual values. To include the '|' in an indivudual value use '\\|': 'String\\| 1'
      * @function structure
-     * @param {string} radical First part of compound key
-     * @param {string} key Second part of compound key
-     * @returns {string} `${radical}|${key}`
+     * @param {...any[]} args Arguments
+     * @returns {string} `${arg1}|${arg2}|${arg3}...`
      * @memberof Compound
+     * @example
+     * Compound.structure('String 1');                 // => 'String 1'
+     * Compound.structure(1);                          // => '1'
+     * Compound.structure('s 1', 's2 ', 's4');         // => 's 1|s2|s4'
+     * Compound.structure(['s 1', 's2 ', 's4']);       // => 's 1|s2|s4'
      */
-    static structure: (radical: string, key: string) => string;
+    static structure: (...args: any[][]) => string;
     /**
      * @static
      * @description If value is a Compound string, destructure and return values
      * @function destructure
-     * @param {string} value Value is supposed to be a compound value
-     * @returns {Array<string>} Array with radical and key, or undefined
+     * @param {any|string} value Value is supposed to be a compound value
+     * @returns {Array<string>|any} Array with the compound values, or value itself in an array ([value]) if it is not a compound
      * @memberof Compound
      */
-    static destructure: (value: string) => Array<string>;
+    static destructure: (value: any | string) => Array<string> | any;
 }
 //# sourceMappingURL=Compound.d.ts.map

@@ -19,10 +19,10 @@ class ExtMap extends Map {
    * }
    * @example
    * const addIndustry = (newIndustry, extmap) => {   // ExtMap
-   *   extmap.hasOrSet('Industries', new Set()).add(newIndustry);
+   *   extmap.getOrSet('Industries', new Set()).add(newIndustry);
    * }
    */
-  hasOrSet(key, value) {
+  getOrSet(key, value) {
     if (this.has(key)) value = this.get(key);
     else               this.set(key, value);
     return value;

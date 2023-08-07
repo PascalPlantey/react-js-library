@@ -1,7 +1,8 @@
-import isString from '../is/isString';
+import { ExtString } from '../extensions';
+import { isIterable, isString } from '../is';
 
 /**
- * Building/Destructuring compound keys. Useful when building a Set or Map to get unique keys
+ * Building/Destructuring compound keys. Useful when building a Set or Map with unique keys
  * @example
  * const compound = Compound.structure('Service cloud', 'Field Service Consultant'); // 'Service Cloud|Field Service Consultant'
  * let cloud, certification;
@@ -9,7 +10,7 @@ import isString from '../is/isString';
  *   [cloud, certification] = Compound.destructure(compound);                        // ['Service Cloud', 'Field Service Consultant']
  */
 class Compound {
-  static #regexp = /([^|]+)\|([^|]+)/;
+  static #regexp = /\s*(?<!\\)\|(?!\s)/;
 
   /**
    * @static
@@ -23,29 +24,46 @@ class Compound {
 
   /**
    * @static
-   * @description Build a compound string from a radical and a key
+   * @description Build a compound string individual values. To include the '|' in an indivudual value use '\\|': 'String\\| 1'
    * @function structure
-   * @param {string} radical First part of compound key
-   * @param {string} key Second part of compound key
-   * @returns {string} `${radical}|${key}`
+   * @param {...any[]} args Arguments
+   * @returns {string} `${arg1}|${arg2}|${arg3}...`
    * @memberof Compound
+   * @example
+   * Compound.structure('String 1');                 // => 'String 1'
+   * Compound.structure(1);                          // => '1'
+   * Compound.structure('s 1', 's2 ', 's4');         // => 's 1|s2|s4'
+   * Compound.structure(['s 1', 's2 ', 's4']);       // => 's 1|s2|s4'
    */
-  static structure = (radical, key) => `${radical}|${key}`;
+  static structure = (...args) => {
+    let compound = '', theArgs = args;
+
+    // If there is only one argument, a string or a non iterable value (like numeric), use this argument as the compound value
+    // If there is only one argument, which is iterable, make coumpound from its individual values
+    if (args.length === 1) {
+      const arg = args[0];
+
+      if (isString(arg) || !isIterable(arg))
+        return arg.toString().trim();                     // One argument only, not iterable, return as-is
+      else
+        theArgs = arg;                                    // One argument only, which is iterable
+    }
+
+    for(const arg of theArgs)                             // Add all elements to the result
+      compound = ExtString.extend(compound, arg.toString().trim(), '|');
+
+    return compound;
+  }
 
   /**
    * @static
    * @description If value is a Compound string, destructure and return values
    * @function destructure
-   * @param {string} value Value is supposed to be a compound value
-   * @returns {Array<string>} Array with radical and key, or undefined
+   * @param {any|string} value Value is supposed to be a compound value
+   * @returns {Array<string>|any} Array with the compound values, or value itself in an array ([value]) if it is not a compound
    * @memberof Compound
    */
-  static destructure = value => {
-    if (Compound.is(value)) {
-      const match = this.#regexp.exec(value);
-      return [match[1], match[2]];
-    }
-  };
+  static destructure = value => Compound.is(value) ? value.split(this.#regexp) : [value];
 };
 
 export default Compound;

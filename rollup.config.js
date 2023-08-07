@@ -32,7 +32,7 @@ export default [
       }
     ],
     plugins: [
-      // Allow CSS imports (non JS files)
+      // Allow CSS files imports
       postcss({
         plugins: [],
         minimize: true
