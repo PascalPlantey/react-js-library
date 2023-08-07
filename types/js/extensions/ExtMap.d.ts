@@ -29,6 +29,20 @@ declare class ExtMap extends Map<any, any> {
      */
     getOrSet(key: any, value: any): any;
     /**
+     * Update or insert a new pair; the update/insert functions return the value to be saved with the key
+     * @param {any} key Key for the Map
+     * @param {function} insert Function whith no parameters which return value is saved with the key
+     * @param {function} update Function receiving current value for key which return value is saved with the key
+     * @return {this} Current ExtMap object
+     * @example
+     * const map = new ExtMap();
+     * const insert = () => 1;
+     * const update = value => value + 1;
+     * map.upsert('bananas', insert, update);           // 'bananas' => 1
+     * map.upsert('bananas', insert, update);           // 'bananas' => 2
+     */
+    upsert(key: any, insert: Function, update: Function): this;
+    /**
      * Map entries as an array [[key, value], ...]
      * @type {Array<Array>}
      */
