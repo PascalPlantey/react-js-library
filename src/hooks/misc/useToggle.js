@@ -10,7 +10,7 @@ import { useState } from 'react';
  * return(
  *   <>
  *     {visible && 'Message is visible'}
- *     <button onClick={toggle}>{visible ? 'Hide' : 'Show'}</button>
+ *     <button onClick={toggleShow}>{visible ? 'Hide' : 'Show'}</button>
  *   </>
  * )
  */

@@ -86,8 +86,8 @@ declare class TupleMap extends ExtMap {
      * @generator
      * @example
      * const tuples = new TupleMap([[['Cert',' adm'], 1], [['Cert', 'sales'], 2]]);
-     * for(const [key, value] of tuples.tupleEntries()) {
-     *   console.log('key', key, 'value', value)
+     * for(const [[category, certification], value] of tuples.tupleEntries()) {
+         console.log('category', category, 'certification', certification, 'value', value);
      * }
      */
     tupleEntries(): Generator<any[], void, unknown>;
