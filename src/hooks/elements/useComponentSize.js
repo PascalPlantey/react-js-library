@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 
-import { useWindowSize } from '../browser';
+import useWindowSize from '../browser/useWindowSize';
 
 /**
  * Hook to get alerted when an HTML element's height changes on Window resize event.

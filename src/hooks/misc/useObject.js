@@ -7,20 +7,20 @@ import { useState, useCallback } from "react";
  * @returns {object} { object, set: object => void, assign: object => void, remove: (string|string[]) => void, reset: void => void, clear: void => void }
  * @example
  * const {
- *   obj,                         // Current object value
+ *   object,                      // Current object value
  *   set,                         // Replace state with a new object
  *   assign,                      // Assign properties of parameter to the state
  *   remove,                      // Remove one or many properties from the state
  *   reset,                       // Reinitialize state with initialState
  *   clear                        // Set an empty object as new state
- * } = useObject({ gamma: 3 });   // state { gamma: 3 };
+ * } = useObject({ gamma: 3 });   // object { gamma: 3 };
  * 
- * assign({ beta: 2, zeta: 4 });  // state { gamma: 3, beta: 2, zeta: 4 }
- * remove('gamma');               // state { beta: 2, zeta: 4 }
- * remove(['beta', 'teta']);      // state { zeta: 4 }
- * reset();                       // state { gamma: 3 };
- * set({ car: 'Honda' });         // state { car: 'Honda' }
- * clear();                       // state {}
+ * assign({ beta: 2, zeta: 4 });  // object { gamma: 3, beta: 2, zeta: 4 }
+ * remove('gamma');               // object { beta: 2, zeta: 4 }
+ * remove(['beta', 'teta']);      // object { zeta: 4 }
+ * reset();                       // object { gamma: 3 };
+ * set({ car: 'Honda' });         // object { car: 'Honda' }
+ * clear();                       // object {}
  */
 const useObject = (initialState = {}) => {
   const [state, setState] = useState(initialState);

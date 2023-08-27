@@ -6,23 +6,24 @@ import { useOndismount, useOnmount } from '../cycles';
  * @description Fire a function when a document event happens
  * @param {string} name Event name (mouseup, mousemove, ...)
  * @param {function} fn Function to be called on event (receives the event information) (event) => any
- * @param {Node} [elt=window] Document element
+ * @param {Element} [elt=window] Document element
  * @param {boolean} [immediately=true] Listen immediately or after toggle()
- * @param {object} [options={}] { capture, once, passive } [Mozilla]{@link https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener}
+ * @param {object} [options={}] { capture, once, passive } [see Mozilla]{@link https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener}
  * @returns {object} { working: boolean, toggle: function() {} }
  * @example
  * const { working, toggle } = useEventListener('mousemove', console.log);
  * @memberof Hooks#
  */
 const useEventListener = (name, fn, elt = window, immediately = true, options = {}) => {
-  const [working, setWorking] = useState(immediately);
+  const [working, setWorking] = useState(!!immediately);
   const { capture, once, passive } = options;
   const refAbort = useRef();
 
   // Use our own listener to track if it is automatically removed by the browser (options.once === true)
   const listener = evt => {
     fn(evt);
-    if (once) setWorking(false);                                    // Listener has been called and eventListener automatically removed
+    if (once)
+      setWorking(false);                                            // Listener has been called and eventListener automatically removed
   };
 
   // Use the abort signal to make sure our listener is found back
