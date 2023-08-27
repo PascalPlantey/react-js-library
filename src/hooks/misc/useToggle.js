@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 /**
  * Toggle hook, can be used to force a render to execute
- * @param {boolean} initial Initial toggle value
+ * @param {boolean} [initial=false] Initial toggle value
  * @returns {Array} [value: boolean, toggle: function]
  * @memberof Hooks#
  * @example
@@ -15,7 +15,7 @@ import { useState } from 'react';
  * )
  */
 const useToggle = (initial = false) => {
-  const [value, toggle] = useState(initial);
+  const [value, toggle] = useState(!!initial);
 
   return [value, () => toggle(prevState => !prevState)];
 };

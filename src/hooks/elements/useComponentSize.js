@@ -20,8 +20,8 @@ const useComponentSize = (step, immediately) => {
   const { height, width, working, toggle } = useWindowSize(step, immediately);
 
   useEffect(() => {
-    const elt = ref.current;
-    setSize({ height: elt.offsetHeight, width: elt.offsetWidth });
+    const elt = ref?.current;
+    setSize({ height: elt?.offsetHeight, width: elt?.offsetWidth });
   }, [height, width]);
 
   return { ...size, ref, working, toggle };

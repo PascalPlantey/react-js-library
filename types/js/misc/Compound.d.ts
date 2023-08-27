@@ -4,7 +4,7 @@ export default Compound;
  * @example
  * const compound = Compound.structure('Service cloud', 'Field Service Consultant'); // 'Service Cloud|Field Service Consultant'
  * let cloud, certification;
- * if (Compound.is(compound))
+ * if (Compound.isCompound(compound))
  *   [cloud, certification] = Compound.destructure(compound);                        // ['Service Cloud', 'Field Service Consultant']
  */
 declare class Compound {
@@ -17,7 +17,7 @@ declare class Compound {
      * @returns {boolean}
      * @memberof Compound
      */
-    static is: (value: any) => boolean;
+    static isCompound: (value: any) => boolean;
     /**
      * @static
      * @description Build a compound string individual values. To include the '|' in an indivudual value use '\\|': 'String\\| 1'

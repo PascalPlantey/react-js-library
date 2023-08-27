@@ -77,7 +77,7 @@ class PropertyValues extends Set {
   iterator() { return this[Symbol.iterator]; }                                // Dummy: force JSDoc to document the function
   *[Symbol.iterator]() {
     for(const value of this.values())
-      yield Compound.is(value) ? Compound.destructure(value) : value;
+      yield Compound.isCompound(value) ? Compound.destructure(value) : value;
   }
 };
 

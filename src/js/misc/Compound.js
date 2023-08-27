@@ -6,7 +6,7 @@ import { isIterable, isString } from '../is';
  * @example
  * const compound = Compound.structure('Service cloud', 'Field Service Consultant'); // 'Service Cloud|Field Service Consultant'
  * let cloud, certification;
- * if (Compound.is(compound))
+ * if (Compound.isCompound(compound))
  *   [cloud, certification] = Compound.destructure(compound);                        // ['Service Cloud', 'Field Service Consultant']
  */
 class Compound {
@@ -15,12 +15,12 @@ class Compound {
   /**
    * @static
    * @description Is value a compound string?
-   * @function is
+   * @function isCompound
    * @param {any} value Value to be tested
    * @returns {boolean}
    * @memberof Compound
    */
-  static is = value => isString(value) && this.#regexp.test(value);
+  static isCompound = value => isString(value) && this.#regexp.test(value);
 
   /**
    * @static
@@ -63,7 +63,7 @@ class Compound {
    * @returns {Array<string>|any} Array with the compound values, or value itself in an array ([value]) if it is not a compound
    * @memberof Compound
    */
-  static destructure = value => Compound.is(value) ? value.split(this.#regexp) : [value];
+  static destructure = value => Compound.isCompound(value) ? value.split(this.#regexp) : [value];
 };
 
 export default Compound;

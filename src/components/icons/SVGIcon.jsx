@@ -54,21 +54,24 @@ const SVGIcon = ({ name, size, color, className, cursor, style, ...props }) => {
     fill: 'currentColor'
   };
 
-  useEffect(() => {                                                               // Dynamic loading of the icon
+  // Dynamic loading of the icon
+  // Note: SVGIcon can be dismounted before displayed; if this happens SVGIcon state (Icon) should not be changed,
+  //       so we use 'mounted' to detect dismount event
+  useEffect(() => {
     let mounted = true;
     const upperName = `${name[0].toUpperCase()}${name.substring(1)}`;
     import(`./svg/${upperName}.jsx`)
     .then(module => {
-      if (mounted) {
-        const Elt = module[upperName];
+      if (mounted) {                                      // Don't change state if icon has already been removed...
+        const Elt = module[upperName];                    // ...when import's Promise is resolved
         setIcon(<Elt />);
       }
     })
     .catch(err => console.error(err));
-    return(() => { 
-      mounted = false;
-      setIcon(null);
-    });                                                                           // Deletes the icon on unmount
+    return(() => () => {
+      mounted = false;                                    // Deletes the icon on unmount
+      setIcon(null)
+    });
   }, [name]);
 
   return(
