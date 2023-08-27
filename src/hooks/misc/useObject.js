@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 /**
  * Use an object as state with basic operations. Useful to avoid managing operations like setState(prev => ({ ...prev, other: 4 })
  * @param {object} [initialState={}] Object value to use for initialization
  * @memberof Hooks#
- * @returns {object} { state, set: object => void, assign: object => void, remove: (string|string[]) => void, reset: void => void, clear: void => void }
+ * @returns {object} { object, set: object => void, assign: object => void, remove: (string|string[]) => void, reset: void => void, clear: void => void }
  * @example
  * const {
- *   state,                       // Current object value
+ *   obj,                         // Current object value
  *   set,                         // Replace state with a new object
  *   assign,                      // Assign properties of parameter to the state
  *   remove,                      // Remove one or many properties from the state
@@ -25,9 +25,9 @@ import { useState } from "react";
 const useObject = (initialState = {}) => {
   const [state, setState] = useState(initialState);
 
-  const reset = () => useCallback(() => setState(initialState), [initialState]);
-  const clear = () => useCallback(() =>setState({}), []);
-  const set = obj => useCallback(() => setState(obj), []);
+  const reset = useCallback(() => setState(initialState), [initialState]);
+  const clear = useCallback(() =>setState({}), []);
+  const set = useCallback(obj => setState(obj), []);
   const assign = useCallback(patch => setState(prev => ({ ...prev, ...patch })), []);
   const remove = useCallback(properties => setState(prev => {
     // Assume 'properties' is a string or an array of strings
@@ -39,7 +39,7 @@ const useObject = (initialState = {}) => {
     return { ...prev };
   }), []);
 
-  return({ state, set, assign, remove, reset, clear });
+  return({ object: state, set, assign, remove, reset, clear });
 };
 
 export default useObject;

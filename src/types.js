@@ -4,11 +4,6 @@
  */
 
 /**
- * @typedef {object} RefObject
- * @property {any} current Property holding the 'cached' value
- */
-
-/**
  * @typedef {Object} useEventListenerResult
  * @property {boolean} working Is the event capture running?
  * @property {toggle} toggle To toggle working on or off: () => void
@@ -38,7 +33,7 @@
  * @property {number} width Component's width
  * @property {number} height Component's height
  * @property {boolean} working Is the event capture running?
- * @property {RefObject} ref ref to attach to the component
+ * @property {React.MutableRefObject} ref ref to attach to the component
  * @property {toggle} toggle To toggle working on or off: () => void
  */
 

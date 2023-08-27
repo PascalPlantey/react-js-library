@@ -4,7 +4,7 @@ import { getEventTarget } from '../../js';
 
 /**
  * Hook to know when the mouse gets over an element
- * @param {string|RefObject|EventTarget} ref Element to be looked for: can be a string (tag ID or selector), a ref (useRef), or an event target
+ * @param {string|React.MutableRefObject|Element} ref Element to be looked for: can be a string (tag ID or selector), a ref (useRef), or an event target
  * @returns {boolean} Hover status
  * @memberof Hooks#
  */

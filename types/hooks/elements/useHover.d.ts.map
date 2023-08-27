@@ -1,1 +1,1 @@
-{"version":3,"file":"useHover.d.ts","sourceRoot":"","sources":["../../../src/hooks/elements/useHover.js"],"names":[],"mappings":";AAIA;;;;;GAKG;AACH,+BAJW,MAAM,eAAW,WAAW,GAC1B,OAAO,CAuBnB"}
+{"version":3,"file":"useHover.d.ts","sourceRoot":"","sources":["../../../src/hooks/elements/useHover.js"],"names":[],"mappings":";AAIA;;;;;GAKG;AACH,+BAJW,MAAM,2CAAwB,OAAO,GACnC,OAAO,CAuBnB"}
