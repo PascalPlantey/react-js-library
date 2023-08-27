@@ -21,12 +21,10 @@ const useObserveSize = (selector, step = 30, options = { box: 'content-box' }) =
         const { width: oldWidth, heigth: oldHeight } = prev,
               { width: newWidth, heigth: newHeight } = getSize(elt);
 
-        if (Math.abs(oldWidth - newWidth) >= step || Math.abs(oldHeight - newHeight) >= step) {
+        if (Math.abs(oldWidth - newWidth) >= step || Math.abs(oldHeight - newHeight) >= step)
           return({ width: newWidth, heigth: newHeight });
-        }
-        else {
-          return prev;
-        }
+        else
+          return prev;                                    // This should not cause a render, but it seems to render once at least
       });
 
       const observer = new ResizeObserver(handleResize);
