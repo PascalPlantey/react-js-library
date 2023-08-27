@@ -25,10 +25,19 @@ import { useState, useCallback } from "react";
 const useObject = (initialState = {}) => {
   const [state, setState] = useState(initialState);
 
+  // Restore initialState
   const reset = useCallback(() => setState(initialState), [initialState]);
-  const clear = useCallback(() =>setState({}), []);
+
+  // Empty state object
+  const clear = useCallback(() => setState({}), []);
+
+  // Replace state object with 'obj'
   const set = useCallback(obj => setState(obj), []);
+
+  // Assign 'patch' properties to state object
   const assign = useCallback(patch => setState(prev => ({ ...prev, ...patch })), []);
+
+  // Remove one or many properties from state object
   const remove = useCallback(properties => setState(prev => {
     // Assume 'properties' is a string or an array of strings
     const values = typeof properties === 'string' ? [properties] : properties;
