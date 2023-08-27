@@ -12,7 +12,7 @@ declare class Compound {
     /**
      * @static
      * @description Is value a compound string?
-     * @function is
+     * @function isCompound
      * @param {any} value Value to be tested
      * @returns {boolean}
      * @memberof Compound

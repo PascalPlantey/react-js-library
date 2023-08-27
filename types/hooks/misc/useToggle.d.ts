@@ -1,7 +1,7 @@
 export default useToggle;
 /**
  * Toggle hook, can be used to force a render to execute
- * @param {boolean} initial Initial toggle value
+ * @param {boolean} [initial=false] Initial toggle value
  * @returns {Array} [value: boolean, toggle: function]
  * @memberof Hooks#
  * @example
@@ -13,5 +13,5 @@ export default useToggle;
  *   </>
  * )
  */
-declare function useToggle(initial?: boolean): any[];
+declare function useToggle(initial?: boolean | undefined): any[];
 //# sourceMappingURL=useToggle.d.ts.map
