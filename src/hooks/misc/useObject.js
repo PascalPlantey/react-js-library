@@ -25,11 +25,11 @@ import { useState } from "react";
 const useObject = (initialState = {}) => {
   const [state, setState] = useState(initialState);
 
-  const reset = () => setState(initialState);
-  const clear = () => setState({});
-  const set = obj => setState(obj);
-  const assign = patch => setState(prev => ({ ...prev, ...patch }));
-  const remove = properties => setState(prev => {
+  const reset = () => useCallback(() => setState(initialState), [initialState]);
+  const clear = () => useCallback(() =>setState({}), []);
+  const set = obj => useCallback(() => setState(obj), []);
+  const assign = useCallback(patch => setState(prev => ({ ...prev, ...patch })), []);
+  const remove = useCallback(properties => setState(prev => {
     // Assume 'properties' is a string or an array of strings
     const values = typeof properties === 'string' ? [properties] : properties;
 
@@ -37,7 +37,7 @@ const useObject = (initialState = {}) => {
       delete prev[value];
 
     return { ...prev };
-  });
+  }), []);
 
   return({ state, set, assign, remove, reset, clear });
 };

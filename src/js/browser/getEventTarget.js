@@ -8,7 +8,7 @@ import isEventTarget from './isEventTarget'
  * + a string, consider it is an element ID or querySelector  
  * + a useRef object, it's input or the wrapped element  
  * + in all other cases the elt itself  
- * @param {RefObject|string|Object|any} elt Element to be looked for; can be a string (tag ID or selector), or a ref (useRef), or an event target
+ * @param {RefObject|string|Element|any} elt Element to be looked for; can be a string (tag ID or selector), or a ref (useRef), or an event target
  * @returns {Object|undefined} A target element with event listener support, `undefined` if not found
  * @memberof JS_BrowserHelpers#
  */
@@ -17,7 +17,7 @@ const getEventTarget = elt => {
 
   if (isString(elt))
     targetElt = document.getElementById(elt) || document.querySelector(elt);
-  else if (elt?.current)
+  else if (elt?.current instanceof Element)
     targetElt = elt.current?.input || elt.current
   else
     targetElt = elt;
