@@ -1,4 +1,5 @@
 import { useState, useLayoutEffect } from "react";
+
 import { getEventTarget } from "../../js";
 
 /**
@@ -10,7 +11,7 @@ import { getEventTarget } from "../../js";
  * @memberof Hooks#
  */
 const useObserveSize = (selector, step = 30, options = { box: 'content-box' }) => {
-  const getSize = elt => ({ width: elt?.offsetWidth ?? 0, heigth: elt?.offsetHeight ?? 0 });
+  const getSize = elt => ({ width: elt?.offsetWidth, heigth: elt?.offsetHeight });
   const [size, setSize] = useState(getSize);
 
   useLayoutEffect(() => {
@@ -21,7 +22,7 @@ const useObserveSize = (selector, step = 30, options = { box: 'content-box' }) =
         const { width: oldWidth, heigth: oldHeight } = prev,
               { width: newWidth, heigth: newHeight } = getSize(elt);
 
-        if (Math.abs(oldWidth - newWidth) >= step || Math.abs(oldHeight - newHeight) >= step)
+        if (oldWidth === undefined || Math.abs(oldWidth - newWidth) >= step || Math.abs(oldHeight - newHeight) >= step)
           return({ width: newWidth, heigth: newHeight });
         else
           return prev;                                    // This should not cause a render, but it seems to render once at least

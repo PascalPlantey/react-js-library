@@ -1,10 +1,9 @@
-import isString from "../is/isString";
+import getElement from "./getElement";
 import isEventTarget from './isEventTarget'
 
 /**
  * Tries to find a target element out of elt. Get a value from element (see below) and check if it
- * supports events or not. Displays a console warning is no event target can be found. Order of tests
- * to get a value: if elt is ...
+ * supports events or not. Order of tests to get a value: if elt is ...
  * + a string, consider it is an element ID or querySelector  
  * + a useRef object, it's input or the wrapped element  
  * + in all other cases the elt itself  
@@ -13,14 +12,7 @@ import isEventTarget from './isEventTarget'
  * @memberof JS_BrowserHelpers#
  */
 const getEventTarget = elt => {
-  let targetElt;
-
-  if (isString(elt))
-    targetElt = document.getElementById(elt) || document.querySelector(elt);
-  else if (elt?.current instanceof Element)
-    targetElt = elt.current?.input || elt.current
-  else
-    targetElt = elt;
+  const targetElt = getElement(elt);
 
   return isEventTarget(targetElt) ? targetElt : undefined;
 };
