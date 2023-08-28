@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import useEventListener from "../elements/useEventListener";
 
+const getVisibility = () => ({ visible: document?.visibilityState === 'visible' });
+
 /**
  * Tracks visibility of the browser window
  * @param {boolean} immediately Start tracking immedialtely or when toggle is called?
@@ -10,14 +12,10 @@ import useEventListener from "../elements/useEventListener";
  * @memberof Hooks#
  */
 const useDocumentVisibility = (immediately = true, options = {}) => {
-  const [visibility, setVisibility] = useState(document?.visibilityState);
+  const [visibility, setVisibility] = useState(getVisibility);    // !!! Function initialization
+  const listener = useEventListener('visibilitychange', () => setVisibility(getVisibility()), document, immediately, options);
 
-  const handleVisibilityChange = () => setVisibility(document?.visibilityState);
-
-  return ({
-    visibility,
-    ...useEventListener('visibilitychange', handleVisibilityChange, document, immediately, options)
-  });
+  return({ ...visibility, ...listener });
 };
 
 export default useDocumentVisibility;

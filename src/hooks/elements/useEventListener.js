@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import { useOndismount, useOnmount } from '../cycles';
 
@@ -27,7 +27,7 @@ const useEventListener = (name, fn, elt = window, immediately = true, options = 
   };
 
   // Use the abort signal to make sure our listener is found back
-  const setListener = () => { 
+  const setListener = () => {
     refAbort.current = new AbortController();
     elt.addEventListener(name, listener, { capture, once, passive, signal: refAbort.current.signal });
   };
@@ -38,12 +38,11 @@ const useEventListener = (name, fn, elt = window, immediately = true, options = 
   useOnmount(() => immediately && setListener());                   // Start immediately if requested
   useOndismount(() => working && unsetListener());                  // Cleanup if still running
 
-  const toggle = () =>
-    setWorking(running => {
-      if (!running) setListener()
-      else          unsetListener();
-      return !running;                                              // Toggle state
-    });
+  const toggle = () => setWorking(running => {
+    if (!running) setListener()
+    else          unsetListener();
+    return !running;                                                // Toggle state
+  });
 
   return({ working, toggle });
 };

@@ -1,18 +1,19 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 
 /**
  * Use an object as state with basic operations. Useful to avoid managing operations like setState(prev => ({ ...prev, other: 4 })
  * @param {object} [initialState={}] Object value to use for initialization
  * @memberof Hooks#
- * @returns {object} { object, set: object => void, assign: object => void, remove: (string|string[]) => void, reset: void => void, clear: void => void }
+ * @returns {object} { object, set: object => void, assign: (object, render = true) => void, remove: (string|string[], render = true) => void, reset: void => void, clear: void => void, render: void => void }
  * @example
  * const {
  *   object,                      // Current object value
  *   set,                         // Replace state with a new object
- *   assign,                      // Assign properties of parameter to the state
- *   remove,                      // Remove one or many properties from the state
+ *   assign,                      // Assign properties of parameter to the state, new object or same object (==> no render)
+ *   remove,                      // Remove one or many properties from the state, new object or same object (==> no render)
  *   reset,                       // Reinitialize state with initialState
- *   clear                        // Set an empty object as new state
+ *   clear,                       // Set an empty object as new state
+ *   render                       // Force the object to updated and a render to be triggered
  * } = useObject({ gamma: 3 });   // object { gamma: 3 };
  * 
  * assign({ beta: 2, zeta: 4 });  // object { gamma: 3, beta: 2, zeta: 4 }
@@ -35,20 +36,37 @@ const useObject = (initialState = {}) => {
   const set = useCallback(obj => setState(obj), []);
 
   // Assign 'patch' properties to state object
-  const assign = useCallback(patch => setState(prev => ({ ...prev, ...patch })), []);
+  const assign = useCallback((patch, render = true) => {
+    if (render)
+      setState(prev => ({ ...prev, ...patch }));
+    else
+      for(const key in patch)
+        state[key] = patch[key];
+  }, [state]);
 
   // Remove one or many properties from state object
-  const remove = useCallback(properties => setState(prev => {
+  const remove = useCallback((properties, render = true) => setState(prev => {
     // Assume 'properties' is a string or an array of strings
     const values = typeof properties === 'string' ? [properties] : properties;
 
     for(const value of values)
       delete prev[value];
 
-    return { ...prev };
+    return render ? { ...prev } : prev;
   }), []);
 
-  return({ object: state, set, assign, remove, reset, clear });
+  // Force a state update
+  const render = useCallback(() => setState(prev => ({ ...prev })), []);
+
+  return useMemo(() => ({
+    object: state,
+    set,
+    assign,
+    remove,
+    reset,
+    clear,
+    render
+  }), [state, set, assign, remove, reset, clear, render]);
 };
 
 export default useObject;

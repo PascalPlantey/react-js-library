@@ -10,7 +10,7 @@ import { getEventTarget } from "../../js";
  * @returns {object} { height: number, width: number }
  * @memberof Hooks#
  */
-const useObserveSize = (selector, step = 30, box = 'content-box') => {
+const useResizeObserver = (selector, step = 30, box = 'content-box') => {
   const getSize = elt => ({ width: elt?.offsetWidth, heigth: elt?.offsetHeight });
   const [size, setSize] = useState(getSize);
 
@@ -40,4 +40,4 @@ const useObserveSize = (selector, step = 30, box = 'content-box') => {
   return size;
 };
 
-export default useObserveSize;
+export default useResizeObserver;
