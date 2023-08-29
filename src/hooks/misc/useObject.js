@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback } from "react";
 
 /**
  * Use an object as state with basic operations. Useful to avoid managing operations like setState(prev => ({ ...prev, other: 4 })
@@ -58,7 +58,7 @@ const useObject = (initialState = {}) => {
   // Force a state update
   const render = useCallback(() => setState(prev => ({ ...prev })), []);
 
-  return useMemo(() => ({
+  return ({
     object: state,
     set,
     assign,
@@ -66,7 +66,19 @@ const useObject = (initialState = {}) => {
     reset,
     clear,
     render
-  }), [state, set, assign, remove, reset, clear, render]);
+  });
 };
+
+// Could use this return value, but not sure it helps: assign({ x: 'x' }, false) does not generate a render and
+// in the parent, useEffect(() => { console.log('effect') }, [object]), is not called
+// return useMemo(() => ({
+//   object: state,
+//   set,
+//   assign,
+//   remove,
+//   reset,
+//   clear,
+//   render
+// }), [state, set, assign, remove, reset, clear, render]);
 
 export default useObject;
