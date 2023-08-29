@@ -8,17 +8,18 @@ import { useState, useCallback } from "react";
  * @example
  * const {
  *   object,                      // Current object value
- *   set,                         // Replace state with a new object
- *   assign,                      // Assign properties of parameter to the state, new object or same object (==> no render)
- *   remove,                      // Remove one or many properties from the state, new object or same object (==> no render)
- *   reset,                       // Reinitialize state with initialState
- *   clear,                       // Set an empty object as new state
- *   render                       // Force the object to updated and a render to be triggered
+ *   set,                         // set(object) -> replace current object
+ *   assign,                      // assign(object, boolean = true) -> assign new properties, with state update or not
+ *   remove,                      // remove(string|Array<string>, boolean = true) -> remove properties
+ *   reset,                       // reset() -> object restored to initial state
+ *   clear,                       // clear() -> object becomes {}
+ *   render                       // render() -> object regenerated => state update
  * } = useObject({ gamma: 3 });   // object { gamma: 3 };
  * 
- * assign({ beta: 2, zeta: 4 });  // object { gamma: 3, beta: 2, zeta: 4 }
- * remove('gamma');               // object { beta: 2, zeta: 4 }
- * remove(['beta', 'teta']);      // object { zeta: 4 }
+ * assign({ beta: 2, zeta: 4 });  // object { gamma: 3, beta: 2, zeta: 4 } ==> state updated and render done
+ * assign({ zut: 'done' }, false);// object { gamma: 3, beta: 2, zeta: 4, zut: 'done' } ==> state not updated
+ * remove('gamma');               // object { beta: 2, zeta: 4, zut: 'done' }
+ * remove(['beta', 'teta']);      // object { zeta: 4, zut: 'done' }
  * reset();                       // object { gamma: 3 };
  * set({ car: 'Honda' });         // object { car: 'Honda' }
  * clear();                       // object {}
@@ -58,7 +59,7 @@ const useObject = (initialState = {}) => {
   // Force a state update
   const render = useCallback(() => setState(prev => ({ ...prev })), []);
 
-  return ({
+  return({
     object: state,
     set,
     assign,

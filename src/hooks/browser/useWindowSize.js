@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import useEventListener from '../elements/useEventListener';
 
@@ -25,10 +25,10 @@ const useWindowSize = (step = 30, immediately = true) => {
 
   const { working, toggle } = useEventListener('resize', onResize, window, immediately);
 
-  const handleToggle = () => {
+  const handleToggle = useCallback(() => {
     setSize(makeSize);                                              // Get initial size before activating the listener
     toggle();
-  };
+  }, [toggle]);
 
   return ({ height, width, working, toggle: handleToggle });
 };
