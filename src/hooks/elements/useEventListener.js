@@ -20,17 +20,17 @@ const useEventListener = (name, fn, elt = window, immediately = true, options = 
   const refAbort = useRef();
 
   // Use our own listener to track if it is automatically removed by the browser (options.once === true)
-  const listener = evt => {
+  const listener = useCallback(evt => {
     fn(evt);
     if (once)
       setWorking(false);                                            // Listener has been called and eventListener automatically removed
-  };
+  }, [fn, once]);
 
   // Use the abort signal to make sure our listener is found back
-  const setListener = () => {
+  const setListener = useCallback(() => {
     refAbort.current = new AbortController();
     elt.addEventListener(name, listener, { capture, once, passive, signal: refAbort.current.signal });
-  };
+  }, [capture, once, passive, elt, listener, name]);
 
   // AbortController.abort() remove the listener
   const unsetListener = () => refAbort.current?.abort();
@@ -38,11 +38,11 @@ const useEventListener = (name, fn, elt = window, immediately = true, options = 
   useOnmount(() => immediately && setListener());                   // Start immediately if requested
   useOndismount(() => working && unsetListener());                  // Cleanup if still running
 
-  const toggle = () => setWorking(running => {
+  const toggle = useCallback(() => setWorking(running => {
     if (!running) setListener()
     else          unsetListener();
     return !running;                                                // Toggle state
-  });
+  }), [setListener]);
 
   return({ working, toggle });
 };

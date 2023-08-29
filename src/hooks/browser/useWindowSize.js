@@ -15,13 +15,13 @@ const useWindowSize = (step = 30, immediately = true) => {
   const [size, setSize] = useState(makeSize());
   const { height, width } = size;
 
-  const onResize = () => setSize(current => {
+  const onResize = useCallback(() => setSize(current => {
     const { height, width } = current;
     if (Math.abs(window.innerWidth - width) >= step || Math.abs(window.innerHeight - height) >= step)
       return makeSize();
     else
       return current;                                               // Unchanged ==> no state change ==> no render
-  });
+  }), [step]);
 
   const { working, toggle } = useEventListener('resize', onResize, window, immediately);
 
