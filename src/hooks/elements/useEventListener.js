@@ -5,7 +5,7 @@ import { useOndismount, useOnmount } from '../cycles';
 /**
  * @description Fire a function when a document event happens
  * @param {string} name Event name (mouseup, mousemove, ...)
- * @param {function} fn Function to be called on event (receives the event information) (event) => any
+ * @param {function} fn Function to be called on event (receives the event information) (event) => any. This should be a useCallback
  * @param {Element} [elt=window] Document element
  * @param {boolean} [immediately=true] Listen immediately or after toggle()
  * @param {object} [options={}] { capture, once, passive } [see Mozilla]{@link https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener}
@@ -33,7 +33,7 @@ const useEventListener = (name, fn, elt = window, immediately = true, options = 
   }, [capture, once, passive, elt, listener, name]);
 
   // AbortController.abort() remove the listener
-  const unsetListener = () => refAbort.current?.abort();
+  const unsetListener = () => refAbort.current?.abort();            // Don't call setWorking when called on dismount
 
   useOnmount(() => immediately && setListener());                   // Start immediately if requested
   useOndismount(() => working && unsetListener());                  // Cleanup if still running

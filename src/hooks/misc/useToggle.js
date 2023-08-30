@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 /**
  * Toggle hook, can be used to force a render to execute
@@ -17,7 +17,7 @@ import { useState } from 'react';
 const useToggle = (initial = false) => {
   const [value, toggle] = useState(!!initial);
 
-  return [value, () => toggle(prevState => !prevState)];
+  return [value, useCallback(() => toggle(prevState => !prevState), [])];
 };
 
 export default useToggle;
