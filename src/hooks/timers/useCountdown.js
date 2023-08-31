@@ -6,8 +6,8 @@ import useTimer from './useTimer';
  * Execute a function after initialSeconds has elapsed
  * @param {function} callback Function to execute when time has elapsed : () => void
  * @param {number} initialSeconds Number of seconds before callback is executed
- * @param {boolean} immediately Start countdown immediately or after resume()/restart(true) is called
- * @returns {useTimerResult} { remainingTime, working, pause, resume, restart }
+ * @param {boolean} immediately Start countdown immediately or after toggle()/restart() is called
+ * @returns {useTimerResult} { remainingTime, working, toggle, restart }
  * @memberof Hooks#
  */
 const useCountdown = (callback, initialSeconds, immediately = true) => {
