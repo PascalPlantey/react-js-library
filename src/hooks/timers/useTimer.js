@@ -1,30 +1,39 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useLayoutEffect, useState } from 'react';
 
 import useInterval from './useInterval';
 
 /**
  * Sends a render every interval ms until initialTime comes to zero
  * @param {number} secondsUntilStop Number of seconds to wait before stopping
- * @returns {useTimerResult} { remainingTime, working, pause, resume, restart }
+ * @returns {useTimerResult} { remainingTime, working, toggle, reset }
  * @memberof Hooks#
  */
 const useTimer = (secondsUntilStop, immediately = true) => {
   const [remainingTime, setRemainingTime] = useState(secondsUntilStop);
 
-  const [working, toggle] = useInterval(() => {
+  const { working, toggle, stop, start } = useInterval(() => {
     setRemainingTime(prev => Math.max(prev - 1, 0));
   }, 1000, immediately);
 
-  working && remainingTime === 0 && toggle();                       // Stop interval if timer is consumed
+  working && remainingTime === 0 && stop();                       // Stop interval if timer is consumed
 
-  const handleToggle = useCallback(() => remainingTime > 0 && toggle(), [remainingTime]);
-  const handleRestart = useCallback(() => setRemainingTime(secondsUntilStop), [secondsUntilStop]);
+  // Toggle only if some time is left
+  const handleToggle = useCallback(() => {
+    remainingTime > 0 && toggle();
+  }, [remainingTime, toggle]);
+
+  // Reset to initial parameters (secondsUntilStop && immediately)
+  const handleReset = useCallback(() => {
+    setRemainingTime(secondsUntilStop);
+    if (!working && immediately)
+      start();
+  }, [secondsUntilStop, working, immediately, start]);
 
   return({
     working,
     remainingTime,
     toggle: handleToggle,
-    restart: handleRestart
+    reset: handleReset
   });
 };
 
@@ -35,7 +44,7 @@ const useTimer = (secondsUntilStop, immediately = true) => {
       { name: 'working', type: 'boolean' },
       { name: 'remainingTime', type: 'number' },
       { name: 'toggle', type: 'function' },
-      { name: 'restart', type: 'function' }
+      { name: 'reset', type: 'function' }
     ]
   };
 
