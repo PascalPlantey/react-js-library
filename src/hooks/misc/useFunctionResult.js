@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 
-import { useIsFirstRender } from '../cycles';
+import useIsFirstRender from '../cycles/useIsFirstRender';
 
 /**
  * Hook to get the result of a function: at first the function is immediately executed and its result returned.
@@ -14,7 +14,7 @@ import { useIsFirstRender } from '../cycles';
  */
 const useFunctionResult = (func, dependencies) => {
   const isFirstRender = useIsFirstRender();
-  const [result, setResult] = useState(() => func());
+  const [result, setResult] = useState(func);
 
   // eslint-disable-next-line
   const memoizedFunc = useCallback(func, [...dependencies]);
