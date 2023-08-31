@@ -81,7 +81,7 @@ class HookDescription {
    * @param {Array} params 
    */
   saveParams(params) {
-    this.paramsRefs = [...params];
+    params && (this.paramsRefs = [...params]);
   }
 
   /**
@@ -124,16 +124,18 @@ class HookDescription {
   checkParams(params) {
     const changes = [];
 
-    if (this.paramsRefs.length != params.length)
-      changes.push(`Alert: number of params is not consistent: old ${this.paramsRefs.length}, new ${params}`)
-    else
-      for(let i = 0; i < params.length; ++i)
-        if (this.paramsRefs[i] !== params[i])
-          changes.push(`Param ${i + 1} has changed from '${this.paramsRefs[i]}' to '${params[i]}'`);
+    if (params && this.paramsRefs) {
+      if (this.paramsRefs.length != params.length)
+        changes.push(`Alert: number of params is not consistent: old ${this.paramsRefs.length}, new ${params}`)
+      else
+        for(let i = 0; i < params.length; ++i)
+          if (this.paramsRefs[i] !== params[i])
+            changes.push(`Param ${i + 1} has changed from '${this.paramsRefs[i]}' to '${params[i]}'`);
 
-    if (changes.length) {
-      console.log(`${this.hookName} params have changed, a render is likely to happen`);
-      console.log('Parameters changes', changes);
+      if (changes.length) {
+        console.log(`${this.hookName} params have changed, a render is likely to happen`);
+        console.log('Parameters changes', changes);
+      }
     }
   }
 
