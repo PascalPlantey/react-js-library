@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import useInterval from './useInterval';
 
@@ -11,16 +11,17 @@ import useInterval from './useInterval';
 const useTimer = (secondsUntilStop, immediately = true) => {
   const [remainingTime, setRemainingTime] = useState(secondsUntilStop);
 
-  const { working, toggle, stop, start } = useInterval(() => {
+  // Get a const function to avoid side effects on toggle & reset
+  const intervalFn = useCallback(() => {
     setRemainingTime(prev => Math.max(prev - 1, 0));
-  }, 1000, immediately);
+  }, []);
+
+  const { working, toggle, stop, start } = useInterval(intervalFn, 1000, immediately);
 
   working && remainingTime === 0 && stop();                       // Stop interval if timer is consumed
 
   // Toggle only if some time is left
-  const handleToggle = useCallback(() => {
-    remainingTime > 0 && toggle();
-  }, [remainingTime, toggle]);
+  const handleToggle = useCallback(() => remainingTime > 0 && toggle(), [remainingTime, toggle]);
 
   // Reset to initial parameters (secondsUntilStop && immediately)
   const handleReset = useCallback(() => {
