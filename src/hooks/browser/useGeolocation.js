@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import useInterval from '../timers/useInterval';
 
@@ -13,17 +13,15 @@ import useInterval from '../timers/useInterval';
 const useGeolocation = (interval = 2000, immediately = true, options) => {
   const [result, setResult] = useState();
 
-  const onResult = value => setResult(value);
-
-  const getPosition = () => navigator.geolocation.getCurrentPosition(onResult, onResult, options);
+  const getPosition = useCallback(() => navigator.geolocation.getCurrentPosition(setResult, setResult, options), [options]);
 
   const { working, toggle } = useInterval(getPosition, interval, immediately);
 
-  const successStatus = result instanceof GeolocationPosition ? true :
-                        result instanceof GeolocationPositionError ? false :
-                        undefined;
+  const success = result instanceof GeolocationPosition ? true :
+                  result instanceof GeolocationPositionError ? false :
+                  undefined;
 
-  return({ success: successStatus, result, working, toggle });
+  return({ success, result, working, toggle });
 };
 
 export default useGeolocation;
