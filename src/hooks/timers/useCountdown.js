@@ -1,6 +1,7 @@
-import { useRef } from 'react';
+import { useRef, useCallback } from 'react';
 
 import useTimer from './useTimer';
+import { isFunction } from '../../js';
 
 /**
  * Execute a function after initialSeconds has elapsed

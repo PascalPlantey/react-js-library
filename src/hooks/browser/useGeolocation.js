@@ -17,7 +17,7 @@ const useGeolocation = (interval = 2000, immediately = true, options) => {
 
   const getPosition = () => navigator.geolocation.getCurrentPosition(onResult, onResult, options);
 
-  const [working, toggle] = useInterval(getPosition, interval, immediately);
+  const { working, toggle } = useInterval(getPosition, interval, immediately);
 
   const successStatus = result instanceof GeolocationPosition ? true :
                         result instanceof GeolocationPositionError ? false :
