@@ -18,7 +18,7 @@ const useDocumentVisibility = (immediately = true, options = {}) => {
   return({ visible, ...listener });
 };
 
-/* for use with useCheckHook
+/* for use with useCheckHook -----------------------------------------------*
   const resultDesc = {
     type: 'object',
     values: [
@@ -29,7 +29,5 @@ const useDocumentVisibility = (immediately = true, options = {}) => {
   };
   const res = useCheckHook('hook', useDocumentVisibility, resultDesc, step);
  */
-
-const res = useCheckHook('hook', useDocumentVisibility, resultDesc, step);
 
 export default useDocumentVisibility;
