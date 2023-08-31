@@ -1,4 +1,4 @@
-const { useRef, useEffect } = require("react");
+import { useRef, useEffect } from "react";
 
 import { ExtMap } from "../../js";
 import useToggle from "../misc/useToggle";
