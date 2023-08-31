@@ -6,22 +6,24 @@ import useTimer from './useTimer';
  * Execute a function after initialSeconds has elapsed
  * @param {function} callback Function to execute when time has elapsed : () => void
  * @param {number} initialSeconds Number of seconds before callback is executed
- * @param {boolean} immediately Start countdown immediately or after toggle()/restart() is called
- * @returns {useTimerResult} { remainingTime, working, toggle, restart }
+ * @param {boolean} immediately Start countdown immediately or after toggle()/reset() is called
+ * @returns {useTimerResult} { remainingTime, working, toggle, reset }
  * @memberof Hooks#
  */
-const useCountdown = (callback, initialSeconds, immediately = true) => {
-  const { working, remainingTime, toggle, restart } = useTimer(initialSeconds, immediately);
-  const done = useRef(false);
+const useCountdown = (action, runAfterSeconds, immediately = true) => {
+  const { working, remainingTime, toggle, reset } = useTimer(runAfterSeconds, immediately);
+  const done = useRef(false);                           // callback action executed?
 
-  const handleToggle = () => done.current === false && toggle();
-  const handleRestart = () => {
-    restart();
+  const handleToggle = useCallback(() => done.current === false && toggle(), [toggle]);
+
+  const handleReset = useCallback(() => {
+    reset();
     done.current = false;
-  };
+  }, [reset]);
 
+  // Execute the action when time has elapsed
   if (remainingTime === 0 && !done.current) {
-    callback();
+    isFunction(action) && action();
     done.current = true;
   }
 
@@ -29,8 +31,20 @@ const useCountdown = (callback, initialSeconds, immediately = true) => {
     working,
     remainingTime,
     toggle: handleToggle,
-    restart: handleRestart,
+    reset: handleReset,
   });
 };
+
+/* Debug with
+ * const resultDesc = {
+ *   type: 'object',
+ *   values: [
+ *     { name: 'working', type: 'boolean' },
+ *     { name: 'remainingTime', type: 'number' },
+ *     { name: 'toggle', type: 'function' },
+ *     { name: 'reset', type: 'function' }
+ *   ]
+ * };
+ */
 
 export default useCountdown;
