@@ -16,7 +16,7 @@ const getElement = elt => {
 
   if      (isString(elt))
     foundElt = document.getElementById(elt) || document.querySelector(elt);
-  else if (elt instanceof React.MutableRefObject)
+  else if (elt?.current)
     foundElt = elt.current;
 
   return foundElt instanceof Element ? foundElt : undefined;

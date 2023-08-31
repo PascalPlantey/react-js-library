@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
 
+import { isFunction } from '../../js';
+
 /**
  * @function useOnmount
  * @description Calls a function when the component is mounted
@@ -13,7 +15,7 @@ import { useEffect, useRef } from 'react';
  */
 const useOnmount = fn => {
   const init = useRef(fn);
-  useEffect(() => { init.current && init.current(); }, []);
+  useEffect(() => { isFunction(init.current) && init.current(); }, []);
 };
 
 export default useOnmount;

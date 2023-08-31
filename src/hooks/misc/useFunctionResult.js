@@ -16,8 +16,7 @@ const useFunctionResult = (func, dependencies) => {
   const isFirstRender = useIsFirstRender();
   const [result, setResult] = useState(func);
 
-  // eslint-disable-next-line
-  const memoizedFunc = useCallback(func, [...dependencies]);
+  const memoizedFunc = useCallback(func, [...dependencies]);  // eslint-disable-line
 
   useEffect(() => {
     if (!isFirstRender)

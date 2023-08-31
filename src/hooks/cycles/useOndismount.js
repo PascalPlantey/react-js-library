@@ -1,5 +1,7 @@
 import { useRef, useEffect } from 'react';
 
+import { isFunction } from '../../js';
+
 /**
  * @function useOndismount
  * @description Calls a function when the component is dismounted
@@ -13,7 +15,7 @@ import { useRef, useEffect } from 'react';
  */
 const useOndismount = fn => {
   const cleanup = useRef(fn);
-  useEffect(() => () => cleanup.current && cleanup.current(), []);
+  useEffect(() => () => isFunction(cleanup.current) && cleanup.current(), []);
 };
 
 export default useOndismount;
