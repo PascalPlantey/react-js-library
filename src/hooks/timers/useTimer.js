@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import useInterval from './useInterval';
 
@@ -17,8 +17,8 @@ const useTimer = (secondsUntilStop, immediately = true) => {
 
   working && remainingTime === 0 && toggle();                       // Stop interval if timer is consumed
 
-  const handleToggle = () => remainingTime > 0 && toggle();
-  const handleRestart = () => setRemainingTime(secondsUntilStop);
+  const handleToggle = useCallback(() => remainingTime > 0 && toggle(), [remainingTime]);
+  const handleRestart = useCallback(() => setRemainingTime(secondsUntilStop), [secondsUntilStop]);
 
   return({
     working,
@@ -27,5 +27,19 @@ const useTimer = (secondsUntilStop, immediately = true) => {
     restart: handleRestart
   });
 };
+
+/* Debug with -----------------------------------------------*
+  const resultDesc = {
+    type: 'object',
+    values: [
+      { name: 'working', type: 'boolean' },
+      { name: 'remainingTime', type: 'number' },
+      { name: 'toggle', type: 'function' },
+      { name: 'restart', type: 'function' }
+    ]
+  };
+
+  const res = useCheckHook('hook', useTimer, resultDesc, 5);
+*/
 
 export default useTimer;
