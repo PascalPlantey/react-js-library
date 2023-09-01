@@ -82,6 +82,14 @@ class ExtMap extends Map {
     const array = sortFn ? this.array.sort(sortFn) : this.array;
     return array.map(([ a, b ]) => ({ [keyName]: a, [valueName]: b }));
   }
+
+  /**
+   * Changed the default object type name visible through Object.prototype.toString.call
+   * @returns {string} ExtMap
+   */
+  get [Symbol.toStringTag]() {
+    return 'ExtMap';
+  }
 };
 
 export default ExtMap;
