@@ -1,6 +1,7 @@
 import React from "react";
 
 import isString from "../is/isString";
+import isRef from "../is/isRef";
 
 /**
  * Tries to find a document element out of elt. Order of tests to get a value: if elt is ...
@@ -16,7 +17,7 @@ const getElement = elt => {
 
   if      (isString(elt))
     foundElt = document.getElementById(elt) || document.querySelector(elt);
-  else if (elt?.current)
+  else if (isRef(elt))
     foundElt = elt.current;
 
   return foundElt instanceof Element ? foundElt : undefined;
