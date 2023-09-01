@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 
 import './SVGIcon.css';
 
@@ -21,6 +21,8 @@ const SVGIconPropTypes = {
   style: PropTypes.object
 };
 
+// useRef & forwardRef, see https://stackoverflow.com/questions/66664209/how-can-i-use-forwardref-in-react
+
 /**
  * @function SVGIcon  
  * @param {object} props React props  
@@ -34,7 +36,7 @@ const SVGIconPropTypes = {
  * @returns {React.Component}  
  * @memberof Components
  */
-const SVGIcon = ({ name, size, color, className, cursor, style, ...props }) => {
+const SVGIcon = forwardRef(({ name, size, color, className, cursor, style, ...props }, ref) => {
   const [Icon, setIcon] = useState(null);
   const wSize = size * 1.6;
   const wrapperStyle = {
@@ -60,6 +62,7 @@ const SVGIcon = ({ name, size, color, className, cursor, style, ...props }) => {
   useEffect(() => {
     let mounted = true;
     const upperName = `${name[0].toUpperCase()}${name.substring(1)}`;
+
     import(`./svg/${upperName}.jsx`)
     .then(module => {
       if (mounted) {                                      // Don't change state if icon has already been removed...
@@ -68,6 +71,7 @@ const SVGIcon = ({ name, size, color, className, cursor, style, ...props }) => {
       }
     })
     .catch(err => console.error(err));
+
     return(() => () => {
       mounted = false;                                    // Deletes the icon on unmount
       setIcon(null)
@@ -75,13 +79,13 @@ const SVGIcon = ({ name, size, color, className, cursor, style, ...props }) => {
   }, [name]);
 
   return(
-    <span className={classNames('svg-icon-wrapper', className)} style={wrapperStyle} {...props}>
+    <span className={classNames('svg-icon-wrapper', className)} style={wrapperStyle} ref={ref} {...props}>
       <span style={iconStyle}>
         {Icon}
       </span>
     </span>
   );
-}
+});
 
 SVGIcon.defaultProps = {
   className: '',
