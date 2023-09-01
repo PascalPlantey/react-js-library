@@ -188,6 +188,8 @@ class HookDescription {
  * @param {string} name Name of the hook, used for display only
  * @param {function} useHook Hook to be tested
  * @param {object} resultDescription Structure describing the returned result of the useHook function
+ * @param {string} resultDescription.type Type of the value returned by the hook, 'simple', 'object' or 'array'
+ * @param {array} resultDescription.values Values { name: string, type: string }
  * @param  {...any} params Parameters to be passed to the useHook function
  * @returns {any} The value returned by the useHook function
  * @memberof Hooks#

@@ -28,8 +28,8 @@ const SVGIconPropTypes = {
  * @param {object} props React props  
  * @param {string} props.name Icon name  
  * @param {number} [props.size=24] Icon size in pixels  
- * @param {string} [props.color] Icon color  
- * @param {(string|Array<string>)} [props.className] One or many CSS class names  
+ * @param {string} props.color Icon color  
+ * @param {(string|Array<string>)} props.className One or many CSS class names  
  * @param {string} [props.cursor='pointer'] Cursor name  
  * @param {object} props.style Additional style for the wrapper div  
  * @param {object} props.... Other props forwarded to the wrapper div  
