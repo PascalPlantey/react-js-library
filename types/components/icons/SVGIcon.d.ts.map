@@ -1,1 +1,1 @@
-{"version":3,"file":"SVGIcon.d.ts","sourceRoot":"","sources":["../../../src/components/icons/SVGIcon.jsx"],"names":[],"mappings":";AAuBA;;;;;;;;;;;;GAYG;AACH;IAVyB,IAAI,EAAlB,MAAM;IACS,IAAI;IACJ,KAAK;IACW,SAAS;IACzB,MAAM;IACP,KAAK,EAAnB,MAAM;IACQ,EAAd,MAAM;IACJ,MAAM,SAAS,CAkD3B;;;;;;;;;;;kBAnF0C,OAAO;;;;;;;;;;;;;;sBAI5B,YAAY"}
+{"version":3,"file":"SVGIcon.d.ts","sourceRoot":"","sources":["../../../src/components/icons/SVGIcon.jsx"],"names":[],"mappings":";AAyBA;;;;;;;;;;;;GAYG;AACH,iFAiDG;kBAvFoD,OAAO"}

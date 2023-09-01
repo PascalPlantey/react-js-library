@@ -1,1 +1,1 @@
-{"version":3,"file":"useResizeObserver.d.ts","sourceRoot":"","sources":["../../../src/hooks/elements/useResizeObserver.js"],"names":[],"mappings":";AAIA;;;;;;;GAOG;AACH,6CANW,wCAAuB,MAAM,GAAC,OAAO,wDAGnC,MAAM,CA+BlB"}
+{"version":3,"file":"useResizeObserver.d.ts","sourceRoot":"","sources":["../../../src/hooks/elements/useResizeObserver.js"],"names":[],"mappings":";AAIA;;;;;;;GAOG;AACH,6CANW,iCAAgB,MAAM,GAAC,OAAO,wDAG5B,MAAM,CA+BlB"}
