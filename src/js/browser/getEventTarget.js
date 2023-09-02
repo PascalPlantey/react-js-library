@@ -1,4 +1,4 @@
-import getElement from "./getElement";
+import getElement from "./getHTMLElement";
 import isEventTarget from './isEventTarget'
 
 /**
