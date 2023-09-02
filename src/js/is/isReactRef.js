@@ -3,6 +3,6 @@
  * @param {any} variable Variable to be tested
  * @returns {boolean}
  */
-const isRef = variable => typeof variable === 'object' && 'current' in variable;
+const isReactRef = variable => typeof variable === 'object' && 'current' in variable;
 
-export default isRef;
+export default isReactRef;

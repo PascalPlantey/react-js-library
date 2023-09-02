@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './SVGIcon.css';
 
@@ -28,15 +28,15 @@ const SVGIconPropTypes = {
  * @param {object} props React props  
  * @param {string} props.name Icon name  
  * @param {number} [props.size=24] Icon size in pixels  
- * @param {string} props.color Icon color  
- * @param {(string|Array<string>)} props.className One or many CSS class names  
+ * @param {string} [props.color] Icon color  
+ * @param {(string|Array<string>)} [props.className] One or many CSS class names  
  * @param {string} [props.cursor='pointer'] Cursor name  
- * @param {object} props.style Additional style for the wrapper div  
+ * @param {object} [props.style] Additional style for the wrapper div  
  * @param {object} props.... Other props forwarded to the wrapper div  
  * @returns {React.Component}  
  * @memberof Components
  */
-const SVGIcon = forwardRef(({ name, size, color, className, cursor, style, ...props }, ref) => {
+const SVGIcon = ({ name, size, color, className, cursor, style, ...props }) => {
   const [Icon, setIcon] = useState(null);
   const wSize = size * 1.6;
   const wrapperStyle = {
@@ -79,13 +79,13 @@ const SVGIcon = forwardRef(({ name, size, color, className, cursor, style, ...pr
   }, [name]);
 
   return(
-    <span className={classNames('svg-icon-wrapper', className)} style={wrapperStyle} ref={ref} {...props}>
+    <span className={classNames('svg-icon-wrapper', className)} style={wrapperStyle} {...props}>
       <span style={iconStyle}>
         {Icon}
       </span>
     </span>
   );
-});
+};
 
 SVGIcon.defaultProps = {
   className: '',

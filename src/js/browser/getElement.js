@@ -1,7 +1,7 @@
 import React from "react";
 
 import isString from "../is/isString";
-import isRef from "../is/isRef";
+import isRef from "../is/isReactRef";
 
 /**
  * Tries to find a document element out of elt. Order of tests to get a value: if elt is ...
