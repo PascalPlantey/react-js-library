@@ -57,6 +57,14 @@ class ExtMath {
   static growth(from, to) {
     return (to - from) / from * 100;
   }
+
+  /**
+   * Changed the default object type name visible through Object.prototype.toString.call
+   * @returns {string}
+   */
+  get [Symbol.toStringTag]() {
+    return 'ExtMath';
+  }
 };
 
 export default ExtMath;

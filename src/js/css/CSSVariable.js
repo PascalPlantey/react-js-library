@@ -30,6 +30,14 @@ class CSSVariable {
   set value(value) {
     document.documentElement.style.setProperty(this.#name, value);
   }
+
+  /**
+   * Changed the default object type name visible through Object.prototype.toString.call
+   * @returns {string} CSSVariable
+   */
+  get [Symbol.toStringTag]() {
+    return 'CSSVariable';
+  }
 };
 
 export default CSSVariable;

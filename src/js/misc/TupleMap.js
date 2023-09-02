@@ -147,6 +147,14 @@ class TupleMap extends ExtMap {
     for(const [key, value] of this.entries())
       yield [Compound.destructure(key), value];
   }
+
+  /**
+   * Changed the default object type name visible through Object.prototype.toString.call
+   * @returns {string}
+   */
+  get [Symbol.toStringTag]() {
+    return 'TupleMap';
+  }
 };
 
 export default TupleMap;

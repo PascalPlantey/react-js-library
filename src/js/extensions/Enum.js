@@ -91,7 +91,7 @@ function Enum(name, values) {
     },
     toString: {                                                     // String representation
       value: () => `${enumObject.name} - ${JSON.stringify(enumObject.keys)}`
-    }
+    },
   });
 
   for (const val of values) {

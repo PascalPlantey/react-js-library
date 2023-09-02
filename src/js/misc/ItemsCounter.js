@@ -216,6 +216,14 @@ class ItemsCounter extends Map {
 
     return items;
   }
+
+  /**
+   * Changed the default object type name visible through Object.prototype.toString.call
+   * @returns {string}
+   */
+  get [Symbol.toStringTag]() {
+    return 'ItemsCounter';
+  }
 };
 
 export default ItemsCounter;

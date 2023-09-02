@@ -18,6 +18,14 @@ class ExtString {
   static extend(str, add, delimiter = '; ', radical = '') {
     return str.concat(str.length ? delimiter : radical, add);
   };
+
+  /**
+   * Changed the default object type name visible through Object.prototype.toString.call
+   * @returns {string}
+   */
+  get [Symbol.toStringTag]() {
+    return 'ExtString';
+  }
 };
 
 

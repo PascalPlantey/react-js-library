@@ -49,6 +49,14 @@ class StorageItem {
     this.#storage.removeItem(this.#key);
     this.#value = undefined;
   }
+
+  /**
+   * Changed the default object type name visible through Object.prototype.toString.call
+   * @returns {string}
+   */
+  get [Symbol.toStringTag]() {
+    return 'StorageItem';
+  }
 };
 
 export default StorageItem;

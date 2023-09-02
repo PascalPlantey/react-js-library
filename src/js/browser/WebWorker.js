@@ -53,6 +53,14 @@ class WebWorker extends Worker {
       evt.preventDefault();                                     // Stop event propagation
     };
   }
+
+  /**
+   * Changed the default object type name visible through Object.prototype.toString.call
+   * @returns {string}
+   */
+  get [Symbol.toStringTag]() {
+    return 'WebWorker';
+  }
 };
 
 export default WebWorker;

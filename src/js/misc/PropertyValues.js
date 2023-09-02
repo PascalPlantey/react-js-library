@@ -79,6 +79,14 @@ class PropertyValues extends Set {
     for(const value of this.values())
       yield Compound.isCompound(value) ? Compound.destructure(value) : value;
   }
+
+  /**
+   * Changed the default object type name visible through Object.prototype.toString.call
+   * @returns {string}
+   */
+  get [Symbol.toStringTag]() {
+    return 'PropertyValues';
+  }
 };
 
 export default PropertyValues;
