@@ -21,6 +21,11 @@ declare class CSSVariable {
      * variable.value = '48em';
      */
     get value(): string;
+    /**
+     * Changed the default object type name visible through Object.prototype.toString.call
+     * @returns {string} CSSVariable
+     */
+    get [Symbol.toStringTag](): string;
     #private;
 }
 //# sourceMappingURL=CSSVariable.d.ts.map

@@ -35,5 +35,10 @@ declare class ExtMath {
      * console.log(`${ExtMath.growth(q1, q2)}%`)
      */
     static growth(from: number, to: number): number;
+    /**
+     * Changed the default object type name visible through Object.prototype.toString.call
+     * @returns {string}
+     */
+    get [Symbol.toStringTag](): string;
 }
 //# sourceMappingURL=ExtMath.d.ts.map

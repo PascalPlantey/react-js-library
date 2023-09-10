@@ -38,5 +38,10 @@ declare class WebWorker extends Worker {
      * @returns {void}
      */
     onerror: (evt: ErrorEvent) => void;
+    /**
+     * Changed the default object type name visible through Object.prototype.toString.call
+     * @returns {string}
+     */
+    get [Symbol.toStringTag](): string;
 }
 //# sourceMappingURL=WebWorker.d.ts.map

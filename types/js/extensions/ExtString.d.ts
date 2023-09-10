@@ -17,5 +17,10 @@ declare class ExtString {
      * console.log(str);          // 'Categories: police; horror; suspense'
      */
     static extend(str: string, add: string, delimiter?: string | undefined, radical?: string | undefined): string;
+    /**
+     * Changed the default object type name visible through Object.prototype.toString.call
+     * @returns {string}
+     */
+    get [Symbol.toStringTag](): string;
 }
 //# sourceMappingURL=ExtString.d.ts.map

@@ -41,5 +41,10 @@ declare class Compound {
      * @memberof Compound
      */
     static destructure: (value: any | string) => Array<string> | any;
+    /**
+     * Changed the default object type name visible through Object.prototype.toString.call
+     * @returns {string}
+     */
+    get [Symbol.toStringTag](): string;
 }
 //# sourceMappingURL=Compound.d.ts.map

@@ -26,6 +26,11 @@ declare class StorageItem {
      * @returns {void}
      */
     remove(): void;
+    /**
+     * Changed the default object type name visible through Object.prototype.toString.call
+     * @returns {string}
+     */
+    get [Symbol.toStringTag](): string;
     #private;
 }
 //# sourceMappingURL=StorageItem.d.ts.map

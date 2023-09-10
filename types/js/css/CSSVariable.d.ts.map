@@ -1,1 +1,1 @@
-{"version":3,"file":"CSSVariable.d.ts","sourceRoot":"","sources":["../../../src/js/css/CSSVariable.js"],"names":[],"mappings":";AAAA;;GAEG;AACH;IAGE;;;OAGG;IACH,kBAHW,MAAM,EAKhB;IAiBD,uBAEC;IAjBD;;;;;;;;;;OAUG;IACH,oBAEC;;CAKF"}
+{"version":3,"file":"CSSVariable.d.ts","sourceRoot":"","sources":["../../../src/js/css/CSSVariable.js"],"names":[],"mappings":";AAAA;;GAEG;AACH;IAGE;;;OAGG;IACH,kBAHW,MAAM,EAKhB;IAiBD,uBAEC;IAjBD;;;;;;;;;;OAUG;IACH,oBAEC;IAMD;;;OAGG;IACH,mCAEC;;CACF"}
