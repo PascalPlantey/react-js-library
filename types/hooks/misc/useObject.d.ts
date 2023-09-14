@@ -9,7 +9,7 @@ export default useObject;
  *   object,                      // Current object value
  *   set,                         // set(object) -> replace current object
  *   assign,                      // assign(object, boolean = true) -> assign new properties, with state update or not
- *   remove,                      // remove(string|Array<string>, boolean = true) -> remove properties
+ *   remove,                      // remove(string|Array<string>, boolean = true) -> remove properties, with state update or not
  *   reset,                       // reset() -> object restored to initial state
  *   clear,                       // clear() -> object becomes {}
  *   render                       // render() -> object regenerated => state update
