@@ -154,7 +154,7 @@ class HookDescription {
     }
 
     if (changes.size)
-      console.log('A render has generated change(s) on ${this.hookName} result', changes.objectsArray('field', 'comments', null));
+      console.log(`A render has generated change(s) on ${this.hookName} result`, changes.objectsArray('field', 'comments', null));
     else
       console.log(`A render has generated no change(s) on ${this.hookName} result`);
   }
