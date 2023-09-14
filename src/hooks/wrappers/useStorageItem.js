@@ -19,7 +19,7 @@ const useStorageItem = (key, def = '', local = true) => {
 
   return [
     value,
-    newValue => setValue(storage.current.value = newValue),
+    newValue => setValue(storage.current.value = newValue), // Change the StorageItem value & set the state
     () => {
       storage.current.remove();
       setValue();                                         // Key does not exist anymore, set value to 'undefined'
