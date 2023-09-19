@@ -1,32 +1,45 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
+
+import { useObject } from '../misc';
+
+const initialObj = {                                                // Make it const to avoid unnecessary renders
+  loading: true,
+  ok: undefined,
+  status: undefined,
+  statusText: undefined,
+  data: {},
+  error: undefined
+};
 
 /**
- * Runs a fetch operation as a React hook
- * @param {string} api API end point
- * @param {string} [base=''] Base for URL ([Mozilla] {@link https://developer.mozilla.org/en-US/docs/Web/API/URL/URL})
+ * Runs a fetch operation as a React hook. The 'options' parameter should be a const or useMemo to avoid infinite loop
+ * @param {string} [api=''] API end point ([Mozilla] {@link https://developer.mozilla.org/en-US/docs/Web/API/URL/URL})
+ * @param {string} url Base url
  * @param {object} options Fetch options ([Mozilla]) {@link https://developer.mozilla.org/en-US/docs/Web/API/fetch}
  * @returns {useFetchResult} { status, ok, statusText, loading, result }
  * @memberof Hooks#
  */
-const useFetch = (api, base = '', options) => {
-  const dflt = useRef({ loading: true });
-  const [result, setResult] = useState(dflt.current);
+const useFetch = (api = '', url, options) => {
+  const { object, assign, reset } = useObject(initialObj);
 
   useEffect(() => {
-    setResult(dflt.current);                                        // Set 'loading' to true in case of dependencies change
+    reset();                                                        // Clear result to default initialObj
 
-    let status, statusText, ok;
+    fetch(encodeURI(new URL(api, url)), options)
+    .then(result => {
+      const { ok, status, statusText } = result;
 
-    fetch(encodeURI(new URL(api, base).toString()), options)        // Encoding if needed (ie search parameters)
-    .then(response => {
-      ({ status, ok, statusText } = response);                      // Forward status information to the next 'then'
-      return response.json();
+      if (ok)
+        result.json()                                               // .then is here to have the result.status etc, .catch falls up to the one provided
+        .then(data => assign({ loading: false, ok, status, statusText, data }));
+      else
+        assign({ loading: false, ok, status, statusText });         // No data available
     })
-    .then(result => setResult({ status, ok, statusText, loading: false, result }))
-    .catch(error => setResult({ status: 400, ok: false, statusText: error.message, loading: false }));
-  }, [api, base, options]);
+    .catch(error => assign({ loading: false, ok: false, error }));  // fetch or json error
 
-  return result;
+  }, [api, url, options, assign, reset]);
+
+  return object;
 };
 
 export default useFetch;
