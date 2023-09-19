@@ -16,12 +16,12 @@ const initialObj = {                                                // Make it c
  * @param {string} [api=''] API end point ([Mozilla] {@link https://developer.mozilla.org/en-US/docs/Web/API/URL/URL})
  * @param {string} url Base url
  * @param {object} options Fetch options ([Mozilla]) {@link https://developer.mozilla.org/en-US/docs/Web/API/fetch}
- * @returns {Array} [{ loading, ok, status, statusText, data, error }, refresh, abort]
+ * @returns {[object, function, function]} [{ loading, ok, status, statusText, data, error }, refresh, abort]
  * @memberof Hooks#
  */
 const useFetch = (api = '', url, options) => {
   const refController = useRef();
-  const [, toggle] = useToggle();
+  const [value, toggle] = useToggle();
   const { object, assign, reset } = useObject(initialObj);
 
   if (!refController.current)
@@ -35,7 +35,8 @@ const useFetch = (api = '', url, options) => {
       const { ok, status, statusText } = result;
 
       if (ok)
-        result.json()                                               // .then is here to have the result.status etc, .catch falls down to the one below
+        result
+        .json()                                                     // .then is here to have the result.status etc, .catch falls down to the one below
         .then(data => assign({ loading: false, ok, status, statusText, data }));
       else
         assign({ loading: false, ok, status, statusText });         // No data available
@@ -46,7 +47,7 @@ const useFetch = (api = '', url, options) => {
       refController.current?.abort();
       refController.current = null;
     }
-  }, [api, url, options, assign, reset, toggle]);
+  }, [api, url, options, assign, reset, value]);
 
   return [object, toggle, refController.current?.abort || noop];
 };
