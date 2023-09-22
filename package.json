@@ -48,6 +48,7 @@
     "@storybook/testing-library": "^0.2.0",
     "classnames": "^2.3.2",
     "docdash": "^2.0.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "jsdoc": "^4.0.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -56,13 +57,15 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "storybook": "^7.0.27",
-    "typescript": "^5.1.6",
-    "eslint-plugin-react-hooks": "^4.6.0"
+    "typescript": "^5.1.6"
   },
   "peerDependencies": {
     "classnames": "^2.3.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "antd": "^5.9.2"
+  },
+  "dependencies": {
   }
 }

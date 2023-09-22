@@ -27,7 +27,8 @@ export default [
         globals: {
           react: 'React',
           "prop-types": 'PropTypes',
-          classnames: 'classNames'
+          classnames: 'classNames',
+          antd: 'antd'
         },
       }
     ],

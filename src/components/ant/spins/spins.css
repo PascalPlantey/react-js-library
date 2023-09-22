@@ -1,0 +1,13 @@
+.pp-spin-container-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.pp-spin-page {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+}

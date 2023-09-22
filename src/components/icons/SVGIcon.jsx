@@ -32,7 +32,7 @@ const SVGIconPropTypes = {
  * @param {(string|Array<string>)} [props.className] One or many CSS class names  
  * @param {string} [props.cursor='pointer'] Cursor name  
  * @param {object} [props.style] Additional style for the wrapper div  
- * @param {object} props.... Other props forwarded to the wrapper div  
+ * @param {object} props... Other props forwarded to the wrapper div  
  * @returns {React.Component}  
  * @memberof Components
  */
