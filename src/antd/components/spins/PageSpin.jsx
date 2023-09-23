@@ -28,7 +28,6 @@ const PageSpin = ({ containerClassName, containerStyle, ...props }) => {
     });
   }, []);
 
-  console.log('position', position)
   return(
     <SpinWithTip
       containerClassName={classNames('pp-spin-page', containerClassName)}
