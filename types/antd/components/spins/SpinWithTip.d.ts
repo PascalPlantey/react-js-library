@@ -1,14 +1,14 @@
-export default PageSpin;
+export default SpinWithTip;
 /**
- * @function PageSpin
+ * @function SpinWithTip
  * @param {string} [containerClassName] Container class name
  * @param {object} [containerStyle] Extra style information for the container
  * @param {boolean} [hidden=false] Hide the spin?
  * @param {string} [tip] Tip text
- * @param {string} [size='default'] Spin image size ('default'|'large'|'small')
+ * @param {string} [size='default'|'large'|'small'] Spin image size
  * @param {any} [props] All other props are injected in the antd Spin component
  * @returns {React.Component}
  */
-declare function PageSpin({ containerClassName, ...props }?: string | undefined): React.Component;
+declare const SpinWithTip: React.ForwardRefExoticComponent<React.RefAttributes<any>>;
 import React from "react";
-//# sourceMappingURL=PageSpin.d.ts.map
+//# sourceMappingURL=SpinWithTip.d.ts.map

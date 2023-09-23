@@ -9,6 +9,6 @@ export default PageSpin;
  * @param {any} [props] All other props are injected in the antd Spin component
  * @returns {React.Component}
  */
-declare function PageSpin({ containerClassName, ...props }?: string | undefined): React.Component;
+declare function PageSpin({ containerClassName, containerStyle, ...props }?: string | undefined): React.Component;
 import React from "react";
 //# sourceMappingURL=PageSpin.d.ts.map

@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useLayoutEffect, useState } from "react";
 
 import SpinWithTip from './SpinWithTip.jsx';
 import classNames from "classnames";
@@ -10,27 +10,29 @@ import { useWindowSize } from "../../../hooks/index.js";
  * @param {object} [containerStyle] Extra style information for the container
  * @param {boolean} [hidden=false] Hide the spin?
  * @param {string} [tip] Tip text
- * @param {string} [size='default'|'large'|'small'] Spin image size
+ * @param {string} [size='default'] Spin image size ('default'|'large'|'small')
  * @param {any} [props] All other props are injected in the antd Spin component
  * @returns {React.Component}
  */
-const PageSpin = ({ containerClassName, ...props }) => {
+const PageSpin = ({ containerClassName, containerStyle, ...props }) => {
   const ref = useRef();
-  const positionRef = useRef({ top: 0, left: 0 });
+  const [position, setPosition] = useState({ ...containerStyle, top: 0, left: 0, opacity: '0%' });
   const { height, width } = useWindowSize(0);
 
   useLayoutEffect(() => {
-    console.log(('layout'))
-    positionRef.current = {
+    setPosition({
+      ...containerStyle,
       top: (height - ref.current.offsetWidth) / 2,
       left: (width - ref.current.offsetHeight) / 2,
-    };
+      opacity: '100%'                                     // Opacity 'hides' the component when at position(0, 0)
+    });
   }, []);
 
+  console.log('position', position)
   return(
     <SpinWithTip
       containerClassName={classNames('pp-spin-page', containerClassName)}
-      containerStyle={positionRef.current}
+      containerStyle={position}
       ref={ref}
       {...props}
     />
