@@ -13,16 +13,16 @@ import { Compound } from "../../../js";
  * buildSelectOptions(arr, 'id', 'b'); => [{ label: '1', value: 'ab' }, { label: '1', value: 'de' }]
  * buildSelectOptions(arr, 'id', 'b', 'c'); => [{ label: '1', value: 'ab|bc' }, { label: '1', value: 'de|ef' }]
  */
-const buildSelectOptions = (list, labelFieldName, ...valueFieldNames) => {
-  const options = [];
-
-  for(const item of list)
-    options.push({
+const buildSelectOptions = (list, labelFieldName, ...valueFieldNames) => 
+  valueFieldNames.length === 1 ?
+    list.map(item => ({
+      label: item[labelFieldName],
+      value: item[valueFieldNames[0]]
+    }))
+  :
+    list.map(item => ({
       label: item[labelFieldName],
       value: Compound.structure(valueFieldNames.map(field => item[field]))
-    });
-
-  return options;
-};
+    }));
 
 export default buildSelectOptions;
