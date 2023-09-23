@@ -14,14 +14,19 @@ const propTypes = {
 };
 
 /**
+ * Displays an antd Spin form with an optional tip text. The Spin and tip are encapsulated in a container div to be displayed vertically
+ * aligned
  * @function SpinWithTip
- * @param {string} [containerClassName] Container class name
- * @param {object} [containerStyle] Extra style information for the container
- * @param {boolean} [hidden=false] Hide the spin?
- * @param {string} [tip] Tip text
- * @param {string} [size='default'|'large'|'small'] Spin image size
- * @param {any} [props] All other props are injected in the antd Spin component
+ * @param {object} props
+ * @param {string} [props.containerClassName] Container class name
+ * @param {object} [props.containerStyle] Extra style information for the container
+ * @param {boolean} [props.hidden=false] Hide the spin?
+ * @param {string} [props.tip] Tip text
+ * @param {string} [props.size='default'] Spin image size ('default'|'large'|'small')
+ * @param {React.MutableRefObject} [props.ref] Ref set in the container div
+ * @param {any} [props.rest] All other {...props} are injected in the antd Spin component
  * @returns {React.Component}
+ * @memberof AntdComponents
  */
 const SpinWithTip = forwardRef(({ containerClassName, containerStyle, tip, hidden, ...spinProps }, ref) =>
   hidden ?

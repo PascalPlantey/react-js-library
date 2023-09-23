@@ -16,7 +16,7 @@ const initialObj = {                                                // Make it c
  * @param {string} [api=''] API end point ([Mozilla] {@link https://developer.mozilla.org/en-US/docs/Web/API/URL/URL})
  * @param {string} url Base url
  * @param {object} options Fetch options ([Mozilla]) {@link https://developer.mozilla.org/en-US/docs/Web/API/fetch}
- * @returns {[object, function, function]} [{ loading, ok, status, statusText, data, error }, refresh, abort]
+ * @returns {Array} Array list [{ loading, ok, status, statusText, data, error }, refresh, abort]
  * @memberof Hooks#
  */
 const useFetch = (api = '', url, options) => {

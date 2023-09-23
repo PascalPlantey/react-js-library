@@ -4,8 +4,8 @@ export default useFetch;
  * @param {string} [api=''] API end point ([Mozilla] {@link https://developer.mozilla.org/en-US/docs/Web/API/URL/URL})
  * @param {string} url Base url
  * @param {object} options Fetch options ([Mozilla]) {@link https://developer.mozilla.org/en-US/docs/Web/API/fetch}
- * @returns {[object, function, function]} [{ loading, ok, status, statusText, data, error }, refresh, abort]
+ * @returns {Array} Array list [{ loading, ok, status, statusText, data, error }, refresh, abort]
  * @memberof Hooks#
  */
-declare function useFetch(api?: string | undefined, url: string, options: object): [object, Function, Function];
+declare function useFetch(api?: string | undefined, url: string, options: object): any[];
 //# sourceMappingURL=useFetch.d.ts.map

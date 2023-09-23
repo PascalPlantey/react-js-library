@@ -8,7 +8,7 @@ export default SVGIcon;
  * @param {(string|Array<string>)} [props.className] One or many CSS class names
  * @param {string} [props.cursor='pointer'] Cursor name
  * @param {object} [props.style] Additional style for the wrapper div
- * @param {object} props... Other props forwarded to the wrapper div
+ * @param {object} [props.rest] {...props} forwarded to the wrapper div
  * @returns {React.Component}
  * @memberof Components
  */
@@ -19,6 +19,7 @@ declare function SVGIcon({ name, size, color, className, cursor, style, ...props
     className?: string | string[] | undefined;
     cursor?: string | undefined;
     style?: object | undefined;
+    rest?: object | undefined;
 }): React.Component;
 declare namespace SVGIcon {
     export namespace defaultProps {
