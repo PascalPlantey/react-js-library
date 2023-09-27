@@ -20,7 +20,7 @@ const buildSelectOptions = (list, labelFieldName, ...valueFieldNames) =>
       value: item[valueFieldNames[0]]
     }))
   :
-    list.map(item => ({
+    list.map(item => ({                                   // This works without the length test but involves more operations
       label: item[labelFieldName],
       value: Compound.structure(valueFieldNames.map(field => item[field]))
     }));
