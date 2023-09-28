@@ -6,6 +6,7 @@ import { isPrimitive } from "../../../../js";
  * @param {string} keyName Property to be toggled
  * @param {any} value A single value or an iterator over many values
  * @returns {Array} New filters
+ * @memberof AntdUtils
  */
 export const toggleFilterValue = (filters, keyName, value) => {
   const values = isPrimitive(value) ? [value] : value;

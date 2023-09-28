@@ -9,6 +9,7 @@ import useUpdateTableColumns from "./useUpdateTableColumns";
  * @param {object} filters Filters to be applied to the columns
  * @param {object} sort Sort order for the columns
  * @returns {array} New value for the Table columns
+ * @memberof AntdHooks
  */
 const useTableConfig = (columns, records, filters, sort) =>
   useUpdateTableColumns(useInitializeTable(columns, records), filters, sort);

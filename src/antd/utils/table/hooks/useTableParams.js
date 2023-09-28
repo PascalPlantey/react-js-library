@@ -6,6 +6,7 @@ import toggleFilterValue from "../tools/toggleFilterValue";
  * Manages the state of a Table component, and offers various functions to update or query the Table state parameters
  * @returns {object} {tableParams, onChange, onChangePagination, onChangeFilters, onChangeSort, isFilterActive}
  * @description Table onChange gives pagination, filters and sort values
+ * @memberof AntdHooks
  */
 export const useTableParams = (params = { pagination: null, filters: null, sort: null }) => {
   const [tableParams, setTableParams] = useState(params);

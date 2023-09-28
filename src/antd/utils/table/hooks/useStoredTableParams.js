@@ -8,6 +8,7 @@ import useTableParams from "./useTableParams";
  * Provides a state for the Table parameters, storage in the local storage
  * @param {string} key Key used in the local storage
  * @returns {object} {tableParams, onChange, onChangePagination, onChangeFilters, onChangeSort, isFilterActive}
+ * @memberof AntdHooks
  */
 const useStoredTableParams = key => {
   const paramsRef = useNewClassRef(() => new StorageItem(key, { pagination: null, filters: null, sort: null }));

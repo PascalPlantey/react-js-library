@@ -8,6 +8,7 @@ import { useEffect, useMemo, useState } from "react";
  * @param {object} filters Restored from the local storage
  * @param {object} sort Restored from the local storage
  * @returns {array} New array for the columns
+ * @memberof AntdHooks
  * @notes: this can potentially be called many times with different parameters each time, so a useMemo or useFunctionResult will cost
  * more than a useState/useEffect
  */

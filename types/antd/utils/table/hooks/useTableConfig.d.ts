@@ -7,6 +7,7 @@ export default useTableConfig;
  * @param {object} filters Filters to be applied to the columns
  * @param {object} sort Sort order for the columns
  * @returns {array} New value for the Table columns
+ * @memberof AntdHooks
  */
 declare function useTableConfig(columns: array, records: array, filters: object, sort: object): array;
 //# sourceMappingURL=useTableConfig.d.ts.map

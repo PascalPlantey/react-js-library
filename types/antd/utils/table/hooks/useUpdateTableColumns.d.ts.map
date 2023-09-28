@@ -1,1 +1,1 @@
-{"version":3,"file":"useUpdateTableColumns.d.ts","sourceRoot":"","sources":["../../../../../src/antd/utils/table/hooks/useUpdateTableColumns.js"],"names":[],"mappings":";AAEA;;;;;;;;;;GAUG;AACH,gEANW,MAAM,QACN,MAAM,SAmBhB"}
+{"version":3,"file":"useUpdateTableColumns.d.ts","sourceRoot":"","sources":["../../../../../src/antd/utils/table/hooks/useUpdateTableColumns.js"],"names":[],"mappings":";AAEA;;;;;;;;;;;GAWG;AACH,gEAPW,MAAM,QACN,MAAM,SAoBhB"}
