@@ -28,9 +28,13 @@ export default [
           react: 'React',
           "prop-types": 'PropTypes',
           classnames: 'classNames',
-          antd: 'antd'
+          antd: 'antd',
+          "@ant-design/icons": 'icons'
         },
       }
+    ],
+    external: [                                       // Exclude from compilation
+      "antd", "react", "react-dom", "@ant-design/icons"
     ],
     plugins: [
       // Allow CSS files imports
