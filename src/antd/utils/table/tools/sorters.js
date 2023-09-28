@@ -1,5 +1,6 @@
 /**
- * For the Table columns, function to sort string properties
+ * @function sortAlpha
+ * @description For the Table columns, function to sort string properties
  * @param {object} a Item to be compared
  * @param {object} b Item to be compared
  * @param {string} index Property name of 'a' and 'b'
@@ -9,7 +10,8 @@
 export const sortAlpha = (a, b, index) => a[index].localeCompare(b[index]);
 
 /**
- * For the Table columns, function to sort number properties
+ * @function sortNumbers
+ * @description For the Table columns, function to sort number properties
  * @param {object} a Item to be compared
  * @param {object} b Item to be compared
  * @param {string} index Property name of 'a' and 'b'
@@ -19,7 +21,8 @@ export const sortAlpha = (a, b, index) => a[index].localeCompare(b[index]);
 export const sortNumbers = (a, b, index) => a[index] - b[index];
 
 /**
- * For the Table columns, function to sort number properties
+ * @function sortDates
+ * @description For the Table columns, function to sort number properties
  * @param {object} a Item to be compared
  * @param {object} b Item to be compared
  * @param {string} index Property name of 'a' and 'b'
