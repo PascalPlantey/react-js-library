@@ -16,7 +16,10 @@ class ExtString {
    * console.log(str);          // 'Categories: police; horror; suspense'
    */
   static extend(str, add, delimiter = '; ', radical = '') {
-    return str.concat(str.length ? delimiter : radical, add);
+    if (add.length === 0)
+      return str.length ? str : radical;
+    else
+      return str.concat(str.length ? delimiter : radical, add);
   };
 
   /**

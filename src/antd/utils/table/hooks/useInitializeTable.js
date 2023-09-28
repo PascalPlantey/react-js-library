@@ -7,7 +7,7 @@ import { isPrimitive, isIterable } from "../../../../js/is";
  * @param {array} columns Columns configuration for the Table
  * @param {array} records Datasource for the Table
  * @returns {array} A new array for the columns (new array so that the Table render is run again)
- * @notes This should be run only two times: before and after data fetch, so a useMemo does not cost much
+ * @notes This should be run only two times: before and after data fetch, so a useMemo does not cost much and saves extra renders
  */
 const useInitializeTable = (columns, records) => useMemo(() => {
   // Don't do anything if the records are not available yet
