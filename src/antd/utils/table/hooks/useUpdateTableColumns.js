@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 /**
  * Update the columns definitions after a change. Needed for example when using parameters stored in the local storage. When the filters
@@ -8,15 +8,23 @@ import { useMemo } from "react";
  * @param {object} filters Restored from the local storage
  * @param {object} sort Restored from the local storage
  * @returns {array} New array for the columns
+ * @notes: this can potentially be called many times with different parameters each time, so a useMemo or useFunctionResult will cost
+ * more than a useState/useEffect
  */
-const useUpdateTableColumns = (columns, filters, sort) => useMemo(() =>
-  columns.map(column => {
-    const { onFilter, sorter, dataIndex } = column;
-    const filteredValue = (onFilter && filters?.[dataIndex]) ?? null;
-    const sortOrder = (sorter && sort?.field === dataIndex && sort.order) || null;
+const useUpdateTableColumns = (columns, filters, sort) => {
+  const [updatedColumns, setUpdatedColumns] = useState(columns);
 
-    return ({ ...column, filteredValue, sortOrder });
-  })
-, [columns, filters, sort]);
+  useEffect(() => {
+    setUpdatedColumns(prev => prev.map(column => {
+      const { onFilter, sorter, dataIndex } = column;
+      const filteredValue = (onFilter && filters?.[dataIndex]) ?? null;
+      const sortOrder = (sorter && sort?.field === dataIndex && sort.order) || null;
+      
+      return ({ ...column, filteredValue, sortOrder });
+    }));
+  }, [columns, filters, sort]);
+
+  return updatedColumns;
+};
 
 export default useUpdateTableColumns;

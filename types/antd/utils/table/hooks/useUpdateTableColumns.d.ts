@@ -7,6 +7,8 @@ export default useUpdateTableColumns;
  * @param {object} filters Restored from the local storage
  * @param {object} sort Restored from the local storage
  * @returns {array} New array for the columns
+ * @notes: this can potentially be called many times with different parameters each time, so a useMemo or useFunctionResult will cost
+ * more than a useState/useEffect
  */
 declare function useUpdateTableColumns(columns: array, filters: object, sort: object): array;
 //# sourceMappingURL=useUpdateTableColumns.d.ts.map
