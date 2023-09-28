@@ -1,3 +1,5 @@
+import { isPrimitive } from "../is";
+
 /**
  * Extensions to the string class
  */
@@ -5,7 +7,7 @@ class ExtString {
   /**
    * Adds the "extend" function to String
    * @param {string} str Current value of the string
-   * @param {string} add String to be added to the original string
+   * @param {string|Iterable} add String(s) to be added to the original string
    * @param {string} [delimiter='; '] Delimiter to be used between the original string and str, if the original string is empty
    * @param {string} [radical=''] String to use as a radical if the original string is empty
    * @returns {string} A new string
@@ -16,11 +18,22 @@ class ExtString {
    * console.log(str);          // 'Categories: police; horror; suspense'
    */
   static extend(str, add, delimiter = '; ', radical = '') {
-    if (add.length === 0)
-      return str.length ? str : radical;
-    else
-      return str.concat(str.length ? delimiter : radical, add);
+    let newStr = str.length ? str : radical;
+    const extensions = add ? (isPrimitive(add) ? [add] : add) : [];
+
+    for(const value of extensions)
+      newStr += (newStr.length ? delimiter : '') + value;
+
+    return newStr;
   };
+
+  static split(str, delimiter = '; ') {
+    return str.split(delimiter);
+  }
+
+  static sortedSplit(str, delimiter = '; ') {
+    return ExtString.split(str, delimiter).map(s => s).sort();
+  }
 
   /**
    * Changed the default object type name visible through Object.prototype.toString.call
@@ -30,6 +43,5 @@ class ExtString {
     return 'ExtString';
   }
 };
-
 
 export default ExtString;
