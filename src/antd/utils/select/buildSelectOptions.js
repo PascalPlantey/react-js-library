@@ -1,4 +1,4 @@
-import { Compound, isArray, isIterable, isString } from "../../../js";
+import { isArray } from "../../../js";
 
 /**
  * Builds an array of options for an antd Select from a list of items
