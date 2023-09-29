@@ -1,3 +1,5 @@
+import { isFunction } from "../is";
+
 /**
  * @description Extensions to JS.Map()
  * @extends Map
@@ -6,7 +8,7 @@ class ExtMap extends Map {
   /**
    * Adds the key/value in the map or retrieve the current value associated with the given key
    * @param {any} key Key to retrieve the element
-   * @param {any} value Default value if the key is not found in the Map
+   * @param {function|any} value Default value if the key is not found in the Map
    * @returns {any} value associated with the given key
    * @example
    * const addIndustry = (newIndustry, map) => {      // Standard Map
@@ -19,13 +21,20 @@ class ExtMap extends Map {
    * }
    * @example
    * const addIndustry = (newIndustry, extmap) => {   // ExtMap
-   *   extmap.getOrSet('Industries', new Set()).add(newIndustry);
+   *   extmap.getOrSet('Industries', () => new Set()).add(newIndustry);
    * }
    */
   getOrSet(key, value) {
-    if (this.has(key)) value = this.get(key);
-    else               this.set(key, value);
-    return value;
+    let result;
+
+    if (this.has(key))
+      result = this.get(key);
+    else {
+      result = isFunction(value) ? value() : value
+      this.set(key, result);
+    }
+
+    return result;
   }
 
   /**

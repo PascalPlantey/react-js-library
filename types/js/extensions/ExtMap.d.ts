@@ -11,7 +11,7 @@ declare class ExtMap extends Map<any, any> {
     /**
      * Adds the key/value in the map or retrieve the current value associated with the given key
      * @param {any} key Key to retrieve the element
-     * @param {any} value Default value if the key is not found in the Map
+     * @param {function|any} value Default value if the key is not found in the Map
      * @returns {any} value associated with the given key
      * @example
      * const addIndustry = (newIndustry, map) => {      // Standard Map
@@ -24,10 +24,10 @@ declare class ExtMap extends Map<any, any> {
      * }
      * @example
      * const addIndustry = (newIndustry, extmap) => {   // ExtMap
-     *   extmap.getOrSet('Industries', new Set()).add(newIndustry);
+     *   extmap.getOrSet('Industries', () => new Set()).add(newIndustry);
      * }
      */
-    getOrSet(key: any, value: any): any;
+    getOrSet(key: any, value: Function | any): any;
     /**
      * Update or insert a new pair; the update/insert functions return the value to be saved with the key
      * @param {any} key Key for the Map
