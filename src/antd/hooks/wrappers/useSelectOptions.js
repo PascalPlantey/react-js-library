@@ -3,14 +3,11 @@ import { useMemo } from 'react';
 import { buildSelectOptions } from '../../utils';
 
 /**
- * Wraps in a hook an array of options for an antd Select from a list of items
- * @param {Iterable} list List of items
- * @param {string} labelFieldName Property name from items of list to be used as Select label
- * @param {string} valueFieldName Property name from items of list to be used as Select value
+ * Wraps in a hook an array of options for an antd Select (see buildSelectOptions)
+ * @param {Array} list List of items
  * @returns {Array<object>} [{ label: any, value: any }]
  * @memberof AntdHooks
  */
-const useSelectOptions = (list, labelFieldName, valueFieldName) =>
-  useMemo(() => buildSelectOptions(list, labelFieldName, valueFieldName), [list, labelFieldName, valueFieldName]);
+const useSelectOptions = list => useMemo(() => buildSelectOptions(list), [list]);
 
 export default useSelectOptions;
