@@ -6,6 +6,7 @@ import { isFunction, isReactElement } from '../../js/is';
  * The cases are evaluated in order and the value returned is the first one which condition is true. The last case can be 
  * with an undefined 'condition' which is considered as the default return value. If no default is provided Switch returns null.
  * @param {Array} cases Component props [{ condition: c1, action: a1 }, { condition: c2, action: a2 }, ...]
+ * @memberof Components
  * @returns JSX
  */
 const Switch = ({ cases }) => {

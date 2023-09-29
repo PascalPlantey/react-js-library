@@ -14,9 +14,9 @@ const useStoredTableParams = key => {
   const paramsRef = useNewClassRef(() => new StorageItem(key, { pagination: null, filters: null, sort: null }));
   const { tableParams, ...rest } = useTableParams(paramsRef.current.value);
 
-  // Write local storage if tableParams have changed
+  // Write local storage after render if tableParams have changed
   useEffect(() => {
-    if (paramsRef.current.value !== tableParams)
+    if (paramsRef.current.value !== tableParams)          // Do not save after first render as there is no change
       paramsRef.current.value = tableParams;
   }, [tableParams, paramsRef]);
 

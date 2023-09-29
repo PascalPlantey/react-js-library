@@ -20,7 +20,6 @@ const ClearTableFilters = ({ isFilterActive, onClearFilters, ...rest }) => (
       size='small'
       disabled={!isFilterActive()}
       onClick={onClearFilters}
-      style={{ marginBottom: '5px'}}
       {...rest}
     >
       Clear

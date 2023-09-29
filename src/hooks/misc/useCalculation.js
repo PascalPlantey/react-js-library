@@ -15,7 +15,7 @@ const useCalculation = calculateFn => {
   const [result, setResult] = useState(calculateFn);
 
   useEffect(() => {
-    if (!isFirstRender)
+    if (!isFirstRender)                                   // First render done in useState
       setResult(calculateFn());
   }, [calculateFn]);
 
