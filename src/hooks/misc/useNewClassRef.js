@@ -7,6 +7,8 @@ import { useRef } from "react";
  * @param {function} func Function to execute once
  * @returns {React.RefObject}
  * @memberof Hooks#
+ * @example
+ * const ref = useNewClassRef(() => new ExtMap());
  */
 const useNewClassRef = func => {
   const ref = useRef();

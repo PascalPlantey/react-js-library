@@ -6,6 +6,8 @@ export default useNewClassRef;
  * @param {function} func Function to execute once
  * @returns {React.RefObject}
  * @memberof Hooks#
+ * @example
+ * const ref = useNewClassRef(() => new ExtMap());
  */
 declare function useNewClassRef(func: Function): import("react").RefObject<any>;
 //# sourceMappingURL=useNewClassRef.d.ts.map
