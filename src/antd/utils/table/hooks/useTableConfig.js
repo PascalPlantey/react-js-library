@@ -1,4 +1,4 @@
-import useInitializeTable from "./useInitializeTable";
+import useInitializeTable from "./useInitializeColumnsFilters";
 import useUpdateTableColumns from "./useUpdateTableColumns";
 
 /**
