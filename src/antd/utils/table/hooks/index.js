@@ -4,4 +4,4 @@ export { default as useInitializeColumnsFilters } from './useInitializeColumnsFi
 export { default as useStoredTableParams } from './useStoredTableParams';
 export { default as useTableConfig } from './useTableConfig';
 export { default as useTableParams } from './useTableParams';
-export { default as useUpdateTableColumns } from './useUpdateTableColumns';
+export { default as useUpdateColumnsFromParams } from './useUpdateColumnsFromParams';

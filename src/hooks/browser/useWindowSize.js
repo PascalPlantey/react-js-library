@@ -12,7 +12,7 @@ import useEventListener from '../elements/useEventListener';
  */
 const useWindowSize = (step = 30, immediately = true) => {
   const makeSize = () => ({ width: window.innerWidth, height: window.innerHeight });
-  const [size, setSize] = useState(makeSize());
+  const [size, setSize] = useState(makeSize);
   const { height, width } = size;
 
   const onResize = useCallback(() => setSize(current => {

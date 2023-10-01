@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import updateColumnsFromParams from "../tools/updateColumnsFromParams";
 
 /**
  * Update the columns definitions after a change. Needed for example when using parameters stored in the local storage. When the filters
@@ -12,20 +13,17 @@ import { useEffect, useMemo, useState } from "react";
  * @notes this can potentially be called many times with different parameters each time, so a useMemo or useCalculation will cost
  * more than a "useState/useEffect and render"
  */
-const useUpdateTableColumns = (columns, filters, sort) => {
+const useUpdateColumnsFromParams = (columns, filters, sort) => {
   const [updatedColumns, setUpdatedColumns] = useState(columns);
 
   useEffect(() => {
-    setUpdatedColumns(prev => prev.map(column => {
-      const { onFilter, sorter, dataIndex } = column;
-      const filteredValue = (onFilter && filters?.[dataIndex]) ?? null;
-      const sortOrder = (sorter && sort?.field === dataIndex && sort.order) || null;
-      
-      return ({ ...column, filteredValue, sortOrder });
-    }));
+    setUpdatedColumns(() => {
+      updateColumnsFromParams(columns, filters, sort);            // 'columns' content modified
+      return [...columns];                                        // Return new Array
+    });
   }, [columns, filters, sort]);
 
   return updatedColumns;
 };
 
-export default useUpdateTableColumns;
+export default useUpdateColumnsFromParams;

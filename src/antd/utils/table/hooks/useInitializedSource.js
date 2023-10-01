@@ -1,4 +1,5 @@
 import { useImmediateRunOnDepsChange } from "../../../../hooks";
+import { initializeSource } from "../tools";
 
 /**
  * Initialize the Table dataSource before renders
@@ -6,10 +7,7 @@ import { useImmediateRunOnDepsChange } from "../../../../hooks";
  * @param {Iterable} dataSource Raw Table records
  * @memberof AntdHooks
  */
-const useInitializedSource = (initializers, dataSource) => useImmediateRunOnDepsChange(() =>
-  initializers.forEach(({ dataIndex, valueInitializer }) =>
-    dataSource.forEach(record => record[dataIndex] = valueInitializer(record))
-  )
-, [initializers, dataSource]);
+const useInitializedSource = (initializers, dataSource) =>
+  useImmediateRunOnDepsChange(() => initializeSource(initializers, dataSource), [initializers, dataSource]);
 
 export default useInitializedSource;

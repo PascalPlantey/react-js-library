@@ -1,5 +1,5 @@
 import useInitializeColumnsFilters from "./useInitializeColumnsFilters";
-import useUpdateTableColumns from "./useUpdateTableColumns";
+import useUpdateTableColumns from "./useUpdateColumnsFromParams";
 
 /**
  * Initialize parameters for a controlled Table. For a basic Table prefer useInitializeTable. If, for example, the table parameters (filters,

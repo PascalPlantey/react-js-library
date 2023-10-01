@@ -12,4 +12,4 @@ export default useUpdateColumnsFilteredValue;
  * more than a "useState/useEffect and render"
  */
 declare function useUpdateColumnsFilteredValue(columns: array, filters: object, sort: object): array;
-//# sourceMappingURL=useUpdateTableColumns.d.ts.map
+//# sourceMappingURL=useUpdateColumnsFilteredValue.d.ts.map

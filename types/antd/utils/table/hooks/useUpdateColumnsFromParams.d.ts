@@ -1,4 +1,4 @@
-export default useUpdateColumnsFilteredValue;
+export default useUpdateColumnsFromParams;
 /**
  * Update the columns definitions after a change. Needed for example when using parameters stored in the local storage. When the filters
  * and sort parameters are restored from the local storage the Table component will not take them into account, so we need to
@@ -11,5 +11,5 @@ export default useUpdateColumnsFilteredValue;
  * @notes this can potentially be called many times with different parameters each time, so a useMemo or useCalculation will cost
  * more than a "useState/useEffect and render"
  */
-declare function useUpdateColumnsFilteredValue(columns: array, filters: object, sort: object): array;
-//# sourceMappingURL=useUpdateTableColumns.d.ts.map
+declare function useUpdateColumnsFromParams(columns: array, filters: object, sort: object): array;
+//# sourceMappingURL=useUpdateColumnsFromParams.d.ts.map
