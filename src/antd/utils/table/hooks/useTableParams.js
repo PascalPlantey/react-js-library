@@ -34,7 +34,7 @@ export const useTableParams = (params = { pagination: null, filters: null, sort:
   const isFilterActive = useCallback(() => {
     let active = false;
 
-    const { filters } = tableParams;
+    const filters = tableParams.filters;
 
     for(const index in filters)
       if (filters[index]) {
@@ -42,8 +42,8 @@ export const useTableParams = (params = { pagination: null, filters: null, sort:
         break;
       }
 
-    return active;
-  }, [tableParams]);
+      return active;
+  }, [tableParams.filters]);
 
   // Change the sort applied to the Table
   const onChangeSort = useCallback(sort => setTableParams(prevState => ({ ...prevState, sort })), []);

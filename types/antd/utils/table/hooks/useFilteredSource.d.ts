@@ -1,6 +1,6 @@
 export default useFilteredSource;
 /**
- * Hook around the getFilteredSource tool
+ * Hook around the getFilteredSource tool, generating a render after execution
  * @param {array} columns Table columns definition
  * @param {array} records Table data source
  * @returns {array} Filtered records

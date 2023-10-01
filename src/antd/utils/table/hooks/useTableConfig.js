@@ -1,4 +1,4 @@
-import useInitializeTable from "./useInitializeColumnsFilters";
+import useInitializeColumnsFilters from "./useInitializeColumnsFilters";
 import useUpdateTableColumns from "./useUpdateTableColumns";
 
 /**
@@ -12,6 +12,6 @@ import useUpdateTableColumns from "./useUpdateTableColumns";
  * @memberof AntdHooks
  */
 const useTableConfig = (columns, records, filters, sort) =>
-  useUpdateTableColumns(useInitializeTable(columns, records), filters, sort);
+  useUpdateTableColumns(useInitializeColumnsFilters(columns, records), filters, sort);
 
 export default useTableConfig;

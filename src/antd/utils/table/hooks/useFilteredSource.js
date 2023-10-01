@@ -4,13 +4,14 @@ import { useCalculation } from "../../../../hooks";
 import { getFilteredSource } from "../tools";
 
 /**
- * Hook around the getFilteredSource tool
+ * Hook around the getFilteredSource tool, generating a render after execution
  * @param {array} columns Table columns definition
  * @param {array} records Table data source
  * @returns {array} Filtered records
  * @memberof AntdHooks
  */
-const useFilteredSource = (columns, records) =>
-  useCalculation(useCallback(() => getFilteredSource(columns, records), [columns, records]));
+const useFilteredSource = (columns, records) => useCalculation(
+  useCallback(() => getFilteredSource(columns, records), [columns, records])
+);
 
 export default useFilteredSource;

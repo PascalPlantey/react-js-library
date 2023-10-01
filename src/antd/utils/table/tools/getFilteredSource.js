@@ -1,3 +1,8 @@
+/**
+ * Returns true if there is at least one filter set on a column
+ * @param {array} columns Table columns definitions
+ * @returns {boolean}
+ */
 const hasOneFilter = columns => {
   for(const { onFilter, filteredValue } of columns)
     if (onFilter && filteredValue)
@@ -14,7 +19,7 @@ const hasOneFilter = columns => {
  * @returns {array} Array of records filtered
  * @memberof AntdUtils
  */
-export const  getFilteredSource = (columns, records) =>
+export const getFilteredSource = (columns, records) =>
   (hasOneFilter(columns) && records.length) ?                       // No change if no filter, avoids useless renders
     records.filter(record => {                                      // Test columns filters for each record to
       for(const { onFilter, filteredValue } of columns)             // determine if record is displayed or not
