@@ -1,4 +1,6 @@
-import useRef from "react";
+import { useRef } from "react";
+
+import { surfaceEquals } from "../../js";
 
 /**
  * Enables to check if the values in an array did change. See example in useFilteredSource

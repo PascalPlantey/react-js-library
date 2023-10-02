@@ -1,22 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 import { getFilteredSource, getFilteredValues } from "../tools";
-import { surfaceEquals } from "../../../../js";
-
-const useCheckValuesChanges = values => {
-  const valuesRef = useRef(values);
-
-  const updateValues = newValues => {
-    const changes = !valuesRef.current || !surfaceEquals(valuesRef.current, newValues);
-    valuesRef.current = values;
-    return changes;
-  };
-
-  return [valuesRef.current, updateValues];
-};
+import { useCheckValuesChanges } from "../../../../hooks";
 
 /**
- * Hook around the getFilteredSource tool, generating a render after execution
+ * Hook around the getFilteredSource tool, generating a render after execution. Generates a render only if filteredValue of columns
+ * are changed or if the records are changed.
  * @param {array} columns Table columns definition
  * @param {array} records Table data source
  * @returns {array} Filtered records
@@ -27,23 +16,18 @@ const useFilteredSource = (columns, records) => {
   const filteredValues = getFilteredValues(columns);
   const [, checkChanges] = useCheckValuesChanges(filteredValues);
 
+  // Conditional state change only if filteredValues changes
   useEffect(() => {
-    if (checkChanges(filteredValues)) {
-      console.log('filtering records');
+    if (checkChanges(filteredValues))
       setNewRecords(getFilteredSource(columns, records));
-    }
   }, [columns, filteredValues, checkChanges]);            // eslint-disable-line
 
+  // records have changed, send a state change
   useEffect(() => {
-    console.log('filtering records');
     setNewRecords(getFilteredSource(columns, records));
   }, [records]);                                          // eslint-disable-line
 
   return newRecords;
 };
-
-// useCalculation(
-//   useCallback(() => getFilteredSource(columns, records), [columns, records])
-// );
 
 export default useFilteredSource;
