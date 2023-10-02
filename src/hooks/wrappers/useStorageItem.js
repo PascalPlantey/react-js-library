@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
 import { StorageItem } from '../../js';
+import { useNewClassRef } from '../misc';
 
 /**
  * Hook around the browser storage
@@ -11,18 +12,15 @@ import { StorageItem } from '../../js';
  * @memberof Hooks#
  */
 const useStorageItem = (key, def = '', local = true) => {
-  const storage = useRef();                               // Holds the StorageItem object
-  if (!storage.current)
-    storage.current = new StorageItem(key, def, local);   // Create the StorageItem
-
+  const storage = useNewClassRef(() => new StorageItem(key, def, local)); // Holds the StorageItem object
   const [value, setValue] = useState(def);
 
   return [
     value,
-    newValue => setValue(storage.current.value = newValue), // Change the StorageItem value & set the state
+    newValue => setValue(storage.current.value = newValue),               // Change the StorageItem value & set the state
     () => {
       storage.current.remove();
-      setValue();                                         // Key does not exist anymore, set value to 'undefined'
+      setValue();                                                         // Key does not exist anymore, set value to 'undefined'
     }
   ];
 };
