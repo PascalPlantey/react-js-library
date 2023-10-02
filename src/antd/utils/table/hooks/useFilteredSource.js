@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-import { getFilteredSource } from "../tools";
+import { getFilteredSource, getFilteredValues } from "../tools";
 import { surfaceEquals } from "../../../../js";
 
 const useCheckValuesChanges = values => {
@@ -13,16 +13,6 @@ const useCheckValuesChanges = values => {
   };
 
   return [valuesRef.current, updateValues];
-};
-
-const getFilteredValues = columns => {
-  const filteredValues = [];
-
-  for(const { onFilter, filteredValue } of columns)
-    if (onFilter)
-      filteredValues.push(filteredValue === undefined ? null : filteredValue);
-
-  return filteredValues;
 };
 
 /**
