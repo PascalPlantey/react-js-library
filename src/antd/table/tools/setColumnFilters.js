@@ -7,7 +7,7 @@ import { isFunction } from "../../../js";
  * @param {function|array} values Array of values or function returning an array of values
  * @returns {undefined}
  */
-const setColumnFilters = (columns, index, values) =>
+const setColumnFilters = (columns, index, values) => 
   columns.find(({ dataIndex }) => dataIndex === index).filters = isFunction(values) ? values() : values;
 
 export default setColumnFilters;

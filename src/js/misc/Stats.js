@@ -83,7 +83,7 @@ class Stats {
    * @type {number}
    */
   get mean() {
-    return this.size ? this.sum / this.size : NaN;
+    return this.size ? this.sum / this.size : 0;
   }
 
   /**
@@ -91,7 +91,7 @@ class Stats {
    * @type {number}
    */
   get stddev() {
-    if (!this.size) return NaN;
+    if (!this.size) return 0;
 
     const mean = this.mean;
     return Math.sqrt(this.#serie.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / this.size);
@@ -102,7 +102,7 @@ class Stats {
    * @type {number}
    */
   get variation() {
-    if (!this.size) return NaN;
+    if (!this.size) return 0;
     return this.stddev / this.mean;
   }
 

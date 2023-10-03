@@ -7,7 +7,10 @@ const arraysSurfaceEquals = (arr1, arr2) => {
     changed = true;
   else
     for(let i = 0; !changed && i < arr1.length; ++i)
-      changed = arr1[i] !== arr2[i];
+      if (isArray(arr1[i]) && isArray(arr2[i]))
+        changed = !arraysSurfaceEquals(arr1[i], arr2[i]);
+      else
+        changed = arr1[i] !== arr2[i];
 
   return !changed;
 };
