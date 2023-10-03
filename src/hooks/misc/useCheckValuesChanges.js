@@ -13,7 +13,7 @@ const useCheckValuesChanges = values => {
 
   const updateValues = newValues => {
     const changes = !valuesRef.current || !surfaceEquals(valuesRef.current, newValues);
-    valuesRef.current = values;
+    valuesRef.current = newValues;
     return changes;
   };
 
