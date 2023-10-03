@@ -10,8 +10,6 @@ import { isIterable, isPrimitive } from "../../../js";
  */
 const initializeColumnsFilters = (columns, records) => columns.forEach(column => {
   const { dataIndex, onFilter, filterInitializer } = column;
-  const start = Date.now();
-  console.log('Initialize', dataIndex);
 
   // If the column has a filter function, initialize the filter values. If filterInitializer is set to 'none', we consider
   // that the 'filters' property of the column is already set
@@ -34,7 +32,6 @@ const initializeColumnsFilters = (columns, records) => columns.forEach(column =>
     });
 
     column.filters = [...filtersMap.values()].sort((a, b) => a.text.localeCompare(b.text));
-    console.log('done', Date.now() - start)
   };
 
   return columns;
