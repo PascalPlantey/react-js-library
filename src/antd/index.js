@@ -1,3 +1,3 @@
-export * from './components';
-export * from './hooks';
-export * from './utils';
+export * from './select';
+export * from './spins';
+export * from './table';
