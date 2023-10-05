@@ -7,12 +7,12 @@ import { Compound } from "../../../js";
  * @returns {array<array>} [{ text, value, children: [{ text, value }, ...]}, ...]
  * @memberof AntdUtils
  */
-const buildTreeSelectOptions = (source, compoundChildren = true) => 
+const buildTreeSelectOptions = (source, labelName, compoundChildren = true) => 
   source.map(([parent, children]) => ({
-    text: parent,
+    [labelName]: parent,
     value: parent,
     children: children.map(child => ({
-      text: child,
+      [labelName]: child,
       value: compoundChildren ? Compound.structure(parent, child) : child
     }))
   }));

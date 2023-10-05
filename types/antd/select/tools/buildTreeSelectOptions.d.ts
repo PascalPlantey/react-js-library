@@ -6,5 +6,5 @@ export default buildTreeSelectOptions;
  * @returns {array<array>} [{ text, value, children: [{ text, value }, ...]}, ...]
  * @memberof AntdUtils
  */
-declare function buildTreeSelectOptions(source: array, compoundChildren?: boolean): array<array>;
+declare function buildTreeSelectOptions(source: array, labelName: any, compoundChildren?: boolean): array<array>;
 //# sourceMappingURL=buildTreeSelectOptions.d.ts.map
