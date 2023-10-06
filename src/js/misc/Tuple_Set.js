@@ -60,11 +60,15 @@ export default class Tuple_Set extends Tuple_Any {
     return this;
   }
 
+  get array() {
+    return super.array.map(([k, v]) => [Compound.destructure(k), v]);
+  }
+
   /**
    * @returns {array} [[[k1, k2, ...][v1, v2, ...]], ...]
    */
   sortedArray() {
-    return super.sortedArray().map(([c, n]) => [c, [...n].sort()]);
+    return this.array.map(([c, n]) => [c, [...n].sort()]);
   }
 
   /**

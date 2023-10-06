@@ -16,7 +16,7 @@ class Tuple_Any extends ExtMap {
    * const tuples = new Tuple_Any([[['Cert',' adm'], 1], [['Cert', 'sales'], 2]]);
    */
   constructor(iterable, asIs = false) {
-    if (!isString(iterable) && isIterable(iterable)) {
+    if (!isString(iterable) && isIterable(iterable) && !asIs) {
       const tuples = [];
 
       for(const item of iterable) {
