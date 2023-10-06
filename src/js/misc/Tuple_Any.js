@@ -11,13 +11,14 @@ class Tuple_Any extends ExtMap {
   /**
    * Builds a new Tuple_Any 
    * @param {any} iterable (see [Mozilla]{@link https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Map/Map})
+   * @param {boolean} [asIs=false] Absorb iterable "as is", allows children classes to build the data
    * @example
    * const tuples = new Tuple_Any([[['Cert',' adm'], 1], [['Cert', 'sales'], 2]]);
    */
-  constructor(iterable) {
-    const tuples = [];
-
+  constructor(iterable, asIs = false) {
     if (!isString(iterable) && isIterable(iterable)) {
+      const tuples = [];
+
       for(const item of iterable) {
         const [key, value] = [...item];
         tuples.push([Compound.structure(key), value]);
@@ -75,7 +76,7 @@ class Tuple_Any extends ExtMap {
         return [args[0], undefined];
     }
     else
-      return [args];                                      // Only one string as argument, forward as key
+      return [args];                                      // Only one element as argument, forward as key
   }
 
   /**
