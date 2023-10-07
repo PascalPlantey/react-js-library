@@ -48,7 +48,6 @@ export default class MapOfSet extends ExtMap {
    */
   addWithChildren(iterable, mainFn, childrenFn) {
     for(const item of iterable) {
-      const res = mainFn(item)
       const [key, values] = mainFn ? mainFn(item) : item;
 
       if (childrenFn)
