@@ -86,4 +86,8 @@ export default class MapOfSet extends ExtMap {
   get sortedArray() {
     return this.getSortedArray();
   }
+
+  get [Symbol.toStringTag]() {
+    return 'MapOfSet';
+  }
 };
