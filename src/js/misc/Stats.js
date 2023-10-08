@@ -15,7 +15,7 @@ class Stats {
    * @param {string} [rankFieldName='rank'] Name of the ranking field
    * @returns {this} Sorted by fieldName, with a new property named 'rank'
    */
-  static rankBy(data, fieldName, rankFieldName) {
+  static rankBy(data, fieldName, rankFieldName = 'rank') {
     data.sort((item1, item2) => item2[fieldName] - item1[fieldName]).forEach((item, index) => item[rankFieldName] = index + 1);
     return data;
   };

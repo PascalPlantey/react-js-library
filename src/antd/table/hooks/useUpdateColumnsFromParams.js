@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+
 import updateColumnsFromParams from "../tools/updateColumnsFromParams";
 
 /**
- * Update the columns definitions after a change. Needed for example when using parameters stored in the local storage. When the filters
+ * Update the columns definitions after a change.  Needed for example when using parameters stored in the local storage. When the filters
  * and sort parameters are restored from the local storage the Table component will not take them into account, so we need to
- * apply the parameters "manually" on the columns
+ * apply the parameters "manually" on the columns. Set filteredValue & sortOrder on the columns
  * @param {array} columns Array defining the columns displayed on the Table
  * @param {object} filters Restored from the local storage
  * @param {object} sort Restored from the local storage
