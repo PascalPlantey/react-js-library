@@ -1,3 +1,4 @@
+export { default as useBoolean } from "./useBoolean";
 export { default as useCalculation } from "./useCalculation";
 export { default as useCheckValuesChanges } from "./useCheckValuesChanges";
 export { default as useFunctionResult } from "./useFunctionResult";
