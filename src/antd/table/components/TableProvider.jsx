@@ -26,4 +26,3 @@ export const TableProvider = ({ controlParams, dataSource, filteredSource, colum
 );
 
 export const TableConsumer = TableContext.Consumer;
-// export default TableContext;

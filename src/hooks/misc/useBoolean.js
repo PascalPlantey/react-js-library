@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 /**
  * Simple hook for a boolean value
@@ -6,12 +6,12 @@ import { useState } from "react";
  * @returns {Array} [value, setValue(), toggle()]
  */
 const useBoolean = (initial = false) => {
-  const [value, setValue] = useState(initial);
+  const [value, setValue] = useState(!!initial);
 
   return([
     value,
-    setValue,
-    () => setValue(prev => !prev),
+    useCallback(setValue, []),
+    useCallback(() => setValue(prev => !prev), [])
   ]);
 };
 
