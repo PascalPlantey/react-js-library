@@ -8,26 +8,25 @@
   height: 100%;
   display: flex;
   align-items: center;
+  margin: 2px;
 }
 
 .splitter-divider {
-  height: 94%;
+  height: 98%;
   width: 6px;
   cursor: col-resize;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgb(181, 181, 181);
   background: linear-gradient(180deg, rgba(192, 192, 192, 0.82) 5%, rgb(225, 224, 224) 48%, rgba(192, 192, 192, 0.82) 99%);
-  border: 1px solid rgb(215, 215, 215);
+  border: 1px outset rgb(146, 146, 146);
   border-radius: 4px;
   touch-action: pan-x pan-y;
 }
 
 .splitter-divider:hover {
-  width: 8px;
-  background-color: rgb(162, 161, 161);
-  border: 1px outset rgb(146, 146, 146);
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  background-color: rgb(161, 161, 161);
 }
 
 .splitter-divider-grabber {
