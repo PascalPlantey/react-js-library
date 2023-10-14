@@ -1,0 +1,41 @@
+.splitter-container {
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+}
+
+.splitter-divider-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.splitter-divider {
+  height: 94%;
+  width: 6px;
+  cursor: col-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(181,181,181);
+  background: linear-gradient(180deg, rgba(192, 192, 192, 0.82) 13%, rgba(181,181,181,1) 84%, rgb(131, 131, 131) 99%);
+  border: 1px solid rgb(146, 146, 146);
+  border-radius: 4px;
+  touch-action: pan-x pan-y;
+}
+
+.splitter-divider-grabber {
+  writing-mode: vertical-lr;
+  height: 20px;
+  border: 1px solid rgb(101, 95, 95);
+}
+
+.splitter-leftpanel-container {
+  height: 100%;
+  overflow: hidden;
+}
+
+.splitter-rightpanel-container {
+  height: 100%;
+  overflow: hidden;
+}
