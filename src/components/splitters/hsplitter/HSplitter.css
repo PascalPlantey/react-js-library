@@ -21,18 +21,19 @@
   border: 1px solid rgb(215, 215, 215);
   border-radius: 4px;
   touch-action: pan-x pan-y;
-  transition: width .2s ease-out;
 }
 
 .splitter-divider:hover {
   width: 8px;
-  border: 1px solid rgb(146, 146, 146);
+  background-color: rgb(162, 161, 161);
+  border: 1px outset rgb(146, 146, 146);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 
 .splitter-divider-grabber {
   writing-mode: vertical-lr;
   height: 20px;
-  border: 1px solid rgb(101, 95, 95);
+  border: 1px outset rgb(101, 95, 95);
 }
 
 
