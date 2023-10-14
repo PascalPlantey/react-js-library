@@ -17,11 +17,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(181,181,181);
-  background: linear-gradient(180deg, rgba(192, 192, 192, 0.82) 13%, rgba(181,181,181,1) 84%, rgb(131, 131, 131) 99%);
-  border: 1px solid rgb(146, 146, 146);
+  background: linear-gradient(180deg, rgba(192, 192, 192, 0.82) 5%, rgb(225, 224, 224) 48%, rgba(192, 192, 192, 0.82) 99%);
+  border: 1px solid rgb(215, 215, 215);
   border-radius: 4px;
   touch-action: pan-x pan-y;
+  transition: width .2s ease-out;
+}
+
+.splitter-divider:hover {
+  width: 8px;
+  border: 1px solid rgb(146, 146, 146);
 }
 
 .splitter-divider-grabber {
@@ -29,6 +34,7 @@
   height: 20px;
   border: 1px solid rgb(101, 95, 95);
 }
+
 
 .splitter-leftpanel-container {
   height: 100%;
