@@ -10,10 +10,11 @@ import './HSplitter.css';
  * panels widths are saved to the local storage if 'name' is provided
  * @param {object} props
  * @param {string} [props.name] Name of the storage item if we need to save/restore panels width
+ * @param {number} [props.widthToColumn] Number under which the children are displayed in column
  * @param {Array<JSX>} props.children Only two panels allowed
  * @returns {JSX}
  */
-const HSplitter = ({ name, children }) => {
+const HSplitter = ({ name, widthToColumn, children }) => {
   const { width : divWidth, ref : divRef } = useComponentSize(0);
   const dividerRef = useRef();
   const [panels, setPanels] = useState(() => {
@@ -24,6 +25,8 @@ const HSplitter = ({ name, children }) => {
     }
     return [50, 50];
   });
+  const columnView = () => widthToColumn && divWidth <= widthToColumn;  // If widthToColumn is provided
+  const direction = () => columnView() ? 'column' : 'row';
   const { toggle : toggleMouseMove } = useEventListener('pointermove', onMouseMove, document, false, { capture: true });
   const { toggle : toogleMouseUp } = useEventListener('pointerup', onMouseUp, document, false);
 
@@ -54,15 +57,23 @@ const HSplitter = ({ name, children }) => {
 
   const [leftPanel, rightPanel] = panels;
   return(
-    <div className='splitter-container' ref={divRef}>
+    <div className='splitter-container' style={{ flexDirection: direction() }} ref={divRef}>
       <div className='splitter-leftpanel-container' style={{ width: `${leftPanel}%` }}>
         {children[0]}
       </div>
-      <div className='splitter-divider-container'>
-        <div className='splitter-divider' onPointerDown={onMouseDown} ref={dividerRef}>
-          <div className='splitter-divider-grabber' />
-        </div>
-      </div>
+
+      {columnView() ?                                                   // Horizontal or vertical divider
+          <div className='splitter-divider-container'>
+            <div className='splitter-divider-column' />
+          </div>
+          :
+          <div className='splitter-divider-container'>
+            <div className='splitter-divider' onPointerDown={onMouseDown} ref={dividerRef}>
+              <div className='splitter-divider-grabber' />
+            </div>
+          </div>
+      }
+
       <div className='splitter-rightpanel-container' style={{ width: `${rightPanel}%` }}>
         {children[1]}
       </div>

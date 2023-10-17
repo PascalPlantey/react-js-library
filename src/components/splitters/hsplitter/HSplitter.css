@@ -7,7 +7,16 @@
 .splitter-divider-container {
   display: flex;
   align-items: center;
-  margin: 2px;
+  justify-content: center;
+}
+
+.splitter-divider-column {
+  width: 98%;
+  height: 6px;
+  margin: 8px 0;
+  background: linear-gradient(180deg, rgba(192, 192, 192, 0.82) 5%, rgb(225, 224, 224) 48%, rgba(192, 192, 192, 0.82) 99%);
+  border: 1px outset rgb(146, 146, 146);
+  border-radius: 4px;
 }
 
 .splitter-divider {

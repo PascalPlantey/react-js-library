@@ -4,11 +4,13 @@ export default HSplitter;
  * panels widths are saved to the local storage if 'name' is provided
  * @param {object} props
  * @param {string} [props.name] Name of the storage item if we need to save/restore panels width
+ * @param {number} [props.widthToColumn] Number under which the children are displayed in column
  * @param {Array<JSX>} props.children Only two panels allowed
  * @returns {JSX}
  */
-declare function HSplitter({ name, children }: {
+declare function HSplitter({ name, widthToColumn, children }: {
     name?: string | undefined;
+    widthToColumn?: number | undefined;
     children: Array<JSX>;
 }): JSX;
 //# sourceMappingURL=HSplitter.d.ts.map
