@@ -8,7 +8,7 @@ const defaultRadical = 'Others: ';
  * Counts the occurences items found in an iterable Object
  * @extends Map
  */
-class ItemsCounter extends Map {
+class ItemsCounters extends Map {
   /**
    * Builds an ItemsCounter in many different ways (see `ItemsCounter.AddCounts` examples)
    * @param {Iterable|object} [itr=[]] Object or Collection of objects or undefined (defaults to [])
@@ -34,7 +34,7 @@ class ItemsCounter extends Map {
   addCounts(itr = [], callback = undefined) {
     for(const item of toIterable(itr))
       if (isFunction(callback))                                             // Provided callback returning array [key, value]
-        this.addCounts(callback(item));
+        this.addCount(callback(item));
       else                                                                  // Considers iter is an iterator over keys
         this.addCount(item);
 
@@ -160,6 +160,7 @@ class ItemsCounter extends Map {
 
       for(const [k, c] of toBegrouped) {                                      // Delete grouped keys and build new key
         groupKey = ExtString.extend(groupKey, `${k}: ${c}`, sep, radical);
+        console.log('result', groupKey)
         groupCount += c;
         this.delete(k);
       }
@@ -222,8 +223,8 @@ class ItemsCounter extends Map {
    * @returns {string}
    */
   get [Symbol.toStringTag]() {
-    return 'ItemsCounter';
+    return 'ItemsCounters';
   }
 };
 
-export default ItemsCounter;
+export default ItemsCounters;

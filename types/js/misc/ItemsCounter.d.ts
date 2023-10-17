@@ -1,9 +1,9 @@
-export default ItemsCounter;
+export default ItemsCounters;
 /**
  * Counts the occurences items found in an iterable Object
  * @extends Map
  */
-declare class ItemsCounter extends Map<any, any> {
+declare class ItemsCounters extends Map<any, any> {
     /**
      * Builds an ItemsCounter in many different ways (see `ItemsCounter.AddCounts` examples)
      * @param {Iterable|object} [itr=[]] Object or Collection of objects or undefined (defaults to [])

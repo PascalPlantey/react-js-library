@@ -1,6 +1,4 @@
-export const TableContext: import("react").Context<any>;
-export const TableProvider: ({ children, ...rest }: {
-    [x: string]: any;
-    children: any;
-}) => import("react").JSX.Element;
+import { ParamsProvider } from "../../../components";
+import { ParamsContext } from "../../../components";
+export { ParamsProvider as TableProvider, ParamsContext as TableContext };
 //# sourceMappingURL=TableProvider.d.ts.map

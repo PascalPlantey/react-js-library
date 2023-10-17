@@ -22,7 +22,7 @@ class ExtString {
     const extensions = add ? (isPrimitive(add) ? [add] : add) : [];
 
     for(const value of extensions)
-      newStr += (newStr.length ? delimiter : '') + value;
+      newStr += (str.length ? delimiter : '') + value;
 
     return newStr;
   };
