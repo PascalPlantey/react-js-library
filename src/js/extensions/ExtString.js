@@ -27,14 +27,6 @@ class ExtString {
     return newStr;
   };
 
-  static split(str, delimiter = '; ') {
-    return str.split(delimiter);
-  }
-
-  static sortedSplit(str, delimiter = '; ') {
-    return ExtString.split(str, delimiter).map(s => s).sort();
-  }
-
   /**
    * Changed the default object type name visible through Object.prototype.toString.call
    * @returns {string}

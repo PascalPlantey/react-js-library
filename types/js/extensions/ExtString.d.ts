@@ -17,8 +17,6 @@ declare class ExtString {
      * console.log(str);          // 'Categories: police; horror; suspense'
      */
     static extend(str: string, add: string | Iterable<any>, delimiter?: string | undefined, radical?: string | undefined): string;
-    static split(str: any, delimiter?: string): any;
-    static sortedSplit(str: any, delimiter?: string): any;
     /**
      * Changed the default object type name visible through Object.prototype.toString.call
      * @returns {string}

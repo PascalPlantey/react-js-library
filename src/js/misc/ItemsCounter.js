@@ -160,7 +160,6 @@ class ItemsCounters extends Map {
 
       for(const [k, c] of toBegrouped) {                                      // Delete grouped keys and build new key
         groupKey = ExtString.extend(groupKey, `${k}: ${c}`, sep, radical);
-        console.log('result', groupKey)
         groupCount += c;
         this.delete(k);
       }
