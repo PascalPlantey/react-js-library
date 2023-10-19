@@ -32,7 +32,8 @@ const useInterval = (callback, interval = 1000, immediately = true) => {
   useOnmount(() => immediately && handleStart());
   useOndismount(() => clearInterval(timer.current));                // No state change on dismounting
 
-  const handleToggle = useCallback(() => working ? handleStop() : handleStart()
+  const handleToggle = useCallback(
+    () => working ? handleStop() : handleStart()
   , [working, handleStart, handleStop]);
 
   return({

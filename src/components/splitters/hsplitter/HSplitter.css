@@ -40,9 +40,16 @@
 .splitter-divider-grabber {
   writing-mode: vertical-lr;
   height: 20px;
-  border: 1px outset rgb(101, 95, 95);
+  border: 1px solid rgb(161, 152, 152);
 }
 
+.splitter-divider:hover .splitter-divider-grabber {
+  border: 1px solid rgb(100, 94, 94);
+}
+
+.splitter-divider-grabber:hover {
+  border: 1px solid rgb(100, 94, 94);
+}
 
 .splitter-leftpanel-container {
   height: 100%;
