@@ -11,10 +11,11 @@ import './HSplitter.css';
  * @param {object} props
  * @param {string} [props.name] Name of the storage item if we need to save/restore panels width
  * @param {number} [props.widthToColumn] Number under which the children are displayed in column
+ * @param {boolean} [props.columnReverse] If true will reverse the column direction
  * @param {Array<JSX>} props.children Only two panels allowed
  * @returns {JSX}
  */
-const HSplitter = ({ name, widthToColumn, children }) => {
+const HSplitter = ({ name, widthToColumn, columnReverse, children }) => {
   const { width : divWidth, ref : divRef } = useComponentSize(0);
   const dividerRef = useRef();
   const [panels, setPanels] = useState(() => {
@@ -26,7 +27,7 @@ const HSplitter = ({ name, widthToColumn, children }) => {
     return [50, 50];
   });
   const columnView = () => widthToColumn && divWidth <= widthToColumn;  // If widthToColumn is provided
-  const direction = () => columnView() ? 'column' : 'row';
+  const direction = () => columnView() ? (columnReverse ? 'column-reverse' : 'column') : 'row';
   const { toggle : toggleMouseMove } = useEventListener('pointermove', onMouseMove, document, false, { capture: true });
   const { toggle : toogleMouseUp } = useEventListener('pointerup', onMouseUp, document, false);
 
