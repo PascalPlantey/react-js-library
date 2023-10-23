@@ -13,13 +13,13 @@ import { useNewClassRef } from '../misc';
  */
 const useStorageItem = (key, def = '', local = true) => {
   const storage = useNewClassRef(() => new StorageItem(key, def, local)); // Holds the StorageItem object
-  const [value, setValue] = useState(storage.current.value);              // Restore current if exists in storage
+  const [value, setValue] = useState(storage.value);                      // Restore current if exists in storage
 
   return [
     value,
-    newValue => setValue(storage.current.value = newValue),               // Change the StorageItem value & set the state
+    newValue => setValue(storage.value = newValue),                       // Change the StorageItem value & set the state
     () => {
-      storage.current.remove();
+      storage.remove();
       setValue();                                                         // Key does not exist anymore, set value to 'undefined'
     }
   ];
