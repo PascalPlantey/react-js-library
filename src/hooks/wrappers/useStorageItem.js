@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { StorageItem } from '../../js';
 import { useNewClassRef } from '../misc';
@@ -17,7 +17,7 @@ const useStorageItem = (key, def = '', local = true) => {
 
   return [
     value,
-    newValue => setValue(storage.value = newValue),                       // Change the StorageItem value & set the state
+    useCallback(newValue => setValue(storage.value = newValue), []),      // Change the StorageItem value & set the state
     () => {
       storage.remove();
       setValue();                                                         // Key does not exist anymore, set value to 'undefined'
