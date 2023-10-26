@@ -12,12 +12,12 @@ import { StorageItem } from "../../../js";
  */
 const useStoredTableParams = key => {
   const paramsRef = useNewClassRef(() => new StorageItem(key, { pagination: null, filters: null, sort: null }));
-  const { tableParams, ...rest } = useTableParams(paramsRef.current.value);
+  const { tableParams, ...rest } = useTableParams(paramsRef.value);
 
   // Write local storage after render if tableParams have changed
   useEffect(() => {
-    if (paramsRef.current.value !== tableParams)          // Do not save after first render as there is no change
-      paramsRef.current.value = tableParams;
+    if (paramsRef.value !== tableParams)          // Do not save after first render as there is no change
+      paramsRef.value = tableParams;
   }, [tableParams, paramsRef]);
 
   return { tableParams, ...rest };
