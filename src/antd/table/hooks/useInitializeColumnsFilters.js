@@ -1,4 +1,4 @@
-import { useImmediateRunOnDepsChange } from "../../../hooks";
+import { useDontMemo } from "../../../hooks";
 import { initializeColumnsFilters } from "../tools";
 
 /**
@@ -10,7 +10,7 @@ import { initializeColumnsFilters } from "../tools";
  * @memberof AntdHooks
  */
 const useInitializeColumnsFilters = (columns, records) => 
-  useImmediateRunOnDepsChange(() => initializeColumnsFilters(columns, records), [columns, records]
+  useDontMemo(() => initializeColumnsFilters(columns, records), [columns, records]
 );
 
 export default useInitializeColumnsFilters;

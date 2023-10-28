@@ -1,4 +1,4 @@
-import { useImmediateRunOnDepsChange } from "../../../hooks";
+import { useDontMemo } from "../../../hooks";
 import { initializeSource } from "../tools";
 
 /**
@@ -8,6 +8,6 @@ import { initializeSource } from "../tools";
  * @memberof AntdHooks
  */
 const useInitializedSource = (initializers, dataSource) =>
-  useImmediateRunOnDepsChange(() => initializeSource(initializers, dataSource), [initializers, dataSource]);
+  useDontMemo(() => initializeSource(initializers, dataSource), [initializers, dataSource]);
 
 export default useInitializedSource;

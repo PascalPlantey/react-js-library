@@ -1,4 +1,5 @@
 export { default as Compound } from './Compound';
+export * from './debouncers';
 export { default as ItemsCounters } from './ItemsCounter';
 export { default as toIterable } from './toIterable';
 export { default as PropertyValues } from './PropertyValues';
