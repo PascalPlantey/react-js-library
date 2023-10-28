@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 
 import { StorageItem } from "../../../js";
-import { useComponentSize, useEventListener } from "../../../hooks";
+import { useComponentSize, useEventListener, useNewClassRef } from "../../../hooks";
 
 import './HSplitter.css';
 
@@ -18,13 +18,12 @@ import './HSplitter.css';
 const HSplitter = ({ name, widthToColumn, columnReverse, children }) => {
   const { width : divWidth, ref : divRef } = useComponentSize(0);
   const dividerRef = useRef();
+  const storedPanels = useNewClassRef(() => new StorageItem(name, []));
   const [panels, setPanels] = useState(() => {
-    if (name) {
-      const item = new StorageItem(name);
-      if (item.value.length)
-        return item.value;
-    }
-    return [50, 50];
+    if (name && storedPanels.value)
+      return storedPanels.value;
+    else
+      return [50, 50];                                                  // Default to 50/50
   });
   const columnView = () => widthToColumn && divWidth <= widthToColumn;  // If widthToColumn is provided
   const direction = () => columnView() ? (columnReverse ? 'column-reverse' : 'column') : 'row';
@@ -43,7 +42,7 @@ const HSplitter = ({ name, widthToColumn, columnReverse, children }) => {
 
   // Save position and stop tracking mouse
   function onMouseUp() {
-    name && setPanels(current => new StorageItem(name).value = current);// Save panels to local storage
+    name && setPanels(current => storedPanels.value = current);         // Save panels to local storage and change state
     document.body.style.cursor = 'default';
     toggleMouseMove();
     toogleMouseUp();
