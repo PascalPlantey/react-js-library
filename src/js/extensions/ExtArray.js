@@ -1,17 +1,19 @@
+import { isIterable, isString } from "../is";
+
 class ExtArray extends Array {
-  get first() {
-    if (this.length)
-      return this[0];
+  constructor(args) {
+    super();
+
+    if      (isString(args)) super.push(args);
+    else if (isIterable(args))
+      for(const arg of args)
+        arg && super.push(arg);
+    else if (args)
+      super.push(args);
   }
 
-  get last() {
-    if (this.length)
-      return this[this.length - 1];
-  }
-
-  get [Symbol.toStringTag]() {
-    return 'ExtArray';
-  }
+  get first() { return super.at(0); }
+  get last() { return super.at(super.length - 1); }
 };
 
 export default ExtArray;

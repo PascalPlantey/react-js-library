@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { useToggle } from "../misc";
 
 /**
  * Executes a function once only. The return value of the function indicates if it did run or not. If it returns
@@ -8,11 +10,13 @@ import { useState } from "react";
  */
 const useRunOnce = fn => {
   const [done, setDone] = useState(false);
+  const [again, tryAgain] = useToggle();
 
-  if (!done) {
-    const over = fn();
-    over && setDone(true);
-  }
+  useEffect(() => {
+    if (!done) {
+      fn() ? setDone(true) : tryAgain();
+    }
+  }, [fn, done, tryAgain, again])
 
   return done;
 };
