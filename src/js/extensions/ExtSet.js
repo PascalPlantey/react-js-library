@@ -31,4 +31,8 @@ export default class ExtSet extends Set {
   sortedArray(sortFn = ([a], [b]) => a.localeCompare(b)) {
     return this.array.sort(sortFn);
   }
+
+  get [Symbol.toStringTag]() {
+    return 'ExtSet';
+  }
 };
