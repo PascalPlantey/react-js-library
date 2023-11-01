@@ -2,8 +2,9 @@ import React from "react";
 
 import { Slider, Space, Typography } from "antd";
 
+import { ExtMath } from "../../js";
+
 import './Sliders.css';
-import { Stats } from "../../js";
 
 /**
  * Shows a slider in percentage around the value (pivot) may vary.  Returns the interval 
@@ -17,7 +18,7 @@ import { Stats } from "../../js";
  * @returns {JSX}
  */
 const PivotSlider = ({ className, pivot, disabled, value, ...rest }) => {
-  const [min, max] = Stats.intervalFromPercentageIncrease(pivot, value, true);
+  const [min, max] = ExtMath.intervalFromPercentageIncrease(pivot, value, true);
 
   return(
     <Space className={className} direction='horizontal' align='center'>

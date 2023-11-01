@@ -23,46 +23,6 @@ class Stats {
   };
 
   /**
-   * Calculate the increase between a base number (from) and its value after increase (to)
-   * @param {number} from
-   * @param {number} to
-   * @param {boolean} [floor=false]
-   * @returns {number} Percentage difference, positive or negative
-   */
-  static percentageIncrease(from, to, floor = false) {
-    const percent = (to - from) / from * 100;
-    return floor ? Math.floor(percent) : percent;
-  }
-
-  /**
-   * Calculate the value of the base number (from) after an increase (increasePercentage, positive or negative)
-   * @param {number} from 
-   * @param {number} increasePercentage
-   * @param {boolean} [floor=false]
-   * @returns {number}
-   */
-  static applyPercentageIncrease(from, increasePercentage, floor = false) {
-    const newValue = from + (from * increasePercentage) / 100;
-    return floor ? Math.floor(newValue) : newValue;
-  }
-
-  /**
-   * Calculate the interval values surrounding of the base number (from) after an increase and increase or
-   * the percentage increasePercentage. The interval is sorted ascending
-   * @param {number} from 
-   * @param {number} increasePercentage
-   * @param {boolean} floor
-   * @returns {number}
-   */
-  static intervalFromPercentageIncrease(from, increasePercentage, floor = false) {
-    const interval = [
-      this.applyPercentageIncrease(from, -increasePercentage, floor),
-      this.applyPercentageIncrease(from, +increasePercentage, floor),
-    ];
-    return interval.sort((a, b) => a - b);
-  }
-
-  /**
    * @param {Iterable} [itr=Array] Iterable used to get values
    * @param {function} [callBack] If provided, used to gather values from itr callBack: (item) => number
    */

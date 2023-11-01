@@ -13,31 +13,6 @@ declare class Stats {
      */
     static rankBy(data: Array<any>, fieldName: string, rankFieldName?: string | undefined): any;
     /**
-     * Calculate the increase between a base number (from) and its value after increase (to)
-     * @param {number} from
-     * @param {number} to
-     * @param {boolean} [floor=false]
-     * @returns {number} Percentage difference, positive or negative
-     */
-    static percentageIncrease(from: number, to: number, floor?: boolean | undefined): number;
-    /**
-     * Calculate the value of the base number (from) after an increase (increasePercentage, positive or negative)
-     * @param {number} from
-     * @param {number} increasePercentage
-     * @param {boolean} [floor=false]
-     * @returns {number}
-     */
-    static applyPercentageIncrease(from: number, increasePercentage: number, floor?: boolean | undefined): number;
-    /**
-     * Calculate the interval values surrounding of the base number (from) after an increase and increase or
-     * the percentage increasePercentage. The interval is sorted ascending
-     * @param {number} from
-     * @param {number} increasePercentage
-     * @param {boolean} floor
-     * @returns {number}
-     */
-    static intervalFromPercentageIncrease(from: number, increasePercentage: number, floor?: boolean): number;
-    /**
      * @param {Iterable} [itr=Array] Iterable used to get values
      * @param {function} [callBack] If provided, used to gather values from itr callBack: (item) => number
      */
