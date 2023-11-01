@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { StorageItem } from '../../js';
 import { useNewClassRef } from '../misc';
@@ -15,9 +15,11 @@ const useStorageItem = (key, def = '', local = true) => {
   const storage = useNewClassRef(() => new StorageItem(key, def, local)); // Holds the StorageItem object
   const [value, setValue] = useState(storage.value);                      // Restore current if exists in storage
 
+  useEffect(() => () => storage.value = value, []);                       // Save on unmounting
+
   return [
     value,
-    useCallback(newValue => setValue(storage.value = newValue), []),      // Change the StorageItem value & set the state
+    useCallback(newValue => setValue(newValue), []),                      // Change the StorageItem value & set the state
     () => {
       storage.remove();
       setValue();                                                         // Key does not exist anymore, set value to 'undefined'

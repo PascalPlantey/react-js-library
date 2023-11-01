@@ -4,7 +4,8 @@ class ExtArray extends Array {
   constructor(args) {
     super();
 
-    if      (isString(args)) super.push(args);
+    if      (isString(args))
+      super.push(args);
     else if (isIterable(args))
       for(const arg of args)
         arg && super.push(arg);

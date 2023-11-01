@@ -39,11 +39,13 @@ export default class MapOfSet extends ExtMap {
   }
 
   /**
-   * Adds items to the map. The values in the items are iterable and all the values are added to the Set associated with the key.
+   * Adds items to the map. The values in the items are iterable and all the values are added to the Set associated
+   * with the key.
    * @param {Iterable} iterable [[k, v], ...]
    * @param {function} [mainFn] If provided receives every item if iterable and returns array- fn: (item) => [key, value]
-   * @param {function} [childrenFn] If provided receives every value of v and returns a value added to the Set. If not provided
-   * the values associated to the key are considered to be an array and every value of the array is added to the Set
+   * @param {function} [childrenFn] If provided receives every child value and returns a value to be added to the Set. If 
+   * not provided the values associated to the key are considered to be an array and every value of the array is added
+   * to the Set
    * @return {MapOfSet} this
    */
   addWithChildren(iterable, mainFn, childrenFn) {

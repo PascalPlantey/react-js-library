@@ -38,11 +38,21 @@ class ExtMap extends Map {
   }
 
   /**
+   * Update a pair; the update function return the value to be saved with the key
+   * @param {any} key Key for the Map
+   * @param {function} update Function receiving current value for key which return value is saved with the key
+   * @return {ExtMap} Current ExtMap object
+   */
+  setByFn(key, fn) {
+    return this.set(key, fn(this.get(key)));
+  }
+
+  /**
    * Update or insert a new pair; the update/insert functions return the value to be saved with the key
    * @param {any} key Key for the Map
    * @param {function} insert Function whith no parameters which return value is saved with the key
    * @param {function} update Function receiving current value for key which return value is saved with the key
-   * @return {this} Current ExtMap object
+   * @return {ExtMap} Current ExtMap object
    * @example
    * const map = new ExtMap();
    * const insert = () => 1;
@@ -50,10 +60,8 @@ class ExtMap extends Map {
    * map.upsert('bananas', insert, update);           // 'bananas' => 1
    * map.upsert('bananas', insert, update);           // 'bananas' => 2
    */
-  upsert(key, insert, update) {
-    if (this.has(key)) this.set(key, update(this.get(key)));
-    else               this.set(key, insert());
-    return this;
+  upsertByFn(key, insert, update) {
+    return this.has(key) ? this.setByFn(key, update) : this.setByFn(key, insert);
   }
 
   /**
@@ -93,7 +101,7 @@ class ExtMap extends Map {
   }
 
   /**
-   * Changed the default object type name visible through Object.prototype.toString.call
+   * Change the default object type name visible through Object.prototype.toString.call
    * @returns {string} ExtMap
    */
   get [Symbol.toStringTag]() {
