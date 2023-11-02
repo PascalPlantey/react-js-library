@@ -6,6 +6,17 @@
  * @example
  * const handleInput = debounce(e => console.log('input', e?.target?.value));
  * <input onChange={handleInput} />
+ * @example
+ * const [value, setValue] = useState();
+ * console.log('value', value)
+ * const debouncerRef = useRef(debounce(e => console.log('e', e)));
+ *
+ * const handleChange = e => {
+ *   setValue(e.target.value);
+ *   debouncerRef.current(e);
+ * };
+ *
+ * return <input onChange={handleChange} />;
  */
 export const debounce = (func, timeout = 500) => {
   let timer;

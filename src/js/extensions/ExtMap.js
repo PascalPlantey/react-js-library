@@ -69,7 +69,7 @@ class ExtMap extends Map {
    * @type {Array<Array>}
    */
   get array() {
-    return [...this.entries()];
+    return [...super.entries()];
   }
 
   /**

@@ -18,7 +18,7 @@ import './Sliders.css';
  * @returns {JSX}
  */
 const PivotSlider = ({ className, pivot, disabled, value, ...rest }) => {
-  const [min, max] = ExtMath.intervalFromPercentageIncrease(pivot, value, true);
+  const [min, max] = ExtMath.intervalFromPercentageDelta(pivot, value, true);
 
   return(
     <Space className={className} direction='horizontal' align='center'>

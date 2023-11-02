@@ -90,7 +90,7 @@ class ExtMath {
    * @param {boolean} floor
    * @returns {number}
    */
-  static intervalFromPercentageIncrease(from, increasePercentage, floor = false) {
+  static intervalFromPercentageDelta(from, increasePercentage, floor = false) {
     const interval = [
       this.applyPercentageIncrease(from, -increasePercentage, floor),
       this.applyPercentageIncrease(from, +increasePercentage, floor),

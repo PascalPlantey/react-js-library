@@ -43,14 +43,14 @@ class Compound {
     if (args.length === 1) {
       const arg = args[0];
 
-      if (isString(arg) || !isIterable(arg))
+      if ((isString(arg) || !isIterable(arg)) && arg !== undefined)
         return arg.toString().trim();                     // One argument only, not iterable, return as-is
       else
         theArgs = arg;                                    // One argument only, which is iterable
     }
 
     for(const arg of theArgs)                             // Add all elements to the result
-      compound = ExtString.extend(compound, arg.toString().trim(), '|');
+      compound = ExtString.extend(compound, arg === undefined ? '' : arg.toString().trim(), '|');
 
     return compound;
   }

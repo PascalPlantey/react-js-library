@@ -59,7 +59,7 @@ declare class ExtMath {
      * @param {boolean} floor
      * @returns {number}
      */
-    static intervalFromPercentageIncrease(from: number, increasePercentage: number, floor?: boolean): number;
+    static intervalFromPercentageDelta(from: number, increasePercentage: number, floor?: boolean): number;
     /**
      * Change the default object type name visible through Object.prototype.toString.call
      * @returns {string}
