@@ -60,7 +60,7 @@ class Compound {
    * @description If value is a Compound string, destructure and return values
    * @function destructure
    * @param {any|string} value Value is supposed to be a compound value
-   * @returns {Array<string>|any} Array with the compound values, or value itself in an array ([value]) if it is not a compound
+   * @returns {Array<string>|Array<any>} Array with the compound values, or value itself in an array ([value]) if it is not a compound
    * @memberof Compound
    */
   static destructure = value => Compound.isCompound(value) ? value.split(this.#regexp) : [value];

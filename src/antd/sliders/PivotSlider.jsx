@@ -29,12 +29,10 @@ const PivotSlider = ({ className, pivot, disabled, value, ...rest }) => {
         max={100}
         step={5}
         value={value}
-        tooltip={{ formatter: p => `${p}%` }}
-        marks={{0: '0%', 50: '50%', 100: '100%'}}
+        tooltip={{ formatter: p => `${p}% - [${min}, ${max}]` }}
+        marks={{0: '0%', 25: '25%', 50: '50%', 75: '75%', 100: '100%'}}
         {...rest}
       />
-
-      <Typography.Text>interval [{min}, {max}]</Typography.Text>
     </Space>
   );
 };

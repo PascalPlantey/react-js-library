@@ -8,7 +8,7 @@ export default Compound;
  *   [cloud, certification] = Compound.destructure(compound);                        // ['Service Cloud', 'Field Service Consultant']
  */
 declare class Compound {
-    static "__#31139@#regexp": RegExp;
+    static "__#38809@#regexp": RegExp;
     /**
      * @static
      * @description Is value a compound string?
@@ -37,10 +37,10 @@ declare class Compound {
      * @description If value is a Compound string, destructure and return values
      * @function destructure
      * @param {any|string} value Value is supposed to be a compound value
-     * @returns {Array<string>|any} Array with the compound values, or value itself in an array ([value]) if it is not a compound
+     * @returns {Array<string>|Array<any>} Array with the compound values, or value itself in an array ([value]) if it is not a compound
      * @memberof Compound
      */
-    static destructure: (value: any | string) => Array<string> | any;
+    static destructure: (value: any | string) => Array<string> | Array<any>;
     /**
      * Changed the default object type name visible through Object.prototype.toString.call
      * @returns {string}

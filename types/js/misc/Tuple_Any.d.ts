@@ -81,7 +81,7 @@ declare class Tuple_Any extends ExtMap {
      * for(const key of tuples.tupleKeys)
      *   console.log('key', key);              // => logs ['Cert', 'adm'] and ['Cert', 'sales']
      */
-    tupleKeys(): Generator<any, void, unknown>;
+    tupleKeys(): Generator<any[] | string[], void, unknown>;
     /**
      * Mimic the Map.entries() but returning destructured keys
      * @generator
