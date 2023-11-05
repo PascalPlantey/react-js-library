@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { isFunction } from "../../js";
 
@@ -9,12 +9,12 @@ import { isFunction } from "../../js";
  * @returns {any} value or function result
  */
 const useDebounceValue = (value, timeout = 500) => {
-  const [debouncedValue, setDebouncedValue] = React.useState(isFunction(value) ? value() : value);
+  const [debouncedValue, setDebouncedValue] = useState(isFunction(value) ? value() : value);
 
-  React.useEffect(() => {
-    const handler = setTimeout(() => setDebouncedValue(value), timeout);
+  useEffect(() => {
+    const handler = setTimeout(() => setDebouncedValue(isFunction(value) ? value() : value, timeout));
     return () => clearTimeout(handler);
-  }, [value, delay]);
+  }, [value, timeout]);
 
   return debouncedValue;
 };
