@@ -52,7 +52,7 @@ class ExtMap extends Map {
     if (this.has(key))
       result = this.get(key);
     else
-      this.set(key, resolve(value));
+      this.set(key, result = resolve(value));
 
     return result;
   }
