@@ -2,6 +2,7 @@ export { default as Compound } from "./Compound";
 export { default as CompoundMap } from "./CompoundMap";
 export * from "./debouncers";
 export { default as ItemsCounters } from "./ItemsCounter";
+export { default as MapOfSet } from "./MapOfSet";
 export { default as toIterable } from "./toIterable";
 export { default as PropertyValues } from "./PropertyValues";
 export { default as Stats } from "./Stats";

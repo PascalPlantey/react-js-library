@@ -1,5 +1,5 @@
-import ExtMap from "./ExtMap";
-import ExtSet from "./ExtSet";
+import ExtMap from "../extensions/ExtMap";
+import ExtSet from "../extensions/ExtSet";
 
 /**
  * @extends ExtMap
@@ -11,8 +11,11 @@ export default class MapOfSet extends ExtMap {
    * @param {function} [fn] If fn is provided fn receives every item if iterable and returns array- fn: (item) => [key, value]
    */
   constructor(iterable, fn) {
-    super();
-    this.add(iterable, fn);
+    if (!fn) super(iterable);
+    else {
+      super();
+      this.add(iterable, fn);
+    }
   }
 
   /**

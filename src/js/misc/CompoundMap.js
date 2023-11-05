@@ -8,8 +8,11 @@ export default class CompoundMap extends ExtMap {
    * each item of iterable is added to the Map; they should be in the form [[...keys], value]
    */
   constructor(iterable, fn) {
-    super();
-    this.add(iterable, fn);
+    if (!fn) super(iterable);
+    else {
+      super();
+      this.add(iterable, fn);
+    }
   }
 
   /**

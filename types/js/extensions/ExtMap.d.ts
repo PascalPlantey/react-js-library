@@ -4,10 +4,17 @@ export default ExtMap;
  * @extends Map
  */
 declare class ExtMap extends Map<any, any> {
-    constructor();
-    constructor(entries?: readonly (readonly [any, any])[] | null | undefined);
-    constructor();
-    constructor(iterable?: Iterable<readonly [any, any]> | null | undefined);
+    /**
+     * @param {Iterable} iterable Contains the items to be added
+     * @param {Function} fn Extraction function
+     */
+    constructor(iterable: Iterable<any>, fn: Function);
+    /**
+     * Adds the items of iterable to the Map. fn returns an array with two values
+     * @param {Iterable} iterable Contains the items to be added
+     * @param {Function} fn Extraction function
+     */
+    add(iterable: Iterable<any>, fn: Function): void;
     /**
      * Adds the key/value in the map or retrieve the current value associated with the given key
      * @param {any} key Key to retrieve the element

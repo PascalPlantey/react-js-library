@@ -6,6 +6,28 @@ import { isFunction } from "../is";
  */
 class ExtMap extends Map {
   /**
+   * @param {Iterable} iterable Contains the items to be added
+   * @param {Function} fn Extraction function
+   */
+  constructor(iterable, fn) {
+    if (!fn) super(iterable);
+    else {
+      super();
+      this.add(iterable, fn);
+    }
+  }
+
+  /**
+   * Adds the items of iterable to the Map. fn returns an array with two values
+   * @param {Iterable} iterable Contains the items to be added
+   * @param {Function} fn Extraction function
+   */
+  add(iterable, fn) {
+    for(const item of iterable ?? [])
+      fn ? this.set(...fn(item)) : item;
+  }
+
+  /**
    * Adds the key/value in the map or retrieve the current value associated with the given key
    * @param {any} key Key to retrieve the element
    * @param {function|any} value Default value if the key is not found in the Map
@@ -30,7 +52,7 @@ class ExtMap extends Map {
     if (this.has(key))
       result = this.get(key);
     else {
-      result = isFunction(value) ? value() : value
+      result = isFunction(value) ? value() : value;
       this.set(key, result);
     }
 
