@@ -1,4 +1,4 @@
-import { isFunction } from "../is";
+import resolve from "../misc/resolve";
 
 /**
  * @description Extensions to JS.Map()
@@ -24,7 +24,7 @@ class ExtMap extends Map {
    */
   add(iterable, fn) {
     for(const item of iterable ?? [])
-      fn ? this.set(...fn(item)) : item;
+      fn ? this.set(...fn(item)) : this.set(item);
   }
 
   /**
@@ -51,10 +51,8 @@ class ExtMap extends Map {
 
     if (this.has(key))
       result = this.get(key);
-    else {
-      result = isFunction(value) ? value() : value;
-      this.set(key, result);
-    }
+    else
+      this.set(key, resolve(value));
 
     return result;
   }

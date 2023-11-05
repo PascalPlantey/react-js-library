@@ -1,5 +1,6 @@
 import ExtMap from "../extensions/ExtMap";
 import ExtSet from "../extensions/ExtSet";
+import resolve from "./resolve";
 
 /**
  * @extends ExtMap
@@ -35,7 +36,7 @@ export default class MapOfSet extends ExtMap {
    */
   add(iterable, fn) {
     for(const item of iterable ?? []) {
-      const [key, value] = fn ? fn(item) : item;
+      const [key, value] = resolve(fn, item);
       this.getOrSet(key).add(value);
     }
     return this;
@@ -53,13 +54,11 @@ export default class MapOfSet extends ExtMap {
    */
   addWithChildren(iterable, mainFn, childrenFn) {
     for(const item of iterable) {
-      const [key, values] = mainFn ? mainFn(item) : item;
+      const [key, values] = resolve(mainFn, item);
 
       if (childrenFn)
-        for(const valueItem of values) {
-          const value = childrenFn ? childrenFn(valueItem) : valueItem;
-          this.getOrSet(key).add(value);
-        }
+        for(const valueItem of values)
+          this.getOrSet(key).add(resolve(childrenFn, valueItem));
       else
         this.getOrSet(key).addIterable(values);
     }

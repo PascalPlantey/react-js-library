@@ -13,9 +13,8 @@ const useRunOnce = fn => {
   const [again, tryAgain] = useToggle();
 
   useEffect(() => {
-    if (!done) {
+    if (!done)
       fn() ? setDone(true) : tryAgain();
-    }
   }, [fn, done, tryAgain, again])
 
   return done;

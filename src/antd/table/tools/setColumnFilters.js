@@ -1,4 +1,4 @@
-import { isFunction } from "../../../js";
+import { resolve } from "../../../js";
 
 /**
  * Set the filter values for a column in the columns definitions for an antd Table component
@@ -9,7 +9,7 @@ import { isFunction } from "../../../js";
  */
 const setColumnFilters = (columns, index, values) => {
   const found = columns.find(({ dataIndex }) => dataIndex === index);
-  found.filters = isFunction(values) ? values() : values;               // Set the filters
+  found.filters = resolve(values);                                      // Set the filters
   found.filterInitializer = 'none';                                     // Avoid strange results in initializeColumnsFilters
 };
 

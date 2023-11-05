@@ -1,5 +1,6 @@
 import Compound from "./Compound";
 import { ExtMap } from "../extensions";
+import resolve from "./resolve";
 
 export default class CompoundMap extends ExtMap {
   /**
@@ -22,7 +23,7 @@ export default class CompoundMap extends ExtMap {
    */
   add(iterable, fn) {
     for(const item of iterable || []) {
-      const [keys, value] = fn ? fn(item) : item;
+      const [keys, value] = resolve(fn, item);
       this.set(keys, value);
     }
   }

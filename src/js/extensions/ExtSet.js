@@ -1,4 +1,4 @@
-import { isFunction, isIterable, isPrimitive } from "../is";
+import resolve from "../misc/resolve";
 
 export default class ExtSet extends Set {
   /**
@@ -10,7 +10,7 @@ export default class ExtSet extends Set {
    */
   addIterable(values, fn) {
     for(const value of values)
-      super.add(fn ? fn(value) : value);
+      super.add(resolve(fn, value));
 
     return this;
   }

@@ -1,4 +1,5 @@
-import { isFunction, isReactElement } from '../../js/is';
+import { resolve } from '../../js';
+import { isReactElement } from '../../js/is';
 
 /**
  * Enables a basic switch within the render of a component. The provided 'cases' is an array in which each element is an object with
@@ -11,7 +12,7 @@ import { isFunction, isReactElement } from '../../js/is';
  */
 const Switch = ({ cases }) => {
   const handleAction = action => {
-    const result = isFunction(action) ? action() : action;
+    const result = resolve(action);
     console.assert(isReactElement(action), "Switch: returned value does not seem to be a JSX element", action);
     return result;
   };
