@@ -83,12 +83,12 @@ class ExtMath {
   }
 
   /**
-   * Calculate the interval values surrounding of the base number (from) after an increase and increase or
+   * Calculate the interval values surrounding the 'base' number after an decrease and increase of
    * the percentage increasePercentage. The interval is sorted ascending
-   * @param {number} from 
+   * @param {number} base 
    * @param {number} increasePercentage
-   * @param {boolean} floor
-   * @returns {number}
+   * @param {boolean} floor Return the floor value if true
+   * @returns {[from: number, to: number]}
    */
   static intervalFromPercentageDelta(from, increasePercentage, floor = false) {
     const interval = [

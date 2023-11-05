@@ -52,14 +52,14 @@ declare class ExtMath {
      */
     static applyPercentageIncrease(from: number, increasePercentage: number, floor?: boolean | undefined): number;
     /**
-     * Calculate the interval values surrounding of the base number (from) after an increase and increase or
+     * Calculate the interval values surrounding the 'base' number after an decrease and increase of
      * the percentage increasePercentage. The interval is sorted ascending
-     * @param {number} from
+     * @param {number} base
      * @param {number} increasePercentage
-     * @param {boolean} floor
-     * @returns {number}
+     * @param {boolean} floor Return the floor value if true
+     * @returns {[from: number, to: number]}
      */
-    static intervalFromPercentageDelta(from: number, increasePercentage: number, floor?: boolean): number;
+    static intervalFromPercentageDelta(from: any, increasePercentage: number, floor?: boolean): [from: number, to: number];
     /**
      * Change the default object type name visible through Object.prototype.toString.call
      * @returns {string}
