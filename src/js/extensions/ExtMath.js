@@ -87,8 +87,8 @@ class ExtMath {
    * the percentage increasePercentage. The interval is sorted ascending
    * @param {number} base 
    * @param {number} increasePercentage
-   * @param {boolean} floor Return the floor value if true
-   * @returns {[from: number, to: number]}
+   * @param {boolean} [floor] If true will 'floor' the interval values
+   * @returns {[from: number, to: number]} [base - (base * increasePercentage%), base + (base * increasePercentage%)]
    */
   static intervalFromPercentageDelta(from, increasePercentage, floor = false) {
     const interval = [

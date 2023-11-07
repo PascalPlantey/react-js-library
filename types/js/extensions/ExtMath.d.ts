@@ -56,10 +56,10 @@ declare class ExtMath {
      * the percentage increasePercentage. The interval is sorted ascending
      * @param {number} base
      * @param {number} increasePercentage
-     * @param {boolean} floor Return the floor value if true
-     * @returns {[from: number, to: number]}
+     * @param {boolean} [floor] If true will 'floor' the interval values
+     * @returns {[from: number, to: number]} [base - (base * increasePercentage%), base + (base * increasePercentage%)]
      */
-    static intervalFromPercentageDelta(from: any, increasePercentage: number, floor?: boolean): [from: number, to: number];
+    static intervalFromPercentageDelta(from: any, increasePercentage: number, floor?: boolean | undefined): [from: number, to: number];
     /**
      * Change the default object type name visible through Object.prototype.toString.call
      * @returns {string}
