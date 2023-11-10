@@ -1,3 +1,4 @@
+import { ExtArray, ExtMath } from "../extensions";
 import { isIterable } from "../is";
 
 /**
@@ -5,7 +6,7 @@ import { isIterable } from "../is";
  * to calculate the standard deviation
  */
 class Stats {
-  #serie = [];
+  #serie = new ExtArray();
   #sum = 0;
 
   /**
@@ -75,7 +76,7 @@ class Stats {
    * @returns {this}
    */
   reset() {
-    this.#serie = [];
+    this.#serie = new ExtArray();
     this.#sum = 0;
     return this;
   }
@@ -119,6 +120,43 @@ class Stats {
    * @type {number}
    */
   get size() { return this.#serie.length; }
+
+  /**
+   * Growth of the serie, from first to last values added
+   * @type {Number}
+   */
+  get growth() {
+    return ExtMath.growth(this.#serie.first, this.#serie.last);
+  }
+
+  get #growthStats() {
+    const growthStats = new Stats();
+    let prev;
+
+    for(let i = 0; i < this.#serie.length; ++i) {
+      if (i > 0)
+        growthStats.add(ExtMath.growth(prev, this.#serie[i]));
+      prev = this.#serie[i];
+    }
+
+    return growthStats;
+  }
+
+  /**
+   * Growth mean of the serie
+   * @type {number}
+   */
+  get growthMean() {
+    return this.#growthStats.mean;
+  }
+
+  /**
+   * Growth standard deviation
+   * @type {number}
+   */
+  get growthStddev() {
+    return this.#growthStats.stddev;
+  }
 
   /**
    * Changed the default object type name visible through Object.prototype.toString.call

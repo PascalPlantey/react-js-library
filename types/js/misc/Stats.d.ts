@@ -63,6 +63,21 @@ declare class Stats {
      */
     get size(): number;
     /**
+     * Growth of the serie, from first to last values added
+     * @type {Number}
+     */
+    get growth(): number;
+    /**
+     * Growth mean of the serie
+     * @type {number}
+     */
+    get growthMean(): number;
+    /**
+     * Growth standard deviation
+     * @type {number}
+     */
+    get growthStddev(): number;
+    /**
      * Changed the default object type name visible through Object.prototype.toString.call
      * @returns {string}
      */
