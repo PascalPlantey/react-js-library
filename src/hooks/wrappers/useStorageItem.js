@@ -15,7 +15,7 @@ const useStorageItem = (key, def = '', local = true) => {
   const storage = useNewClassRef(() => new StorageItem(key, def, local)); // Holds the StorageItem object
   const [value, setValue] = useState(storage.value);                      // Restore current if exists in storage
 
-  useEffect(() => () => storage.value = value, []);                       // Save on unmounting
+  useEffect(() => { storage.value = value; }, [value]);                   // Save on change
 
   return [
     value,
