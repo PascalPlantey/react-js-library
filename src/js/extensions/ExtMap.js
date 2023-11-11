@@ -85,6 +85,16 @@ class ExtMap extends Map {
   }
 
   /**
+   * Update all values of the Map with the result of the fn function
+   * @param {function} fn 
+   * @returns {ExtMap} this
+   */
+  updateValues(fn) {
+    this.forEach((value, key) => this.set(key, fn(value, key, this)));
+    return this;
+  }
+
+  /**
    * Map entries as an array [[key, value], ...]
    * @type {Array<Array>}
    */

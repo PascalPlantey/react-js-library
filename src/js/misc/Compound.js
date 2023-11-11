@@ -66,7 +66,7 @@ class Compound {
   static destructure = value => Compound.isCompound(value) ? value.split(this.#regexp) : [value];
 
   /**
-   * Changed the default object type name visible through Object.prototype.toString.call
+   * Change the default object type name visible through Object.prototype.toString.call
    * @returns {string}
    */
   get [Symbol.toStringTag]() {

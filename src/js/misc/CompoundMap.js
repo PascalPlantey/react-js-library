@@ -66,6 +66,14 @@ export default class CompoundMap extends ExtMap {
   }
 
   /**
+   * Change the default behavior of Map.forEach to send Compound keys to Map.forEach
+   * @param {function} fn 
+   */
+  forEach(fn) {
+    super.forEach((value, keys) => fn(value, Compound.destructure(keys), this));
+  }
+
+  /**
    * Map entries as an array [[[key1, keys2, ...], value], ...]
    * @get {Array<Array>}
    */
