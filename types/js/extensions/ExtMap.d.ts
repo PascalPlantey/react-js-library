@@ -57,6 +57,12 @@ declare class ExtMap extends Map<any, any> {
      */
     upsertByFn(key: any, insert: Function, update: Function): ExtMap;
     /**
+     * Update all values of the Map with the result of the fn function
+     * @param {function} fn
+     * @returns {ExtMap} this
+     */
+    updateValues(fn: Function): ExtMap;
+    /**
      * Map entries as an array [[key, value], ...]
      * @type {Array<Array>}
      */

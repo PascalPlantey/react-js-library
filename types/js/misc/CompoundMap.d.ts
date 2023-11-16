@@ -37,6 +37,11 @@ export default class CompoundMap extends ExtMap {
      */
     delete(...keys: any[]): boolean;
     /**
+     * Change the default behavior of Map.forEach to send Compound keys to Map.forEach
+     * @param {function} fn
+     */
+    forEach(fn: Function): void;
+    /**
      * Generator for all the (keys / value) pairs of the map
      * @yields {Array<Array<>, any>} [[...keys], value]
      */

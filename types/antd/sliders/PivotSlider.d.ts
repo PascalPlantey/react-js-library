@@ -10,7 +10,7 @@ export default PivotSlider;
  * @param {Function} props.onChange Called when the interval changes f(interval: Array<Number, Number>)
  * @returns {JSX}
  */
-declare function PivotSlider({ className, pivot, disabled, value, ...rest }: {
+declare function PivotSlider({ className, pivot, disabled, value, onChange, ...rest }: {
     className?: string | undefined;
     disabled: boolean;
     pivot: number;

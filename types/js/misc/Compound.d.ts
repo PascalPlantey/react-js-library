@@ -42,7 +42,7 @@ declare class Compound {
      */
     static destructure: (value: any | string) => Array<string> | Array<any>;
     /**
-     * Changed the default object type name visible through Object.prototype.toString.call
+     * Change the default object type name visible through Object.prototype.toString.call
      * @returns {string}
      */
     get [Symbol.toStringTag](): string;
