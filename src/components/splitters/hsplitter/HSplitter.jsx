@@ -20,7 +20,7 @@ const HSplitter = ({ name, widthToColumn, columnReverse, children }) => {
   const dividerRef = useRef();
   const storedPanels = useNewClassRef(() => new StorageItem(name, []));
   const [panels, setPanels] = useState(() => {
-    if (name && storedPanels.value)
+    if (name && storedPanels.value.length)
       return storedPanels.value;
     else
       return [50, 50];                                                  // Default to 50/50

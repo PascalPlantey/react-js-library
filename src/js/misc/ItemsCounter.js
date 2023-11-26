@@ -1,5 +1,5 @@
 import { ExtString } from '../extensions';
-import { isFunction, isString } from '../is';
+import { isArray, isFunction, isString } from '../is';
 import toIterable from './toIterable';
 
 const defaultRadical = 'Others: ';
@@ -48,8 +48,13 @@ class ItemsCounters extends Map {
    * @returns {this}
    */
   addCount(item, count = 1) {
-    if (Array.isArray(item) && item.length === 2)
+    if (isArray(item) && item.length === 2)
       this.addCount(item[0], item[1]);
+    else if (isArray(item)) {
+      console.log('adding array', item)
+      for(const sub of item)
+        this.addCount(sub);
+    }
     else
       this.set(item, (this.get(item) ?? 0) + count);
     return this;

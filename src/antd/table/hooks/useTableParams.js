@@ -12,7 +12,9 @@ export const useTableParams = (params = { pagination: null, filters: null, sort:
   const [tableParams, setTableParams] = useState(params);
 
   // Event from antd Table, change all Table parameters (except 'extra' parameter which is not kept/used)
-  const onChange = useCallback((pagination, filters, sort) => setTableParams({ pagination, filters, sort }), []);
+  // The extra parameter contains the currentDataSource (filtered & sorted source) and the action. But the currentDataSource
+  // remains filtered if the filter is reset manually by the user and do not revert to all data available
+  const onChange = useCallback((pagination, filters, sort/*, extra*/) => setTableParams({ pagination, filters, sort }), []);
 
   // Change the pagination param
   const onChangePagination = useCallback(pagination => setTableParams(prevState => ({ ...prevState, pagination })), []);
@@ -42,13 +44,22 @@ export const useTableParams = (params = { pagination: null, filters: null, sort:
         break;
       }
 
-      return active;
+    return active;
   }, [tableParams.filters]);
 
   // Change the sort applied to the Table
   const onChangeSort = useCallback(sort => setTableParams(prevState => ({ ...prevState, sort })), []);
 
-  return({ tableParams, onChange, onChangePagination, onChangeFilters, onToggleFilterValue, onClearFilters, onChangeSort, isFilterActive });
+  return({
+    tableParams,
+    onChange,
+    onChangePagination,
+    onChangeFilters,
+    onToggleFilterValue,
+    onClearFilters,
+    onChangeSort,
+    isFilterActive
+  });
 };
 
 

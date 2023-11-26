@@ -10,7 +10,6 @@ import { initializeColumnsFilters } from "../tools";
  * @memberof AntdHooks
  */
 const useInitializeColumnsFilters = (columns, records) => 
-  useDontMemo(() => initializeColumnsFilters(columns, records), [columns, records]
-);
+  useDontMemo(() => initializeColumnsFilters(columns, records), [columns, records]);
 
 export default useInitializeColumnsFilters;
