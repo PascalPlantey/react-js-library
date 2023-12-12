@@ -41,7 +41,7 @@ class ExtMath {
    * @returns {number}
    */
   static distance(to, xName = 'x', yName = 'y') {
-    return isArray(to) ? XYdistance([0, 0], to) : XYdistance({ [xName]: 0, [yName]: 0 }, to, xName, yName);
+    return isArray(to) ? ExtMath.XYdistance([0, 0], to) : ExtMath.XYdistance({ [xName]: 0, [yName]: 0 }, to, xName, yName);
   }
   
   /**
