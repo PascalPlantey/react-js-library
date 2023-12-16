@@ -29,7 +29,11 @@ const UlTooltip = ({ liValues, children, ...rest }) => {
           {isPrimitive(liValues) ?
             <li>{liValues}</li>
             :
-            liValues.sort().map((value, index) => <li key={index}>{value}</li>)
+            liValues.sort().map((value, index) => 
+              <li key={index}>
+                {Array.isArray(value) && value.length === 2 ? `${value[0]} - ${value[1]}` : value}
+              </li>
+            )
           }
         </ul>
       }

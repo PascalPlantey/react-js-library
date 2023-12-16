@@ -62,7 +62,7 @@ const HSplitter = ({ name, widthToColumn, columnReverse, children }) => {
         className='splitter-leftpanel-container'
         style={{ width: columnView() ? '100%' : `${leftPanel}%` }}
       >
-        {children[0]}
+        {(children?.length > 0 && children[0]) || 'no content'}
       </div>
 
       {columnView() ?                                                   // Horizontal or vertical divider
@@ -81,7 +81,7 @@ const HSplitter = ({ name, widthToColumn, columnReverse, children }) => {
         className='splitter-rightpanel-container'
         style={{ width: columnView() ? '100%' : `${rightPanel}%` }}
       >
-        {children[1]}
+        {(children?.length > 1 && children[1]) || 'no content'}
       </div>
     </div>
   )
