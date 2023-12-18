@@ -9,7 +9,7 @@ class CSSVariable {
    * @description The name can have the preceding '--' or not
    */
   constructor(name) {
-    this.#name = name.startsWith('--') ? name : `--${this.#name}`;
+    this.#name = name.startsWith('--') ? name : `--${name}`;
   }
 
   /**
