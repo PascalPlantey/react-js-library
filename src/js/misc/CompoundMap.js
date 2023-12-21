@@ -57,6 +57,15 @@ export default class CompoundMap extends ExtMap {
   }
 
   /**
+   * @param {Array} keys Keys of the item
+   * @param {any} value New value to associate to the keys
+   * @returns {any} Returns the value associated to the keys
+   */
+  getOrSet(keys, value) {
+    return super.getOrSet(Compound.structure(keys), value);
+  }
+
+  /**
    * Deletes the items associated with the ...keys
    * @param  {Array} keys 
    * @returns {boolean} True if an item has been removed from the Map

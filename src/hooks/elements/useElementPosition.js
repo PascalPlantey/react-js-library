@@ -1,26 +1,26 @@
 import { useRef, useState, useEffect } from "react";
 
-import { getElementPosition } from "../../js";
+import { getElementPosition, getHTMLElement } from "../../js";
 
 /**
  * Hook to get position and size of an element through an React ref.
- * @param {object} [clientRef] React ref, will create one if not provided
+ * @param {object|string} [clientRef] React ref or query selector, will create one if not provided
  * @returns {Array} [ref, position] position: { top, left, bottom, right, height, width }, properties can be undefined if render
  * has not been done
  */
 const useElementPosition = clientRef => {
   const ref = useRef();
-  const { current } = clientRef ? clientRef : ref;
+  const current = getHTMLElement(clientRef) ? getHTMLElement(clientRef) : ref.current;
   const [position, setPosition] = useState(() => getElementPosition(current));
 
   useEffect(() => {
-    const { current } = clientRef ? clientRef : ref;
-    const observer = new ResizeObserver(() => setPosition(getElementPosition(current)));
+    if (current) {
+      const observer = new ResizeObserver(() => setPosition(getElementPosition(current)));
+      observer.observe(current);                                      // Start "listening" to change
 
-    current && observer.observe(current);
-
-    return () => current && observer.unobserve(current);
-  }, [clientRef, clientRef?.current]); // eslint-disable-line
+      return () => observer.unobserve(current);                       // Stop "listening" on unmount
+    }
+  }, [current]);
 
   return [clientRef ? clientRef : ref, position];
 };
