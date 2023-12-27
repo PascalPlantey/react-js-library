@@ -31,6 +31,12 @@ export default class CompoundMap extends ExtMap {
      */
     set(keys: any[], value: any): CompoundMap;
     /**
+     * @param {Array} keys Keys of the item
+     * @param {any} value New value to associate to the keys
+     * @returns {any} Returns the value associated to the keys
+     */
+    getOrSet(keys: any[], value: any): any;
+    /**
      * Deletes the items associated with the ...keys
      * @param  {Array} keys
      * @returns {boolean} True if an item has been removed from the Map

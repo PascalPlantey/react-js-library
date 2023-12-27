@@ -56,11 +56,18 @@ const HSplitter = ({ name, widthToColumn, columnReverse, children }) => {
   };
 
   const [leftPanel, rightPanel] = panels;
+
   return(
-    <div className='splitter-container' style={{ flexDirection: direction() }} ref={divRef}>
+    <div
+      className='splitter-container'
+      style={{ flexDirection: direction() }}
+      ref={divRef}
+    >
       <div
         className='splitter-leftpanel-container'
-        style={{ width: columnView() ? '100%' : `${leftPanel}%` }}
+        style={{
+          width: `${columnView() ? '100' : leftPanel}%`
+        }}
       >
         {(children?.length > 0 && children[0]) || 'no content'}
       </div>
@@ -79,7 +86,10 @@ const HSplitter = ({ name, widthToColumn, columnReverse, children }) => {
 
       <div
         className='splitter-rightpanel-container'
-        style={{ width: columnView() ? '100%' : `${rightPanel}%` }}
+        style={{
+          width: `${columnView() ? '100' : rightPanel}%`,
+          height: `${columnView() ? undefined : 'inherit'}`
+        }}
       >
         {(children?.length > 1 && children[1]) || 'no content'}
       </div>

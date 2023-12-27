@@ -9,9 +9,9 @@ declare class Stats {
      * @param {Array<any>} data Collection of objects to be ranked
      * @param {string} fieldName Name of the field to be ranked by (object[fieldName] should be a number)
      * @param {string} [rankFieldName='rank'] Name of the ranking field
-     * @returns {this} Sorted by fieldName, with a new property named 'rank'
+     * @returns {object} data sorted by fieldName, with a new property named 'rank'
      */
-    static rankBy(data: Array<any>, fieldName: string, rankFieldName?: string | undefined): any;
+    static rankBy(data: Array<any>, fieldName: string, rankFieldName?: string | undefined): object;
     /**
      * @param {Iterable} [itr=Array] Iterable used to get values
      * @param {function} [callBack] If provided, used to gather values from itr callBack: (item) => number
