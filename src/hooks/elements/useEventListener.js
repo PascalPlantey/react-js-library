@@ -1,6 +1,6 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { useOndismount, useOnmount } from '../cycles';
+import { useOndismount } from '../cycles';
 
 /**
  * @description Fire a function when a document event happens
@@ -13,6 +13,8 @@ import { useOndismount, useOnmount } from '../cycles';
  * @example
  * const { working, toggle } = useEventListener('mousemove', console.log);
  * @memberof Hooks#
+ * @maintenance
+ *  . 28/12/2023: changed useOnmount by useEffect to restart listening when listener changes
  */
 const useEventListener = (name, fn, elt = window, immediately = true, options = {}) => {
   const [working, setWorking] = useState(!!immediately);
@@ -32,10 +34,15 @@ const useEventListener = (name, fn, elt = window, immediately = true, options = 
     elt.addEventListener(name, listener, { capture, once, passive, signal: refAbort.current.signal });
   }, [capture, once, passive, elt, listener, name]);
 
-  // AbortController.abort() remove the listener
-  const unsetListener = () => refAbort.current?.abort();            // Don't call setWorking when called on dismount
+  const unsetListener = () => refAbort.current?.abort();            // AbortController.abort() remove the listener
 
-  useOnmount(() => immediately && setListener());                   // Start immediately if requested
+  useEffect(() => {                                                 // Start listener when it changes
+    if (working) {
+      unsetListener();
+      setListener()
+    }
+  }, [listener, setListener]);
+
   useOndismount(() => working && unsetListener());                  // Cleanup if still running
 
   const toggle = useCallback(() => setWorking(running => {

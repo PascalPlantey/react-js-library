@@ -2,7 +2,7 @@
  * Execute a function after x ms, unless called again before x ms
  * @param {Function} func Function to be executed
  * @param {number} [timeout=500] Delay before execution
- * @returns {void}
+ * @returns {Function} Debounce function to be called
  * @example
  * const handleInput = debounce(e => console.log('input', e?.target?.value));
  * <input onChange={handleInput} />

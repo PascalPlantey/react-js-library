@@ -10,6 +10,8 @@ export default useEventListener;
  * @example
  * const { working, toggle } = useEventListener('mousemove', console.log);
  * @memberof Hooks#
+ * @maintenance
+ *  . 28/12/2023: changed useOnmount by useEffect to restart listening when listener changes
  */
 declare function useEventListener(name: string, fn: Function, elt?: Element | undefined, immediately?: boolean | undefined, options?: object | undefined): object;
 //# sourceMappingURL=useEventListener.d.ts.map

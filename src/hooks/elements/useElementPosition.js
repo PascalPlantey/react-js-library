@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 
-import { getElementPosition, getHTMLElement } from "../../js";
+import { getElementPosition, getHTMLElement, isReactRef } from "../../js";
+import { useOnmount } from "../cycles";
 
 /**
  * Hook to get position and size of an element through an React ref.
@@ -10,19 +11,25 @@ import { getElementPosition, getHTMLElement } from "../../js";
  */
 const useElementPosition = clientRef => {
   const ref = useRef();
-  const current = getHTMLElement(clientRef) ? getHTMLElement(clientRef) : ref.current;
-  const [position, setPosition] = useState(() => getElementPosition(current));
+  const [position, setPosition] = useState(() => getElementPosition(ref.current));
+
+  useOnmount(() => {
+    ref.current ??= isReactRef(clientRef) ? clientRef.current : getHTMLElement(clientRef);
+  });
 
   useEffect(() => {
+    const { current } = ref;
+
     if (current) {
       const observer = new ResizeObserver(() => setPosition(getElementPosition(current)));
+
       observer.observe(current);                                      // Start "listening" to change
 
       return () => observer.unobserve(current);                       // Stop "listening" on unmount
     }
-  }, [current]);
+  }, [ref.current]);
 
-  return [clientRef ? clientRef : ref, position];
+  return [ref, position];
 };
 
 export default useElementPosition;
