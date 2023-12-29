@@ -23,22 +23,24 @@ const useEventListener = (name, fn, elt = window, immediately = true, options = 
   const refAbort = useRef();
 
   const stopListener = useCallback(() => {
-    refAbort.current?.abort();                                      // AbortController.abort() remove the listener
-    refAbort.current = undefined;
+    if (refAbort.current) {
+      refAbort.current.abort();                                     // AbortController.abort() remove the listener
+      refAbort.current = undefined;
+    }
   }, []);
 
   // Use our own listener to track if it is automatically removed by the browser (options.once === true)
   const listener = useCallback(evt => {
     fn(evt);
     if (once) {
-      stopListener();
+      refAbort.current = undefined;                                 // Listener has been stopped
       setWorking(false);                                            // Listener has been called and eventListener automatically removed
     }
   }, [fn, once]);
 
   // Use the abort signal to make sure our listener is found back
   const startListener = useCallback(() => {
-    stopListener();                                                // Stop listening if it already started
+    stopListener();                                                 // Stop listening if it already started
     refAbort.current = new AbortController();
     elt.addEventListener(name, listener, { capture, once, passive, signal: refAbort.current.signal });
   }, [capture, once, passive, elt, listener, name]);
@@ -48,7 +50,7 @@ const useEventListener = (name, fn, elt = window, immediately = true, options = 
       startListener();
   }, [startListener]);
 
-  useOndismount(stopListener);                                     // Cleanup if still running
+  useOndismount(stopListener);                                      // Cleanup if still running
 
   const toggle = useCallback(() => setWorking(running => {
     if (!running) startListener()
