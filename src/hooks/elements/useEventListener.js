@@ -14,41 +14,47 @@ import { useOndismount } from '../cycles';
  * const { working, toggle } = useEventListener('mousemove', console.log);
  * @memberof Hooks#
  * @maintenance
- *  . 28/12/2023: changed useOnmount by useEffect to restart listening when listener changes
+ *  . 28/12/2023: changed useOnmount by useEffect to restart listening when listener (startListener) changes
+ *  . 29/12/2023: make sure stopListener is called on startListener changes & clear the AbortController in stopListener
  */
 const useEventListener = (name, fn, elt = window, immediately = true, options = {}) => {
   const [working, setWorking] = useState(!!immediately);
   const { capture, once, passive } = options;
   const refAbort = useRef();
 
+  const stopListener = useCallback(() => {
+    refAbort.current?.abort();                                      // AbortController.abort() remove the listener
+    refAbort.current = undefined;
+  }, []);
+
   // Use our own listener to track if it is automatically removed by the browser (options.once === true)
   const listener = useCallback(evt => {
     fn(evt);
-    if (once)
+    if (once) {
+      stopListener();
       setWorking(false);                                            // Listener has been called and eventListener automatically removed
+    }
   }, [fn, once]);
 
-  const unsetListener = () => refAbort.current?.abort();            // AbortController.abort() remove the listener
-
   // Use the abort signal to make sure our listener is found back
-  const setListener = useCallback(() => {
-    unsetListener();                                                // Stop listening if it already started
+  const startListener = useCallback(() => {
+    stopListener();                                                // Stop listening if it already started
     refAbort.current = new AbortController();
     elt.addEventListener(name, listener, { capture, once, passive, signal: refAbort.current.signal });
   }, [capture, once, passive, elt, listener, name]);
 
-  useEffect(() => {                                                 // Start listener when it changes
+  useEffect(() => {                                                 // (Re)Start listener when it changes
     if (working)
-      setListener();
-  }, [listener, setListener]);
+      startListener();
+  }, [startListener]);
 
-  useOndismount(() => working && unsetListener());                  // Cleanup if still running
+  useOndismount(stopListener);                                     // Cleanup if still running
 
   const toggle = useCallback(() => setWorking(running => {
-    if (!running) setListener()
-    else          unsetListener();
+    if (!running) startListener()
+    else          stopListener();
     return !running;                                                // Toggle state
-  }), [setListener]);
+  }), [startListener]);
 
   return({ working, toggle });
 };
