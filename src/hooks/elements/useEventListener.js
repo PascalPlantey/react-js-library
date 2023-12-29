@@ -28,19 +28,18 @@ const useEventListener = (name, fn, elt = window, immediately = true, options = 
       setWorking(false);                                            // Listener has been called and eventListener automatically removed
   }, [fn, once]);
 
+  const unsetListener = () => refAbort.current?.abort();            // AbortController.abort() remove the listener
+
   // Use the abort signal to make sure our listener is found back
   const setListener = useCallback(() => {
+    unsetListener();                                                // Stop listening if it already started
     refAbort.current = new AbortController();
     elt.addEventListener(name, listener, { capture, once, passive, signal: refAbort.current.signal });
   }, [capture, once, passive, elt, listener, name]);
 
-  const unsetListener = () => refAbort.current?.abort();            // AbortController.abort() remove the listener
-
   useEffect(() => {                                                 // Start listener when it changes
-    if (working) {
-      unsetListener();
-      setListener()
-    }
+    if (working)
+      setListener();
   }, [listener, setListener]);
 
   useOndismount(() => working && unsetListener());                  // Cleanup if still running
