@@ -5,7 +5,6 @@ import { isIterable, isPrimitive } from "../../../js";
  * from the records. Thus this should run only two times: before and after data fetch, each time before render.
  * @param {array} columns Columns configuration for the Table
  * @param {array} records Datasource for the Table
- * @returns {array} The 'columns' array
  * @memberof AntdHooks
  */
 const initializeColumnsFilters = (columns, records) => columns.forEach(column => {
@@ -33,8 +32,6 @@ const initializeColumnsFilters = (columns, records) => columns.forEach(column =>
 
     column.filters = [...filtersMap.values()].sort((a, b) => a.text.localeCompare(b.text));
   };
-
-  return columns;
 });
 
 export default initializeColumnsFilters;

@@ -7,6 +7,7 @@
 const updateColumnsFromParams = (columns, filters, sort) =>
   columns.forEach(column => {
     const { onFilter, sorter, dataIndex } = column;
+
     column.filteredValue = (onFilter && filters?.[dataIndex]) ?? null;
     column.sortOrder = (sorter && sort?.field === dataIndex && sort.order) || null;
   });

@@ -13,9 +13,11 @@ import updateColumnsFromParams from "../tools/updateColumnsFromParams";
  * @memberof AntdHooks
  * @notes this can potentially be called many times with different parameters each time, so a useMemo or useCalculation will cost
  * more than a "useState/useEffect and render"
+ * @maintenance
+ *  . 31/12/2023: changed the initial state value to make sure all columns have a filteredValue property to avoid a Table warning
  */
 const useUpdateColumnsFromParams = (columns, filters, sort) => {
-  const [updatedColumns, setUpdatedColumns] = useState(columns);
+  const [updatedColumns, setUpdatedColumns] = useState(() => columns.map(col => ({ ...col, filteredValue: null })));
 
   useEffect(() => {
     setUpdatedColumns(() => {
