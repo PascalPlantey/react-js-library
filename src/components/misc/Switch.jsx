@@ -13,7 +13,7 @@ import { isReactElement } from '../../js/is';
 const Switch = ({ cases }) => {
   const handleAction = action => {
     const result = resolve(action);
-    console.assert(isReactElement(action), "Switch: returned value does not seem to be a JSX element", action);
+    console.assert(isReactElement(result), "Switch: returned value does not seem to be a JSX element", result);
     return result;
   };
 

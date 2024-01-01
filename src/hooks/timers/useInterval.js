@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useOnmount, useOndismount } from '../cycles';
 
@@ -28,6 +28,16 @@ const useInterval = (callback, interval = 1000, immediately = true) => {
       setWorking(true);
     }
   }, [timer, callback, interval]);
+
+  useEffect(() => {
+    if (working) {
+      if (timer.current) {
+        clearInterval(timer.current)
+        timer.current = undefined;
+      }
+      handleStart();
+    }
+  }, [handleStart]);
 
   useOnmount(() => immediately && handleStart());
   useOndismount(() => clearInterval(timer.current));                // No state change on dismounting
