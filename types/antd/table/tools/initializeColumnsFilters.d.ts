@@ -4,8 +4,7 @@ export default initializeColumnsFilters;
  * from the records. Thus this should run only two times: before and after data fetch, each time before render.
  * @param {array} columns Columns configuration for the Table
  * @param {array} records Datasource for the Table
- * @returns {array} The 'columns' array
  * @memberof AntdHooks
  */
-declare function initializeColumnsFilters(columns: array, records: array): array;
+declare function initializeColumnsFilters(columns: array, records: array): any;
 //# sourceMappingURL=initializeColumnsFilters.d.ts.map

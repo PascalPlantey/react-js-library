@@ -1,1 +1,1 @@
-{"version":3,"file":"useUpdateColumnsFromParams.d.ts","sourceRoot":"","sources":["../../../../src/antd/table/hooks/useUpdateColumnsFromParams.js"],"names":[],"mappings":";AAIA;;;;;;;;;;;GAWG;AACH,qEAPW,MAAM,QACN,MAAM,SAiBhB"}
+{"version":3,"file":"useUpdateColumnsFromParams.d.ts","sourceRoot":"","sources":["../../../../src/antd/table/hooks/useUpdateColumnsFromParams.js"],"names":[],"mappings":";AAIA;;;;;;;;;;;;;GAaG;AACH,qEATW,MAAM,QACN,MAAM,SAmBhB"}

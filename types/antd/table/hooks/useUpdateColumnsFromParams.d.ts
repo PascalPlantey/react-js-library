@@ -10,6 +10,8 @@ export default useUpdateColumnsFromParams;
  * @memberof AntdHooks
  * @notes this can potentially be called many times with different parameters each time, so a useMemo or useCalculation will cost
  * more than a "useState/useEffect and render"
+ * @maintenance
+ *  . 31/12/2023: changed the initial state value to make sure all columns have a filteredValue property to avoid a Table warning
  */
 declare function useUpdateColumnsFromParams(columns: array, filters: object, sort: object): array;
 //# sourceMappingURL=useUpdateColumnsFromParams.d.ts.map

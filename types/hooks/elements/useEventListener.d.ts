@@ -11,7 +11,8 @@ export default useEventListener;
  * const { working, toggle } = useEventListener('mousemove', console.log);
  * @memberof Hooks#
  * @maintenance
- *  . 28/12/2023: changed useOnmount by useEffect to restart listening when listener changes
+ *  . 28/12/2023: changed useOnmount by useEffect to restart listening when listener (startListener) changes
+ *  . 29/12/2023: make sure stopListener is called on startListener changes & clear the AbortController in stopListener
  */
 declare function useEventListener(name: string, fn: Function, elt?: Element | undefined, immediately?: boolean | undefined, options?: object | undefined): object;
 //# sourceMappingURL=useEventListener.d.ts.map
