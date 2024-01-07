@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useOndismount } from '../cycles';
+import { getEventTarget } from '../../js';
 
 /**
  * @description Fire a function when a document event happens
@@ -20,7 +21,10 @@ import { useOndismount } from '../cycles';
 const useEventListener = (name, fn, elt = window, immediately = true, options = {}) => {
   const [working, setWorking] = useState(!!immediately);
   const { capture, once, passive } = options;
-  const refAbort = useRef();
+  const refAbort = useRef(),
+        refElt = useRef();
+
+  useEffect(() => { refElt.current = getEventTarget(elt); }, [elt]);
 
   const stopListener = useCallback(() => {
     if (refAbort.current) {
@@ -42,7 +46,7 @@ const useEventListener = (name, fn, elt = window, immediately = true, options = 
   const startListener = useCallback(() => {
     stopListener();                                                 // Stop listening if it already started
     refAbort.current = new AbortController();
-    elt.addEventListener(name, listener, { capture, once, passive, signal: refAbort.current.signal });
+    refElt.current?.addEventListener(name, listener, { capture, once, passive, signal: refAbort.current.signal });
   }, [capture, once, passive, elt, listener, name]);
 
   useEffect(() => {                                                 // (Re)Start listener when it changes

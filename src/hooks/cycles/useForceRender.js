@@ -7,6 +7,7 @@ import useToggle from '../misc/useToggle';
  */
 const useForceRender = () => {
   const [, toggle] = useToggle();
+
   return toggle;
 };
 
