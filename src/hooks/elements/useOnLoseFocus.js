@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { getEventTarget } from "../../js";
 
@@ -9,23 +9,14 @@ import { getEventTarget } from "../../js";
  * @param {Boolean} [hasFocus=true]
  * @returns {Boolean}
  */
-const useOnLoseFocus = (elt, fn, hasFocus = true) => {
-  const [focus, setFocus] = useState(hasFocus);
-
+const useOnLoseFocus = (elt, fn, hasFocus = true) =>
   useEffect(() => {
     const target = getEventTarget(elt);
-    const targetFn = () => {
-      setFocus(false);
-      fn();
-    };
 
-    if (fn && target && hasFocus && document.activeElement === target) {
-      target.addEventListener('focusout', targetFn);
-      return () => target.removeEventListener('focusout', targetFn);
+    if (target && hasFocus && document.activeElement === target) {
+      target.addEventListener('focusout', fn);
+      return () => target.removeEventListener('focusout', fn);
     }
-  }, [focus, elt, fn]);
-
-  return focus;
-};
+  }, [hasFocus, elt, fn]);
 
 export default useOnLoseFocus;

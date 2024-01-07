@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { getEventTarget } from "../../js";
 
@@ -9,23 +9,14 @@ import { getEventTarget } from "../../js";
  * @param {Boolean} [hasFocus=false]
  * @returns {Boolean}
  */
-const useOnGetFocus = (elt, fn, hasFocus = false) => {
-  const [focus, setFocus] = useState(hasFocus);
-
+const useOnGetFocus = (elt, fn, hasFocus = false) =>
   useEffect(() => {
     const target = getEventTarget(elt);
-    const targetFn = () => {
-      setFocus(true);
-      fn();
-    };
 
     if (target && !hasFocus && document.activeElement !== target) {
-      target.addEventListener('focus', targetFn);
-      return () => target.removeEventListener('focus', targetFn);
+      target.addEventListener('focus', fn);
+      return () => target.removeEventListener('focus', fn);
     }
   }, [focus, elt, fn]);
-
-  return focus;
-};
 
 export default useOnGetFocus;
