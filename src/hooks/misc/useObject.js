@@ -39,6 +39,9 @@ const useObject = (initialState = {}) => {
   // Assign 'patch' properties to state object
   const assign = useCallback(patch => setState(prev => ({ ...prev, ...patch })), []);
 
+  // Restore initial value for property 'field'
+  const restore = useCallback(field => setState(prev => ({ ...prev, [field]: initialState[field] })));
+
   // Remove one or many properties from state object
   const remove = useCallback(properties => setState(prev => {
     for(const value of toIterable(properties))
@@ -53,6 +56,7 @@ const useObject = (initialState = {}) => {
     assign,
     remove,
     reset,
+    restore,
     clear,
   });
 };

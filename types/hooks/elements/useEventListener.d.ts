@@ -13,6 +13,7 @@ export default useEventListener;
  * @maintenance
  *  . 28/12/2023: changed useOnmount by useEffect to restart listening when listener (startListener) changes
  *  . 29/12/2023: make sure stopListener is called on startListener changes & clear the AbortController in stopListener
+ *  . 09/01/2024: updated some dependencies and checking that fn is a Function
  */
 declare function useEventListener(name: string, fn: Function, elt?: Element | undefined, immediately?: boolean | undefined, options?: object | undefined): object;
 //# sourceMappingURL=useEventListener.d.ts.map

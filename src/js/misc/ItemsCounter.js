@@ -50,13 +50,12 @@ class ItemsCounters extends Map {
   addCount(item, count = 1) {
     if (isArray(item) && item.length === 2)
       this.addCount(item[0], item[1]);
-    else if (isArray(item)) {
-      console.log('adding array', item)
+    else if (isArray(item))
       for(const sub of item)
         this.addCount(sub);
-    }
     else
       this.set(item, (this.get(item) ?? 0) + count);
+
     return this;
   };
 

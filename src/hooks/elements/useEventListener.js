@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useOndismount } from '../cycles';
-import { getEventTarget } from '../../js';
+import { getEventTarget, isFunction } from '../../js';
 
 /**
  * @description Fire a function when a document event happens
@@ -17,6 +17,7 @@ import { getEventTarget } from '../../js';
  * @maintenance
  *  . 28/12/2023: changed useOnmount by useEffect to restart listening when listener (startListener) changes
  *  . 29/12/2023: make sure stopListener is called on startListener changes & clear the AbortController in stopListener
+ *  . 09/01/2024: updated some dependencies and checking that fn is a Function
  */
 const useEventListener = (name, fn, elt = window, immediately = true, options = {}) => {
   const [working, setWorking] = useState(!!immediately);
@@ -24,7 +25,12 @@ const useEventListener = (name, fn, elt = window, immediately = true, options = 
   const refAbort = useRef(),
         refElt = useRef();
 
-  useEffect(() => { refElt.current = getEventTarget(elt); }, [elt]);
+  console.assert(isFunction(fn), `useEventListener: fn is not a function: ${fn}`);
+
+  useEffect(() => {
+    refElt.current = getEventTarget(elt);
+    console.assert(refElt.current, `useEventListener: found "elt" is not an event target ${refElt.current}`);
+  }, [elt]);
 
   const stopListener = useCallback(() => {
     if (refAbort.current) {
@@ -47,12 +53,12 @@ const useEventListener = (name, fn, elt = window, immediately = true, options = 
     stopListener();                                                 // Stop listening if it already started
     refAbort.current = new AbortController();
     refElt.current?.addEventListener(name, listener, { capture, once, passive, signal: refAbort.current.signal });
-  }, [capture, once, passive, elt, listener, name]);
+  }, [capture, once, passive, refElt, listener, name, stopListener]);
 
   useEffect(() => {                                                 // (Re)Start listener when it changes
     if (working)
       startListener();
-  }, [startListener]);
+  }, [working, startListener]);
 
   useOndismount(stopListener);                                      // Cleanup if still running
 
@@ -60,7 +66,7 @@ const useEventListener = (name, fn, elt = window, immediately = true, options = 
     if (!running) startListener()
     else          stopListener();
     return !running;                                                // Toggle state
-  }), [startListener]);
+  }), [startListener, stopListener]);
 
   return({ working, toggle });
 };

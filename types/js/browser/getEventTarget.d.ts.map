@@ -1,1 +1,1 @@
-{"version":3,"file":"getEventTarget.d.ts","sourceRoot":"","sources":["../../../src/js/browser/getEventTarget.js"],"names":[],"mappings":";AAGA;;;;;;;;;GASG;AACH,qCAJW,wCAAuB,MAAM,GAAC,OAAO,GACnC,MAAM,GAAC,SAAS,CAO5B"}
+{"version":3,"file":"getEventTarget.d.ts","sourceRoot":"","sources":["../../../src/js/browser/getEventTarget.js"],"names":[],"mappings":";AAGA;;;;;;;;;;;GAWG;AACH,qCANW,wCAAuB,MAAM,GAAC,OAAO,GACnC,MAAM,GAAC,SAAS,CAQ5B"}

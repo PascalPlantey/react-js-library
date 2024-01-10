@@ -49,7 +49,7 @@ class WebWorker extends Worker {
      * @returns {void}
      */
     this.onerror = evt => {
-      console.log('Error occured in Worker', evt);
+      console.error('Error occured in Worker', evt);
       evt.preventDefault();                                     // Stop event propagation
     };
   }

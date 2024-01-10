@@ -8,6 +8,8 @@ export default getEventTarget;
  * @param {React.MutableRefObject|string|Element} elt Element to be looked for; can be a string (tag ID or selector), or a ref (useRef), or an event target
  * @returns {Object|undefined} A target element with event listener support, `undefined` if not found
  * @memberof JS_BrowserHelpers#
+ * @maintenance
+ *  . 09/01/2024: Document & Window are valid target elements
  */
 declare function getEventTarget(elt: import("react").MutableRefObject<any> | string | Element): Object | undefined;
 //# sourceMappingURL=getEventTarget.d.ts.map

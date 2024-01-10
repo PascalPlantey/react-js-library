@@ -10,10 +10,11 @@ import isEventTarget from './isEventTarget'
  * @param {React.MutableRefObject|string|Element} elt Element to be looked for; can be a string (tag ID or selector), or a ref (useRef), or an event target
  * @returns {Object|undefined} A target element with event listener support, `undefined` if not found
  * @memberof JS_BrowserHelpers#
+ * @maintenance
+ *  . 09/01/2024: Document & Window are valid target elements
  */
 const getEventTarget = elt => {
-  const targetElt = getHTMLElement(elt);
-
+  const targetElt = getHTMLElement(elt) || elt;
   return isEventTarget(targetElt) ? targetElt : undefined;
 };
 
