@@ -8,7 +8,7 @@ import isRef from "../is/isReactRef";
  * + a string, consider it is an element ID or querySelector  
  * + a useRef object, it's input or the wrapped element  
  * + in all other cases the elt itself  
- * @param {React.MutableRefObject|string|Element} elt Element to be looked for; can be a string (tag ID or selector), or a ref (useRef), or an event target
+ * @param {React.MutableRefObject|string|Element} [elt] Element to be looked for; can be a string (tag ID or selector), or a ref (useRef), or an event target
  * @returns {Element|undefined} A document element, `undefined` if not found
  * @memberof JS_BrowserHelpers#
  */

@@ -4,7 +4,8 @@ import { getElementPosition, getHTMLElement, isReactRef } from "../../js";
 import { useOnmount } from "../cycles";
 
 /**
- * Hook to get position and size of an element through an React ref.
+ * Hook to get position and size of an element through a React ref. clientRef should be stable (do not change element
+ * between renders)
  * @param {object|string} [clientRef] React ref or query selector, will create one if not provided
  * @returns {Array} [ref, position] position: { top, left, bottom, right, height, width }, properties can be undefined if render
  * has not been done
@@ -14,7 +15,7 @@ const useElementPosition = clientRef => {
   const [position, setPosition] = useState(() => getElementPosition(ref.current));
 
   useOnmount(() => {
-    ref.current ??= isReactRef(clientRef) ? clientRef.current : getHTMLElement(clientRef);
+    ref.current = isReactRef(clientRef) ? clientRef.current : getHTMLElement(clientRef);
   });
 
   useEffect(() => {
@@ -27,7 +28,7 @@ const useElementPosition = clientRef => {
 
       return () => observer.unobserve(current);                       // Stop "listening" on unmount
     }
-  }, [ref.current]);
+  }, [ref]);
 
   return [ref, position];
 };

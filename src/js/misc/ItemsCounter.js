@@ -22,7 +22,7 @@ class ItemsCounters extends Map {
   /**
    * Add counts to an ItemsCounter in many different ways. `itr` can be a Map with pairs of key/number,
    * thus can copy an ItemsCounter, allowing the constructor to copy/construct an ItemsCounter
-   * @param {Iterable|object} [itr=[]] Object or Collection of objects or undefined (defaults to [])
+   * @param {Iterable} [itr=[]] Object or Collection of objects or undefined (defaults to [])
    * @param {function} [callback] Function returning key/value pairs to be added [[k, v], [k, v]]
    * @returns {this}
    * @example
