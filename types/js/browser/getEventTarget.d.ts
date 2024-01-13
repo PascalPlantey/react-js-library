@@ -9,7 +9,7 @@ export default getEventTarget;
  * @returns {Object|undefined} A target element with event listener support, `undefined` if not found
  * @memberof JS_BrowserHelpers#
  * @maintenance
- *  . 09/01/2024: Document & Window are valid target elements
+ * + 11/01/2024: parameter defaults to document
  */
-declare function getEventTarget(elt: import("react").MutableRefObject<any> | string | Element): Object | undefined;
+declare function getEventTarget(elt?: import("react").MutableRefObject<any> | string | Element): Object | undefined;
 //# sourceMappingURL=getEventTarget.d.ts.map

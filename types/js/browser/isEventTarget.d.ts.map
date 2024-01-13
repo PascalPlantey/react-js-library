@@ -1,1 +1,1 @@
-{"version":3,"file":"isEventTarget.d.ts","sourceRoot":"","sources":["../../../src/js/browser/isEventTarget.js"],"names":[],"mappings":";AAAA;;;;;GAKG;AACH,oCAJW,GAAG,GACD,OAAO,CAG8B"}
+{"version":3,"file":"isEventTarget.d.ts","sourceRoot":"","sources":["../../../src/js/browser/isEventTarget.js"],"names":[],"mappings":";AAAA;;;;;;;GAOG;AACH,oCANW,GAAG,GACD,OAAO,CAKgC"}

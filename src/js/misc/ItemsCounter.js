@@ -23,7 +23,7 @@ class ItemsCounters extends Map {
    * Add counts to an ItemsCounter in many different ways. `itr` can be a Map with pairs of key/number,
    * thus can copy an ItemsCounter, allowing the constructor to copy/construct an ItemsCounter
    * @param {Iterable} [itr=[]] Object or Collection of objects or undefined (defaults to [])
-   * @param {function} [callback] Function returning key/value pairs to be added [[k, v], [k, v]]
+   * @param {function} [callback] Function returning key/count pairs to be added [[k, c], [k, c]] or [[k1], [k2], ...] or [k1, k2, ...]
    * @returns {this}
    * @example
    * new ItemsCounter("abcdedfde");                               // => Counts letters
@@ -34,7 +34,7 @@ class ItemsCounters extends Map {
   addCounts(itr = [], callback = undefined) {
     for(const item of toIterable(itr))
       if (isFunction(callback))                                             // Provided callback returning array [key, value]
-        this.addCount(callback(item));
+        this.addCounts(callback(item));
       else                                                                  // Considers iter is an iterator over keys
         this.addCount(item);
 

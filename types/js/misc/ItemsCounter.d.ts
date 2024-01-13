@@ -13,8 +13,8 @@ declare class ItemsCounters extends Map<any, any> {
     /**
      * Add counts to an ItemsCounter in many different ways. `itr` can be a Map with pairs of key/number,
      * thus can copy an ItemsCounter, allowing the constructor to copy/construct an ItemsCounter
-     * @param {Iterable|object} [itr=[]] Object or Collection of objects or undefined (defaults to [])
-     * @param {function} [callback] Function returning key/value pairs to be added [[k, v], [k, v]]
+     * @param {Iterable} [itr=[]] Object or Collection of objects or undefined (defaults to [])
+     * @param {function} [callback] Function returning key/count pairs to be added [[k, c], [k, c]] or [[k1], [k2], ...] or [k1, k2, ...]
      * @returns {this}
      * @example
      * new ItemsCounter("abcdedfde");                               // => Counts letters
@@ -22,7 +22,7 @@ declare class ItemsCounters extends Map<any, any> {
      * new ItemsCounter(['a', 2], ['a', 5], ['b', 3])               // => Counts of 'a' and 'b'
      * new ItemsCounter([{ name: 'a', count: 5 }, { name: 'a', count: 2 }], ({ name, count }) => [[name, count]]) // => Occurences in objects
      */
-    addCounts(itr?: object | Iterable<any> | undefined, callback?: Function | undefined): this;
+    addCounts(itr?: Iterable<any> | undefined, callback?: Function | undefined): this;
     /**
      * Adds a count of occurences of an item in the counter
      * @param {any} item Item to be added
