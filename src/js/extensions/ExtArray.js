@@ -8,8 +8,8 @@ class ExtArray extends Array {
     if      (isString(args))
       super.push(args);
     else if (isIterable(args))
-      for(const arg of args)
-        arg && super.push(arg);
+      for(const arg of args)                                // Parent is an Array but does not have 'from' prototype...
+        super.push(arg);
     else if (args)
       super.push(args);
   }

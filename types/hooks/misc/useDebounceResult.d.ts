@@ -8,6 +8,8 @@ export default useDebounceResult;
  * @param {Number} [timeout=500] Wait time before execution
  * @param {Array} deps Dependencies
  * @returns {any} func result
+ * @maintenance
+ * + 16/01/2024: setting result to dflt when a calculation is started, so that parent can show a Spin or whatever
  */
 declare function useDebounceResult(func: Function, dflt?: any | Function, timeout?: number | undefined, deps: any[]): any;
 //# sourceMappingURL=useDebounceResult.d.ts.map
