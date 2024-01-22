@@ -1,9 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
+
+import React, { useState, useEffect } from "react";
 
 import { StorageItem } from "../../../js";
 import { useComponentSize, useEventListener, useNewClassRef } from "../../../hooks";
 
 import './HSplitter.css';
+
+/* eslint-disable react/prop-types */
 
 /**
  * Display two panels horizontally separated by a vertical divider. The divider can be moved using the mouse. The initial/final
@@ -13,14 +16,17 @@ import './HSplitter.css';
  * @param {number} [props.widthToColumn] Number under which the children are displayed in column
  * @param {boolean} [props.columnReverse] If true will reverse the column direction
  * @param {function} [props.onChangeMode] Sends 'row' or 'column' to the parent
+ * @param {object} [props.panelsStyle] Additional styling for the left & right panels
  * @param {Array<JSX>} props.children Only two panels allowed
  * @returns {JSX}
  * @maintenance
  * + 14/01/2024: added a callback to inform of view mode ('row'|'column') and force the leftPanel height in column mode
  *               so that the graphics do not shrink (strage behavior). To make the component more generic another height
  *               parameter { left, right } could be added in a future version
+ * + 22/01/2024: added a min-height style in the CSS for right and left panels, and a panelsStyle additional parameter
+ *               to let the parent fine tune if needed
  */
-const HSplitter = ({ name, widthToColumn, panelsHeight, columnReverse, onChangeMode, children }) => {
+const HSplitter = ({ name, widthToColumn, panelsHeight, columnReverse, onChangeMode, panelsStyle, children }) => {
   const { width : divWidth, ref : divRef } = useComponentSize(0);
 
   const storedPanels = useNewClassRef(() => new StorageItem(name, []));
@@ -51,7 +57,7 @@ const HSplitter = ({ name, widthToColumn, panelsHeight, columnReverse, onChangeM
 
     if (position >= 0 && position <= 100)                               // Expressed as % it's easy to avoid outbounds
       setPanels([position, 100 - position]);
-  };
+  }
 
   // Save position and stop tracking mouse
   function onMouseUp() {
@@ -59,7 +65,7 @@ const HSplitter = ({ name, widthToColumn, panelsHeight, columnReverse, onChangeM
     document.body.style.cursor = 'default';
     toggleMouseMove();
     toogleMouseUp();
-  };
+  }
 
   // Start tracking mouse
   const onMouseDown = () => {
@@ -78,7 +84,8 @@ const HSplitter = ({ name, widthToColumn, panelsHeight, columnReverse, onChangeM
         className='splitter-leftpanel-container'
         style={{
           width: `${columnView ? '100' : leftPanelWidth}%`,
-          height: `${leftPanelHeight ? leftPanelHeight : 'unset'}`
+          height: `${leftPanelHeight ? leftPanelHeight : 'unset'}`,
+          ...panelsStyle
         }}
       >
         {(children?.length > 0 && children[0]) || 'no content'}
@@ -100,7 +107,8 @@ const HSplitter = ({ name, widthToColumn, panelsHeight, columnReverse, onChangeM
         className='splitter-rightpanel-container'
         style={{
           width: `${columnView ? '100' : rightPanelWidth}%`,
-          height: `${rightPanelHeight ? rightPanelHeight : 'unset'}`
+          height: `${rightPanelHeight ? rightPanelHeight : 'unset'}`,
+          ...panelsStyle
         }}
       >
         {(children?.length > 1 && children[1]) || 'no content'}

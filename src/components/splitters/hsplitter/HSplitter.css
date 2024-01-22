@@ -21,14 +21,14 @@
 
 .splitter-divider {
   height: 98%;
-  width: 6px;
+  width: 4px;
   cursor: col-resize;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: rgb(181, 181, 181);
-  background: linear-gradient(180deg, rgba(192, 192, 192, 0.82) 5%, rgb(225, 224, 224) 48%, rgba(192, 192, 192, 0.82) 99%);
-  border: 1px outset rgb(146, 146, 146);
+  background: linear-gradient(180deg, rgb(225, 224, 224) 5%, rgba(192, 192, 192, 0.82) 48%, rgb(225, 224, 224) 99%);
+  border: 1px outset rgb(190, 190, 190);
   border-radius: 4px;
   touch-action: pan-x pan-y;
 }
@@ -40,7 +40,7 @@
 .splitter-divider-grabber {
   writing-mode: vertical-lr;
   height: 20px;
-  border: 1px solid rgb(161, 152, 152);
+  border: 1px solid rgb(241, 231, 231);
 }
 
 .splitter-divider:hover .splitter-divider-grabber {
@@ -52,11 +52,13 @@
 }
 
 .splitter-leftpanel-container {
+  min-height: 300px;
   height: 100%;
   overflow: hidden;
 }
 
 .splitter-rightpanel-container {
+  min-height: 300px;
   height: 100%;
   overflow: hidden;
 }
