@@ -6,4 +6,5 @@ export { default as useIsMounted } from './useIsMounted';
 export { default as useOnce } from './useOnce';
 export { default as useOndismount } from './useOndismount';
 export { default as useOnmount } from './useOnmount';
+export { default as useRenderCount } from './useRenderCount';
 export { default as useRunOnce } from './useRunOnce';
