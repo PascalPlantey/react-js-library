@@ -26,7 +26,7 @@ class Stats {
     .forEach((item, index) => {
       const [previousRank, previousValue] = previous;
 
-      if (previousValue === item[fieldName])    // Same value, keep the same rank than previous
+      if (previousValue === item[fieldName])    // Same value, item gets the same rank than previous one
         item[rankFieldName] = previousRank;
       else                                      // Set item rank and keep new values (previous ranking and value)
         previous = [item[rankFieldName] = index + 1, item[fieldName]];
