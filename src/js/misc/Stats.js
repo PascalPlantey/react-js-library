@@ -19,22 +19,19 @@ class Stats {
    * + 28/01/2024: ranking does not increase when two elements have the same value
    */
   static rankBy(data, fieldName, rankFieldName = 'rank') {
-    const previous = { previousRank: undefined, previousValue: undefined };
+    let previous = [undefined, undefined];
 
     data
     .sort((item1, item2) => item2[fieldName] - item1[fieldName])
     .forEach((item, index) => {
-      const { previousRank, previousValue } = previous;
+      const [previousRank, previousValue] = previous;
 
-      if (previousValue === item[fieldName])                      // Same value, keep the same rank than previous
+      if (previousValue === item[fieldName])    // Same value, keep the same rank than previous
         item[rankFieldName] = previousRank;
-      else {
-        const rank = index + 1;                                   // Rank skips all the previous with same value
-        previous.previousRank = item[rankFieldName] = rank;       // New ranking attached to...
-        previous.previousValue = item[fieldName];                 // ...this value
-      }
-
+      else                                      // Set item rank and keep new values (previous ranking and value)
+        previous = [item[rankFieldName] = index + 1, item[fieldName]];
     });
+
     return data;
   }
 
