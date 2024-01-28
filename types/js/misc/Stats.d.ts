@@ -5,11 +5,13 @@ export default Stats;
  */
 declare class Stats {
     /**
-     * Ranks a collection of objects by the given fieldname. The array (data) is modified
+     * Adds a `rankFieldName` rank attribute using the given `fieldname` attribute. The array (data) is modified
      * @param {Array<any>} data Collection of objects to be ranked
-     * @param {string} fieldName Name of the field to be ranked by (object[fieldName] should be a number)
-     * @param {string} [rankFieldName='rank'] Name of the ranking field
-     * @returns {object} data sorted by fieldName, with a new property named 'rank'
+     * @param {string} fieldName Name of the field to be ranked by (item[`fieldName`] should be a number)
+     * @param {string} [rankFieldName='rank'] Name of the ranking attribute added to the items of `data` (default 'rank')
+     * @returns {object} data sorted by `fieldName`, with a new property named `rankFieldName`
+     * @maintenance
+     * + 28/01/2024: ranking does not increase when two elements have the same value
      */
     static rankBy(data: Array<any>, fieldName: string, rankFieldName?: string | undefined): object;
     /**
