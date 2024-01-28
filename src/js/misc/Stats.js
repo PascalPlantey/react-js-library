@@ -10,18 +10,33 @@ class Stats {
   #sum = 0;
 
   /**
-   * Ranks a collection of objects by the given fieldname. The array (data) is modified
+   * Adds a `rankFieldName` rank attribute using the given `fieldname` attribute. The array (data) is modified
    * @param {Array<any>} data Collection of objects to be ranked
-   * @param {string} fieldName Name of the field to be ranked by (object[fieldName] should be a number)
-   * @param {string} [rankFieldName='rank'] Name of the ranking field
-   * @returns {object} data sorted by fieldName, with a new property named 'rank'
+   * @param {string} fieldName Name of the field to be ranked by (item[`fieldName`] should be a number)
+   * @param {string} [rankFieldName='rank'] Name of the ranking attribute added to the items of `data` (default 'rank')
+   * @returns {object} data sorted by `fieldName`, with a new property named `rankFieldName`
+   * @maintenance
+   * + 28/01/2024: ranking does not increase when two elements have the same value
    */
   static rankBy(data, fieldName, rankFieldName = 'rank') {
+    const previous = { previousRank: undefined, previousValue: undefined };
+
     data
     .sort((item1, item2) => item2[fieldName] - item1[fieldName])
-    .forEach((item, index) => item[rankFieldName] = index + 1);
+    .forEach((item, index) => {
+      const { previousRank, previousValue } = previous;
+
+      if (previousValue === item[fieldName])                      // Same value, keep the same rank than previous
+        item[rankFieldName] = previousRank;
+      else {
+        const rank = index + 1;                                   // Rank skips all the previous with same value
+        previous.previousRank = item[rankFieldName] = rank;       // New ranking attached to...
+        previous.previousValue = item[fieldName];                 // ...this value
+      }
+
+    });
     return data;
-  };
+  }
 
   /**
    * @param {Iterable} [itr=Array] Iterable used to get values
@@ -165,6 +180,6 @@ class Stats {
   get [Symbol.toStringTag]() {
     return 'Stats';
   }
-};
+}
 
 export default Stats;
