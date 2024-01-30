@@ -47,14 +47,14 @@ class ItemsCounters extends Map {
    * @param {number} [count=1] Occurences to add
    * @returns {this}
    */
-  addCount(item, count = 1) {
-    if      (isArray(item) && item.length === 2)
+  addCount(item, count) {
+    if      (isArray(item) && item.length === 2 && !count)
       this.addCount(item[0], item[1]);
-    else if (isArray(item))
+    else if (isArray(item) && !count)
       for(const sub of item)
         this.addCount(sub);
     else
-      this.set(item, (this.get(item) ?? 0) + count);
+      this.set(item, (this.get(item) ?? 0) + (count === undefined ? 1 : count));
 
     return this;
   }
