@@ -1,3 +1,4 @@
+export { default as useCheckChanges } from './useCheckChanges';
 export { default as useCheckHook } from './useCheckHook';
 export { default as useDontMemo } from './useDontMemo';
 export { default as useForceRender } from './useForceRender';
