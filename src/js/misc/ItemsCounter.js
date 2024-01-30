@@ -10,28 +10,28 @@ const defaultRadical = 'Others: ';
  */
 class ItemsCounters extends Map {
   /**
-   * Builds an ItemsCounter in many different ways (see `ItemsCounter.AddCounts` examples)
+   * Builds an `ItemsCounter` in many different ways (see `ItemsCounter.AddCounts` examples)
    * @param {Iterable|object} [itr=[]] Object or Collection of objects or undefined (defaults to [])
    * @param {function} [callback] Function returning key/value pairs to be added [[k, v], [k, v]]
    */
   constructor(itr = [], callback) {
     super();
     this.addCounts(itr, callback);
-  };
+  }
 
   /**
-   * Add counts to an ItemsCounter in many different ways. `itr` can be a Map with pairs of key/number,
-   * thus can copy an ItemsCounter, allowing the constructor to copy/construct an ItemsCounter
+   * Add counts to an `ItemsCounter` in many different ways. `itr` can be a Map with pairs of key/number,
+   * thus can copy an `ItemsCounter`, allowing the constructor to copy/construct an `ItemsCounter`
    * @param {Iterable} [itr=[]] Object or Collection of objects or undefined (defaults to [])
    * @param {function} [callback] Function returning key/count pairs to be added [[k, c], [k, c]] or [[k1], [k2], ...] or [k1, k2, ...]
    * @returns {this}
    * @example
-   * new ItemsCounter("abcdedfde");                               // => Counts letters
+   * new ItemsCounter("abcdedfde")                                // => Counts letters
    * new ItemsCounter(['blue', 'blue', 'red'])                    // => Counts occurences of colors
    * new ItemsCounter(['a', 2], ['a', 5], ['b', 3])               // => Counts of 'a' and 'b'
    * new ItemsCounter([{ name: 'a', count: 5 }, { name: 'a', count: 2 }], ({ name, count }) => [[name, count]]) // => Occurences in objects
    */
-  addCounts(itr = [], callback = undefined) {
+  addCounts(itr = [], callback) {
     for(const item of toIterable(itr))
       if (isFunction(callback))                                             // Provided callback returning array [key, value]
         this.addCounts(callback(item));
@@ -42,13 +42,13 @@ class ItemsCounters extends Map {
   }
 
   /**
-   * Adds a count of occurences of an item in the counter
+   * Adds a `count` of occurences of an item in the counter
    * @param {any} item Item to be added
    * @param {number} [count=1] Occurences to add
    * @returns {this}
    */
   addCount(item, count = 1) {
-    if (isArray(item) && item.length === 2)
+    if      (isArray(item) && item.length === 2)
       this.addCount(item[0], item[1]);
     else if (isArray(item))
       for(const sub of item)
@@ -57,7 +57,7 @@ class ItemsCounters extends Map {
       this.set(item, (this.get(item) ?? 0) + count);
 
     return this;
-  };
+  }
 
   /**
    * Returns an array of the key/counts of the ItemsObject
@@ -81,7 +81,7 @@ class ItemsCounters extends Map {
    * @description An iterator over the percentages of occurences of each item. Each element
    * iterated is in the form [key, count, percentage]
    * @param {number} [digits=2] Number of digits for the percentage results
-   * @yields {Array} [key, count, percentage]
+   * @yields {array<any, number, number>} [key, count, percentage]
    */
   *percentages(digits = 2) {
     const total = this.totalCount;
@@ -135,19 +135,19 @@ class ItemsCounters extends Map {
       this.addCount(k, c);
 
     return this;
-  };
+  }
 
   /**
    * Sorts the ItemsCounter object ascending or descending
    * @param {boolean} [ascending=false] Sort order
    * @returns {this}
    */
-  sortByCount(ascending = false) { return this.sort(([_1, c1], [_2, c2]) => ascending ? c1 - c2 : c2 - c1); }
+  sortByCount(ascending = false) { return this.sort(([, c1], [, c2]) => ascending ? c1 - c2 : c2 - c1); }
 
   /**
    * Group the items which percentages are under the number provided (the ItemsCounter is modified)
    * @param {number} [number=5] Percentage under (<=) which the item is removed and grouped
-   * @param {string} [sep='; '] Separator to be used when concatening the keys for the new item containing grouped values
+   * @param {string} [sep='; '] Separator to be used when concatenating the keys for the new item containing grouped values
    * @param {string} [radical='Others: '] Radical key
    * @returns {this}
    */
@@ -172,7 +172,7 @@ class ItemsCounters extends Map {
     }
 
     return this;
-  };
+  }
 
   /**
    * Is label the name of a grouped label
@@ -228,6 +228,6 @@ class ItemsCounters extends Map {
   get [Symbol.toStringTag]() {
     return 'ItemsCounters';
   }
-};
+}
 
 export default ItemsCounters;
