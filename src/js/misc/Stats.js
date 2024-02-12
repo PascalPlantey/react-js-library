@@ -141,33 +141,18 @@ class Stats {
     return ExtMath.growth(this.#serie.first, this.#serie.last);
   }
 
-  get #growthStats() {
+  /**
+   * Using all the values in the serie returns a `new Stats` object giving statistics of the growth from each value
+   * to the next
+   * @type {Stats}
+   */
+  get growthStats() {
     const growthStats = new Stats();
-    let prev;
 
-    for(let i = 0; i < this.#serie.length; ++i) {
-      if (i > 0)
-        growthStats.add(ExtMath.growth(prev, this.#serie[i]));
-      prev = this.#serie[i];
-    }
+    for(let i = 1; i < this.#serie.length; ++i)
+      growthStats.add(ExtMath.growth(this.#serie[i - 1], this.#serie[i]));
 
     return growthStats;
-  }
-
-  /**
-   * Growth mean of the serie
-   * @type {number}
-   */
-  get growthMean() {
-    return this.#growthStats.mean;
-  }
-
-  /**
-   * Growth standard deviation
-   * @type {number}
-   */
-  get growthStddev() {
-    return this.#growthStats.stddev;
   }
 
   /**

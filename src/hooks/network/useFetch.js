@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 import { useObject, useToggle } from '../misc';
+import { noop } from '../../js';
 
 const initialObj = {                                                // Make it const to avoid unnecessary renders
   loading: true,
@@ -37,7 +38,9 @@ const useFetch = (api = '', url, options) => {
       if (ok)
         result
         .json()                                                     // .then is here to have the result.status etc, .catch falls down to the one below
-        .then(data => assign({ loading: false, ok, status, statusText, data }));
+        .then(data => {
+          assign({ loading: false, ok, status, statusText, data })
+        });
       else
         assign({ loading: false, ok, status, statusText });         // No data available
     })
@@ -46,7 +49,7 @@ const useFetch = (api = '', url, options) => {
     return () => {
       refController.current?.abort();
       refController.current = null;
-    }
+    };
   }, [api, url, options, assign, reset, value]);
 
   return [object, toggle, refController.current?.abort || noop];

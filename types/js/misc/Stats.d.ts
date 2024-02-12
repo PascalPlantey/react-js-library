@@ -70,15 +70,11 @@ declare class Stats {
      */
     get growth(): number;
     /**
-     * Growth mean of the serie
-     * @type {number}
+     * Using all the values in the serie returns a `new Stats` object giving statistics of the growth from each value
+     * to the next
+     * @type {Stats}
      */
-    get growthMean(): number;
-    /**
-     * Growth standard deviation
-     * @type {number}
-     */
-    get growthStddev(): number;
+    get growthStats(): Stats;
     /**
      * Changed the default object type name visible through Object.prototype.toString.call
      * @returns {string}

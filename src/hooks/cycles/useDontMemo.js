@@ -1,6 +1,5 @@
 import { useRef } from "react";
 
-import { surfaceEquals } from "../../js/extensions";
 import { useCheckValuesChanges } from "../misc";
 
 /**

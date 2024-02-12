@@ -156,6 +156,6 @@ class Tuple_Any extends ExtMap {
   get [Symbol.toStringTag]() {
     return 'Tuple_Any';
   }
-};
+}
 
 export default Tuple_Any;

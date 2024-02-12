@@ -75,6 +75,10 @@ class ExtArray extends Array {
 
     return newArray;
   }
-};
+
+  get [Symbol.toStringTag]() {
+    return 'ExtArray';
+  }
+}
 
 export default ExtArray;

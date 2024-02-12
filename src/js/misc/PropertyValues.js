@@ -87,6 +87,6 @@ class PropertyValues extends Set {
   get [Symbol.toStringTag]() {
     return 'PropertyValues';
   }
-};
+}
 
 export default PropertyValues;

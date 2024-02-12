@@ -137,6 +137,6 @@ class ExtMap extends Map {
   get [Symbol.toStringTag]() {
     return 'ExtMap';
   }
-};
+}
 
 export default ExtMap;

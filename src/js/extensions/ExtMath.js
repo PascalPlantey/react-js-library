@@ -31,7 +31,7 @@ class ExtMath {
     }
   
     return Math.sqrt(Math.pow(toX - fromX, 2) + Math.pow(toY - fromY, 2));
-  };
+  }
   
   /**
    * Returns the euclidian distance from the origin to the point `to`
@@ -105,6 +105,6 @@ class ExtMath {
   get [Symbol.toStringTag]() {
     return 'ExtMath';
   }
-};
+}
 
 export default ExtMath;

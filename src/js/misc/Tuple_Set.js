@@ -78,4 +78,4 @@ export default class Tuple_Set extends Tuple_Any {
   get [Symbol.toStringTag]() {
     return 'Tuple_Set';
   }
-};
+}

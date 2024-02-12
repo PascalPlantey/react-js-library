@@ -72,6 +72,6 @@ class Compound {
   get [Symbol.toStringTag]() {
     return 'Compound';
   }
-};
+}
 
 export default Compound;

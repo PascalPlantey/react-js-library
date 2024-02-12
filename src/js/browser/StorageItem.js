@@ -60,6 +60,6 @@ class StorageItem {
   get [Symbol.toStringTag]() {
     return 'StorageItem';
   }
-};
+}
 
 export default StorageItem;

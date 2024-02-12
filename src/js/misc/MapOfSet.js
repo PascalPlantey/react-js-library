@@ -80,7 +80,7 @@ export default class MapOfSet extends ExtMap {
    */
   getSortedArray(keySortFn = ([a], [b]) => a.localeCompare(b), childSortFn = ([a], [b]) => a.localeCompare(b)) {
     const sorted = this.array.sort(keySortFn);
-    sorted.forEach(([k, v]) => v.sort(childSortFn));
+    sorted.forEach(([, v]) => v.sort(childSortFn));
     return sorted;
   }
 
@@ -94,4 +94,4 @@ export default class MapOfSet extends ExtMap {
   get [Symbol.toStringTag]() {
     return 'MapOfSet';
   }
-};
+}

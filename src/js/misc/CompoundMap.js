@@ -124,4 +124,4 @@ export default class CompoundMap extends ExtMap {
   get [Symbol.toStringTag]() {
     return 'CompoundMap';
   }
-};
+}

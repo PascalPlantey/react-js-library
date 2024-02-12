@@ -20,39 +20,39 @@ class ItemsCounters extends Map {
   }
 
   /**
-   * Add counts to an `ItemsCounter` in many different ways. `itr` can be a Map with pairs of key/number,
+   * Add counts to an `ItemsCounter` in different ways. `itr` can be a Map with pairs of key/number,
    * thus can copy an `ItemsCounter`, allowing the constructor to copy/construct an `ItemsCounter`
    * @param {Iterable} [itr=[]] Object or Collection of objects or undefined (defaults to [])
-   * @param {function} [callback] Function returning key/count pairs to be added [[k, c], [k, c]] or [[k1], [k2], ...] or [k1, k2, ...]
+   * @param {function} [callback] Function returning key/count pairs to be added [[k, c], [k, c]] or [k1, k2, ...]
    * @returns {this}
    * @example
    * new ItemsCounter("abcdedfde")                                // => Counts letters
    * new ItemsCounter(['blue', 'blue', 'red'])                    // => Counts occurences of colors
-   * new ItemsCounter(['a', 2], ['a', 5], ['b', 3])               // => Counts of 'a' and 'b'
+   * new ItemsCounter([['a', 2], ['a', 5], ['b', 3]])             // => Counts of 'a' and 'b'
    * new ItemsCounter([{ name: 'a', count: 5 }, { name: 'a', count: 2 }], ({ name, count }) => [[name, count]]) // => Occurences in objects
    */
   addCounts(itr = [], callback) {
     for(const item of toIterable(itr))
-      if (isFunction(callback))                                             // Provided callback returning array [key, value]
+      if (isFunction(callback))                                             // Provided callback returning array [[key, value], ...]
         this.addCounts(callback(item));
-      else                                                                  // Considers iter is an iterator over keys
+      else                                                                  // Considers `itr` is an iterator over keys or [key, value]
         this.addCount(item);
 
     return this;
   }
 
   /**
-   * Adds a `count` of occurences of an item in the counter
-   * @param {any} item Item to be added
-   * @param {number} [count=1] Occurences to add
+   * Adds a `count` of occurences of an item in the counter. `item` has to be an array [k, c] and `count` `undefined` or a key
+   * which will be counted `count` times
+   * @param {any|Array<any, number>} item Item to be added
+   * @param {number} [count=1] Occurences to add (defaults to 1)
    * @returns {this}
+   * @maintenance
+   * + 09/02/2024: simplified so that `item` is either an array [key, count] or a key (not a multi [[k, c], ...])
    */
   addCount(item, count) {
-    if      (isArray(item) && item.length === 2 && !count)
+    if      (isArray(item) && item.length === 2 && !count)                  // Case where item = [key, count] only
       this.addCount(item[0], item[1]);
-    else if (isArray(item) && !count)
-      for(const sub of item)
-        this.addCount(sub);
     else
       this.set(item, (this.get(item) ?? 0) + (count === undefined ? 1 : count));
 
