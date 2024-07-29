@@ -1,6 +1,8 @@
 import { resolve } from '../../js';
 import { isReactElement } from '../../js/is';
 
+import PropTypes from 'prop-types';
+
 /**
  * Enables a basic switch within the render of a component. The provided 'cases' is an array in which each element is an object with
  * two properties 'condition' & 'action', where 'condition' is a boolean and 'action' a function (returning JSX) or a JSX value.
@@ -22,6 +24,14 @@ const Switch = ({ cases }) => {
     else if (condition === undefined) return handleAction(action);
 
   return null;
+};
+
+Switch.defaultProps = {
+  cases: []
+};
+
+Switch.propTypes = {
+  cases: PropTypes.array
 };
 
 export default Switch;
